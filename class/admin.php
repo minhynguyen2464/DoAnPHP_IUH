@@ -68,5 +68,83 @@
 					}	
 				}	
 			}
+			
+			function general_list_item($sql){
+				$con = $this->connect();
+				$result = $con->query($sql);
+				$dir = '../../../products-images/';
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						echo '<tr>
+							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['pro_id'].'</a></td>
+							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['name'].'</a></td>
+							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['description'].'</a></td>
+							  <td><a href="?id='.$rows['pro_id'].'"><img src="'.$dir.$rows['image'].'" alt="Product Image" width="150px" 		height="150px"></a></td>
+							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['gender'].'</a></td>
+							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['price'].'</a></td>
+							
+                    		</tr>';
+					}	
+				}
+			}
+			
+	
+			
+			function get_name_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT name FROM products WHERE pro_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['name'];
+					}
+				}
+			}
+			
+			function get_price_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT price FROM products WHERE pro_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['price'];
+					}
+				}
+			}
+			
+			function get_description_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT description FROM products WHERE pro_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['description'];
+					}
+				}
+			}
+			
+			function get_gender_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT gender FROM products WHERE pro_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						$gender = $rows['gender'];
+						return $gender;
+					}
+					else{
+						return false;	
+					}
+				}
+			}
+			
 	}
 ?>
