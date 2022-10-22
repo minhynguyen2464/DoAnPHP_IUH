@@ -410,9 +410,10 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="general.php"><i class="fa fa-circle-o"></i> General Elements</a>
+                            <li><a href="general.php"><i class="fa fa-circle-o"></i> General Elements</a>
                             </li>
-                            <li><a href="advanced.php"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                            <li class="active"><a href="advanced.php"><i class="fa fa-circle-o"></i> Advanced
+                                    Elements</a></li>
                             <li><a href="editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
                         </ul>
                     </li>
@@ -509,116 +510,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <!-- left column -->
-                    <div class="col-md-6">
-                        <!-- general form elements -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Thêm sản phẩm</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form role="form" method="post" enctype="multipart/form-data">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                        <input name="txtName" type="text" class="form-control" id="txtName"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Giá</label>
-                                        <input name="txtPrice" type="text" class="form-control" id="txtPrice"
-                                            placeholder="Nhập giá sản phẩm" value="<?php $p->get_price_value();?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtGender">Giới tính:</label>
-                                        <select name="txtGender" id="txtGender">
-                                            <?php
-                  	if($p->get_gender_value()=='male'){
-						echo '<option value="male" selected>Nam</option>';
-						echo '<option value="female">Nữ</option>';
-					}
-					if($p->get_gender_value()=='female'){
-						echo '<option value="male">Nam</option>';
-						echo '<option value="female" selected>Nữ</option>';
-					}
-					else{
-						echo '  <option>Vui lòng chọn giới tính</option> 
-								<option value="male">Nam</option>
-                    			<option value="female">Nữ</option>';
-					}
-				  ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="textarea">Mô tả:</label>
-                                        <textarea name="textarea" cols="30" rows="5" id="textarea"
-                                            style="width: 591px; height: 71px;"><?php $p->get_description_value();?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPicture">Chọn hình ảnh</label>
-                                        <input type="file" id="txtPicture" name="txtPicture">
-                                    </div>
-                                </div>
-                                <!-- /.box-body -->
 
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary" id="submit"
-                                        name="submit">Thêm</button>
-                                    <button type="submit" class="btn btn-danger" id="delete" name="delete">Xóa</button>
-                                    <button type="submit" class="btn btn-success" id="update" name="update">Sửa</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.box -->
-                        <?php
-				$id = $_REQUEST['id'];
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				
-				//File processing
-				$dir = '../../../products-images/';
-				$fileName = $_FILES['txtPicture']['name'];
-				$fileTempName = $_FILES['txtPicture']['tmp_name'];
-				//Thêm
-        	if(isset($_REQUEST['submit'])){
-
-				$p->moveFile($fileTempName,$dir,$fileName);
-				$sql = "INSERT INTO products(name, price, image, description, gender) 
-						VALUES('$name', '$price', '$fileName', '$description', '$gender')";
-				$p->product_modify($sql);
-			}
-			//Xóa
-			if(isset($_REQUEST['delete'])){
-				$sql = "DELETE FROM products WHERE pro_id='$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Deleted successfully")</script>';	
-				}	
-			}
-			
-			//Sửa
-			if(isset($_REQUEST['update'])){
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				$sql = "UPDATE products SET 
-				name = '$name',
-				price = '$price',
-				gender = '$gender',
-				description = '$description'
-				WHERE pro_id = '$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Updated successfully")</script>';	
-				}
-			}
-		?>
-
-
-                    </div>
-                    <!--/.col (left) -->
                     <!-- right column -->
                     <div class="col-md-6">
                         <!-- general form elements -->
@@ -629,30 +521,43 @@
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form role="form" method="post" enctype="multipart/form-data">
-                              <div class="box-body">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Tên đăng nhập</label>
-                                      <input name="txtUsername" type="text" class="form-control" id="txtUsername"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tên đăng nhập</label>
+                                        <input name="txtUsername" type="text" class="form-control" id="txtUsername"
+                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_username_value()?>">
                                     </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                     <input name="txtEmail" type="text" class="form-control" id="txtEmail"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input name="txtEmail" type="mail" class="form-control" id="txtEmail"
+                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_email_value()?>">
                                     </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Mật khẩu</label>
-                                      <input name="txtPassword" type="text" class="form-control" id="txtPassword"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Mật khẩu</label>
+                                        <input name="txtPassword" type="password" class="form-control" id="txtPassword"
+                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_password_value()?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="txtPermission">Quyền:</label>
                                         <select name="txtPermission" id="txtPermission">
-                                          <option value="1">Admin</option>
-                                          <option value="0">User</option>
+                                            <?php
+                                        	if($p->get_permission_value()==1){
+												echo '<option value="1" selected>Admin</option>';
+												echo '<option value="0">User</option>';
+											}
+											else if($p->get_permission_value()==0){
+												echo '<option value="1">Admin</option>';
+												echo '<option value="0"selected>User</option>';
+											}
+											else{
+												echo '<option value="1">Admin</option>
+                                         			 <option value="0">User</option>';
+											}
+											 
+										?>
                                         </select>
-                                </div>
-                              
+                                    </div>
+
                                 </div>
                                 <!-- /.box-body -->
 
@@ -667,26 +572,20 @@
                         <!-- /.box -->
                         <?php
 				$id = $_REQUEST['id'];
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				
-				//File processing
-				$dir = '../../../products-images/';
-				$fileName = $_FILES['txtPicture']['name'];
-				$fileTempName = $_FILES['txtPicture']['tmp_name'];
+				$username = $_REQUEST['txtUsername'];
+				$email = $_REQUEST['txtEmail'];
+				$password = $_REQUEST['txtPassword'];
+				$permission = $_REQUEST['txtPermission'];
+
 				//Thêm
         	if(isset($_REQUEST['submit'])){
-
-				$p->moveFile($fileTempName,$dir,$fileName);
-				$sql = "INSERT INTO products(name, price, image, description, gender) 
-						VALUES('$name', '$price', '$fileName', '$description', '$gender')";
+				$sql = "INSERT INTO user(username, email, password, permission) 
+						VALUES('$username', '$email', '$password', '$permission')";
 				$p->product_modify($sql);
 			}
 			//Xóa
 			if(isset($_REQUEST['delete'])){
-				$sql = "DELETE FROM products WHERE pro_id='$id' LIMIT 1";
+				$sql = "DELETE FROM user WHERE user_id='$id' LIMIT 1";
 				if($p->product_modify($sql)==1){
 					echo '<script>alert("Deleted successfully")</script>';	
 				}	
@@ -694,16 +593,16 @@
 			
 			//Sửa
 			if(isset($_REQUEST['update'])){
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				$sql = "UPDATE products SET 
-				name = '$name',
-				price = '$price',
-				gender = '$gender',
-				description = '$description'
-				WHERE pro_id = '$id' LIMIT 1";
+			$username = $_REQUEST['txtUsername'];
+				$email = $_REQUEST['txtEmail'];
+				$password = $_REQUEST['txtPassword'];
+				$permission = $_REQUEST['txtPermission'];
+				$sql = "UPDATE user SET 
+				username = '$username',
+				email = '$email',
+				password = '$password',
+				permission = '$permission'
+				WHERE user_id = '$id' LIMIT 1";
 				if($p->product_modify($sql)==1){
 					echo '<script>alert("Updated successfully")</script>';	
 				}
@@ -717,7 +616,7 @@
                         <!-- Horizontal Form -->
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Danh sách các sản phẩm</h3>
+                                <h3 class="box-title">Danh sách các tài khoản</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
@@ -726,17 +625,16 @@
                                     <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
                                         <tbody>
                                             <tr>
-                                                <th width="5%" align="center" valign="middle" scope="col">ID</th>
-                                                <th width="32%" scope="col">Tên sản phẩm</th>
-                                                <th width="24%" scope="col">Mô tả</th>
-                                                <th width="11%" scope="col">Hình ảnh</th>
-                                                <th width="13%" scope="col">Giới tính</th>
-                                                <th width="15%" scope="col">Giá</th>
+                                                <th width="8%" align="center" valign="middle" scope="col">ID</th>
+                                                <th width="29%" scope="col">Username</th>
+                                                <th width="27%" scope="col">Email</th>
+                                                <th width="20%" scope="col">Password</th>
+                                                <th width="16%" scope="col">Quyền</th>
                                             </tr>
                                             <?php
-						$sql = "SELECT * FROM products";
-                    	$p->general_list_item($sql);
-					?>
+                                $sql = "SELECT * FROM user";
+                                $p->general_list_account($sql);
+                            ?>
                                         </tbody>
                                     </table>
 

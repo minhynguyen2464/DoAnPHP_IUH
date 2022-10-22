@@ -5,7 +5,7 @@
 			$_SESSION['username'] = $username;
 			$_SESSION['password'] = $password;
 			if($username=='admin' && $password=='123456'){
-				header('Location: AdminLTE-master/index2.html');
+				header('Location: AdminLTE-master/index2.php');
 			}
  		}
 		
@@ -88,6 +88,22 @@
 				}
 			}
 			
+				function general_list_account($sql){
+				$con = $this->connect();
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						echo '<tr>
+								<td><a href="?id='.$rows['user_id'].'">'.$rows['user_id'].'</a></td>
+							  <td><a href="?id='.$rows['user_id'].'">'.$rows['username'].'</a></td>
+							  <td><a href="?id='.$rows['user_id'].'">'.$rows['email'].'</a></td>
+							  <td><a href="?id='.$rows['user_id'].'">'.$rows['password'].'</a></td>
+							  <td><a href="?id='.$rows['user_id'].'">'.$rows['permission'].'</a></td>		
+                    		</tr>';
+					}	
+				}
+			}
+			
 	
 			
 			function get_name_value(){
@@ -142,6 +158,58 @@
 					}
 					else{
 						return false;	
+					}
+				}
+			}
+			
+			function get_username_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT username FROM user WHERE user_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['username'];
+					}
+				}
+			}
+			
+			function get_email_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT email FROM user WHERE user_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['email'];
+					}
+				}
+			}
+			
+			function get_password_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT password FROM user WHERE user_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['password'];
+					}
+				}
+			}
+			
+			function get_permission_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT permission FROM user WHERE user_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						return $rows['permission'];
 					}
 				}
 			}

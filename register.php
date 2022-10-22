@@ -12,8 +12,8 @@
 			$password = $_REQUEST['txtPassword'];
 			$password2 = $_REQUEST['txtPassword2'];
 			if($u->checkPassword($password,$password2)){
-				$sql = "INSERT INTO user(username,email,password)
-						VALUES('$username','$email','$password')";	
+				$sql = "INSERT INTO user(username,email,password,permission)
+						VALUES('$username','$email','$password','0')";	
 				if($p->product_modify($sql)==1){
 					header('Location: login.php');
 					exit();
