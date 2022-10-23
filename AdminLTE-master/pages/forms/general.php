@@ -551,6 +551,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="txtCompany">Công ty:</label>
+                                        <select name="txtCompany" id="txtCompany">
+                                            <?php
+											$sql = "SELECT * FROM shoe_company"; 
+											$p->company_list($sql)
+										?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="textarea">Mô tả:</label>
                                         <textarea name="textarea" cols="30" rows="5" id="textarea"
                                             style="width: 591px; height: 71px;"><?php $p->get_description_value();?></textarea>
@@ -577,7 +586,8 @@
 				$price = $_REQUEST['txtPrice'];
 				$gender = $_REQUEST['txtGender'];
 				$description = $_REQUEST['textarea'];
-				
+				$comp_id = $_REQUEST['txtCompany'];		
+				$date = date("Y-m-d");
 				//File processing
 				$dir = '../../../products-images/';
 				$fileName = $_FILES['txtPicture']['name'];
@@ -586,8 +596,8 @@
         	if(isset($_REQUEST['submit'])){
 
 				$p->moveFile($fileTempName,$dir,$fileName);
-				$sql = "INSERT INTO products(name, price, image, description, gender) 
-						VALUES('$name', '$price', '$fileName', '$description', '$gender')";
+				$sql = "INSERT INTO products(name, price, image, description, gender, comp_id, add_date) 
+						VALUES('$name', '$price', '$fileName', '$description', '$gender','$comp_id','$date')";
 				$p->product_modify($sql);
 			}
 			//Xóa
@@ -604,15 +614,18 @@
 				$price = $_REQUEST['txtPrice'];
 				$gender = $_REQUEST['txtGender'];
 				$description = $_REQUEST['textarea'];
+				$comp_id = $_REQUEST['txtCompany'];	
 				$sql = "UPDATE products SET 
 				name = '$name',
 				price = '$price',
 				gender = '$gender',
-				description = '$description'
+				description = '$description',
+				comp_id = '$comp_id'
 				WHERE pro_id = '$id' LIMIT 1";
 				if($p->product_modify($sql)==1){
 					echo '<script>alert("Updated successfully")</script>';	
 				}
+				$test = "SELECT * FROM products";
 			}
 		?>
 
@@ -620,98 +633,6 @@
                     </div>
                     <!--/.col (left) -->
                     <!-- right column -->
-                    <div class="col-md-6">
-                        <!-- general form elements -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Quản lý tài khoản</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form role="form" method="post" enctype="multipart/form-data">
-                              <div class="box-body">
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Tên đăng nhập</label>
-                                      <input name="txtUsername" type="text" class="form-control" id="txtUsername"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
-                                    </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                     <input name="txtEmail" type="text" class="form-control" id="txtEmail"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
-                                    </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputEmail1">Mật khẩu</label>
-                                      <input name="txtPassword" type="text" class="form-control" id="txtPassword"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_name_value();?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPermission">Quyền:</label>
-                                        <select name="txtPermission" id="txtPermission">
-                                          <option value="1">Admin</option>
-                                          <option value="0">User</option>
-                                        </select>
-                                </div>
-                              
-                                </div>
-                                <!-- /.box-body -->
-
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary" id="submit"
-                                        name="submit">Thêm</button>
-                                    <button type="submit" class="btn btn-danger" id="delete" name="delete">Xóa</button>
-                                    <button type="submit" class="btn btn-success" id="update" name="update">Sửa</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.box -->
-                        <?php
-				$id = $_REQUEST['id'];
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				
-				//File processing
-				$dir = '../../../products-images/';
-				$fileName = $_FILES['txtPicture']['name'];
-				$fileTempName = $_FILES['txtPicture']['tmp_name'];
-				//Thêm
-        	if(isset($_REQUEST['submit'])){
-
-				$p->moveFile($fileTempName,$dir,$fileName);
-				$sql = "INSERT INTO products(name, price, image, description, gender) 
-						VALUES('$name', '$price', '$fileName', '$description', '$gender')";
-				$p->product_modify($sql);
-			}
-			//Xóa
-			if(isset($_REQUEST['delete'])){
-				$sql = "DELETE FROM products WHERE pro_id='$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Deleted successfully")</script>';	
-				}	
-			}
-			
-			//Sửa
-			if(isset($_REQUEST['update'])){
-				$name = $_REQUEST['txtName'];
-				$price = $_REQUEST['txtPrice'];
-				$gender = $_REQUEST['txtGender'];
-				$description = $_REQUEST['textarea'];
-				$sql = "UPDATE products SET 
-				name = '$name',
-				price = '$price',
-				gender = '$gender',
-				description = '$description'
-				WHERE pro_id = '$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Updated successfully")</script>';	
-				}
-			}
-		?>
-
-
-                    </div>
 
                     <div class="col-md-12">
                         <!-- Horizontal Form -->
@@ -719,28 +640,27 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">Danh sách các sản phẩm</h3>
                             </div>
+                            <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <th width="4%" align="center" valign="middle" scope="col">ID</th>
+                                        <th width="22%" scope="col">Tên sản phẩm</th>
+                                        <th width="20%" scope="col">Mô tả</th>
+                                        <th width="11%" scope="col">Hình ảnh</th>
+                                        <th width="13%" scope="col">Giới tính</th>
+                                        <th width="14%" scope="col">Giá</th>
+                                        <th width="16%" scope="col">Công ty</th>
+                                    </tr>
+                                    <?php
+												$sql = "SELECT * FROM products ORDER BY comp_id";
+												$p->general_list_item($sql);
+											?>
+                                </tbody>
+                            </table>
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form class="form-horizontal">
-                                <div class="box-body">
-                                    <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <th width="5%" align="center" valign="middle" scope="col">ID</th>
-                                                <th width="32%" scope="col">Tên sản phẩm</th>
-                                                <th width="24%" scope="col">Mô tả</th>
-                                                <th width="11%" scope="col">Hình ảnh</th>
-                                                <th width="13%" scope="col">Giới tính</th>
-                                                <th width="15%" scope="col">Giá</th>
-                                            </tr>
-                                            <?php
-						$sql = "SELECT * FROM products";
-                    	$p->general_list_item($sql);
-					?>
-                                        </tbody>
-                                    </table>
-
-                                </div>
+                                <div class="box-body"></div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
 

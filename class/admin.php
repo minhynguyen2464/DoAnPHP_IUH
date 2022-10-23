@@ -82,7 +82,7 @@
 							  <td><a href="?id='.$rows['pro_id'].'"><img src="'.$dir.$rows['image'].'" alt="Product Image" width="150px" 		height="150px"></a></td>
 							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['gender'].'</a></td>
 							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['price'].'</a></td>
-							
+							<td><a href="?id='.$rows['pro_id'].'">'.$rows['comp_id'].'</a></td>
                     		</tr>';
 					}	
 				}
@@ -210,6 +210,35 @@
 					if($result->num_rows>0){
 						$rows = $result->fetch_assoc();
 						return $rows['permission'];
+					}
+				}
+			}
+			
+			function company_list($sql){
+				$con = $this->connect();
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						if($this->get_company_value()==$rows['comp_id']){
+							echo '<option value="'.$rows['comp_id'].'" selected>'.$rows['name'].'</option>';
+						}
+						else{
+							echo '<option value="'.$rows['comp_id'].'">'.$rows['name'].'</option>';	
+						}
+						
+					}	
+				}
+			}
+			
+			function get_company_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT comp_id FROM user WHERE user_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						return $rows['comp_id'];
 					}
 				}
 			}
