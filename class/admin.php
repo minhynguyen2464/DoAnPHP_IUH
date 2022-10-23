@@ -243,5 +243,51 @@
 				}
 			}
 			
+			function men_nike_list($sql){
+				$dir = 'products-images/';
+				$con = $this->connect();
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows = $result->fetch_assoc()){
+						echo '<li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                  <div class="item-inner">
+                    <div class="item-img">
+                      <div class="item-img-info"> <a href="product_detail.html" title="Sample Product" class="product-image"> <img src="'.$dir.$rows['image'].'" alt="Sample Product"> </a>
+                        <div class="new-label new-top-left">New</div>
+                        <div class="item-box-hover">
+                          <div class="box-inner"> <div class="actions">
+                            <div class="add_cart">
+                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                            </div>
+                            <div class="product-detail-bnt"><a href="quick_view.html" class="button detail-bnt"><span>Quick View</span></a></div>
+                           <span class="add-to-links"> <a href="wishlist.html" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="compare.html" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-info">
+                      <div class="info-inner">
+                        <div class="item-title"> <a href="product_detail.html" title="Sample Product">'.$rows['name'].'</a> </div>
+                        <div class="item-content">
+                          <div class="rating">
+                            <div class="ratings">
+                              <div class="rating-box">
+                                <div class="rating" style="width:80%"></div>
+                              </div>
+                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                            </div>
+                          </div>
+                          <div class="item-price">
+                            <div class="price-box"> <span class="regular-price"> <span class="price">'.'$'.$rows['price'].'</span> </span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>';
+					}	
+				}	
+			}
+			
 	}
 ?>
