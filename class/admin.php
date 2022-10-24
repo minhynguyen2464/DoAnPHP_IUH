@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	class admin{	
+		//Hàm kiểm tra đăng nhập admin
 		function checkInput($username,$password){
 			$_SESSION['username'] = $username;
 			$_SESSION['password'] = $password;
@@ -15,6 +16,7 @@
 			}	
 		}
 		
+		//Hàm chuyển file
 		function moveFile($tmp_name, $dir, $name){
 			$path = $dir.$name;
 			if(move_uploaded_file($tmp_name,$path)){
@@ -26,6 +28,10 @@
 		}
 		
 		//Database
+			//Hàm connect database 
+			//Tên db: shoeDatabase
+			//usernname: admin
+			//password: 123qwe!@#
 			private function connect(){
 			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
 			if($con->connect_error){
@@ -34,6 +40,7 @@
 			return $con;
 		}	
 		
+			//Hàm thêm xóa sửa database
 			function product_modify($sql){
 				$con = $this->connect();
 				if(mysqli_query($con,$sql)){
@@ -45,6 +52,7 @@
 				mysqli_close($con);
 			}
 			
+			//Hàm list các sản phẩm thêm gần đây ở trang AdminLTE-master/index2.php
 			function recent_product($sql){
 				$con = $this->connect();
 				$result = $con->query($sql);
@@ -69,6 +77,7 @@
 				}	
 			}
 			
+			//Hàm list các products ở trang AdminLTE-master/pages/forms/general.php
 			function general_list_item($sql){
 				$con = $this->connect();
 				$result = $con->query($sql);
@@ -88,6 +97,7 @@
 				}
 			}
 			
+				//Hàm list account ở trang AdminLTE-master/pages/forms/advanced.php
 				function general_list_account($sql){
 				$con = $this->connect();
 				$result = $con->query($sql);
@@ -105,7 +115,7 @@
 			}
 			
 	
-			
+			//Hàm lấy value cho form ở trang AdminLTE-master/pages/forms/general.php
 			function get_name_value(){
 				if(isset($_REQUEST['id'])){
 					$id = $_REQUEST['id'];
@@ -243,6 +253,7 @@
 				}
 			}
 			
+			//Hàm đổ CSS cho các trang product men_nike.php, men_adidas.php,...
 			function men_nike_list($sql){
 				$dir = 'products-images/';
 				$con = $this->connect();
@@ -253,7 +264,6 @@
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="product_detail.html" title="Sample Product" class="product-image"> <img src="'.$dir.$rows['image'].'" alt="Sample Product"> </a>
-                        <div class="new-label new-top-left">New</div>
                         <div class="item-box-hover">
                           <div class="box-inner"> <div class="actions">
                             <div class="add_cart">
@@ -278,7 +288,7 @@
                             </div>
                           </div>
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">'.'$'.$rows['price'].'</span> </span> </div>
+                            <div class="price-box"> <span class="regular-price"> <span class="price">'.number_format($rows['price'] , 0, ',', '.').'đ'.'</span> </span> </div>
                           </div>
                         </div>
                       </div>
@@ -287,6 +297,123 @@
                 </li>';
 					}	
 				}	
+			}
+			
+			//Đổ CSS trang index
+			function index_page_list($sql){
+				$con = $this->connect();
+				$dir = 'products-images/';
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						echo '<li class="item item-animate wide-first">
+                                <div class="item-inner">
+                                  <div class="item-img">
+                                    <div class="item-img-info"><a href="product_detail.html" title="Sample Product"
+                                        class="product-image"><img src="'.$dir.$rows['image'].'"
+                                          alt="Sample Product"></a>
+                                      <div class="new-label new-top-left">New</div>
+                                      <div class="item-box-hover">
+                                        <div class="box-inner">
+                                          <div class="actions">
+                                            <div class="add_cart">
+                                              <button class="button btn-cart" type="button"><span>Add to
+                                                  Cart</span></button>
+                                            </div>
+                                            <div class="product-detail-bnt"><a href="quick_view.html"
+                                                class="button detail-bnt"><span>Quick View</span></a></div>
+                                            <span class="add-to-links"><a href="wishlist.html" class="link-wishlist"
+                                                title="Add to Wishlist"><span>Add to Wishlist</span></a> <a
+                                                href="compare.html" class="link-compare add_to_compare"
+                                                title="Add to Compare"><span>Add to Compare</span></a></span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="item-info">
+                                    <div class="info-inner">
+                                      <div class="item-title"><a href="product_detail.html"
+                                          title="Sample Product">'.$rows['name'].'</a> </div>
+                                      <div class="item-content">
+                                        <div class="rating">
+                                          <div class="ratings">
+                                            <div class="rating-box">
+                                              <div class="rating" style="width:80%"></div>
+                                            </div>
+                                            <p class="rating-links"><a href="#">1 Review(s)</a> <span
+                                                class="separator">|</span> <a href="#">Add Review</a> </p>
+                                          </div>
+                                        </div>
+                                        <div class="item-price">
+                                          <div class="price-box"><span class="regular-price"><span
+                                                class="price">'.number_format($rows['price'] , 0, ',', '.').'đ'.'</span> </span> </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>';
+					}
+				}
+			}
+			
+			//Hàm CSS cho trang css 2
+			function index_page_list_featured($sql){
+				$con = $this->connect();
+				$dir = 'products-images/';
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						echo '  <div class="item">
+              <div class="item-inner">
+                <div class="item-img">
+                  <div class="item-img-info"> <a class="product-image" title="Sample Product"
+                      href="product_detail.html"> <img alt="Sample Product" src="'.$dir.$rows['image'].'"> </a>
+                    <div class="sale-label sale-top-left">sale</div>
+                    <div class="item-box-hover">
+                      <div class="box-inner">
+                        <div class="actions">
+                          <div class="add_cart">
+                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                          </div>
+                          <div class="product-detail-bnt"><a href="quick_view.html"
+                              class="button detail-bnt"><span>Quick View</span></a></div>
+                          <span class="add-to-links"><a href="wishlist.html" class="link-wishlist"
+                              title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="compare.html"
+                              class="link-compare add_to_compare" title="Add to Compare"><span>Add to
+                                Compare</span></a></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <div class="info-inner">
+                    <div class="item-title"> <a title="Sample Product" href="product_detail.html">'.$rows['name'].'</a>
+                    </div>
+                    <div class="item-content">
+                      <div class="rating">
+                        <div class="ratings">
+                          <div class="rating-box">
+                            <div style="width:80%" class="rating"></div>
+                          </div>
+                          <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a
+                              href="#">Add Review</a> </p>
+                        </div>
+                      </div>
+                      <div class="item-price">
+                        <div class="price-box"> <span class="regular-price"> <span class="price">'.number_format($rows['price'] , 0, ',', '.').'đ'.'</span> </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>';	
+					}	
+				}
+					
 			}
 			
 	}

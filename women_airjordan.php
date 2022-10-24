@@ -392,7 +392,7 @@
                             <div class="category-products">
                                 <ul class="products-grid">
                                     <?php
-                	$sql = "SELECT * FROM products where comp_id=1 and gender='male'";
+                	$sql = "SELECT * FROM products where comp_id=3 and gender='female'";
 					$p->men_nike_list($sql);
 				?>
                                 </ul>

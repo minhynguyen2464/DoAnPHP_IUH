@@ -538,7 +538,7 @@
 						echo '<option value="male" selected>Nam</option>';
 						echo '<option value="female">Nữ</option>';
 					}
-					if($p->get_gender_value()=='female'){
+					else if($p->get_gender_value()=='female'){
 						echo '<option value="male">Nam</option>';
 						echo '<option value="female" selected>Nữ</option>';
 					}
