@@ -600,6 +600,7 @@
 						VALUES('$name', '$price', '$fileName', '$description', '$gender','$comp_id','$date')";
 				$p->product_modify($sql);
 			}
+            
 			//Xóa
 			if(isset($_REQUEST['delete'])){
 				$sql = "DELETE FROM products WHERE pro_id='$id' LIMIT 1";

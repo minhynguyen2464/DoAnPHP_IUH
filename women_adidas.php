@@ -8,7 +8,7 @@
 <!-- Tieu Long Lanh Kute -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
+<a href="product-detail/product_detail.html">Classic premium HTML5 & CSS3 template</a>
 <head>
     <meta charset="utf-8">
     <!--[if IE]>

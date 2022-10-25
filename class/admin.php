@@ -260,10 +260,11 @@
 				$result = $con->query($sql);
 				if($result->num_rows>0){
 					while($rows = $result->fetch_assoc()){
+						$detail = $rows['pro_id'].'.php'; //Phải tạo trang đặt tên tương ứng với pro_id vd pro_id 11 thì tên trang product detail là 11.php
 						echo '<li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="product_detail.html" title="Sample Product" class="product-image"> <img src="'.$dir.$rows['image'].'" alt="Sample Product"> </a>
+                      <div class="item-img-info"> <a href="'.$detail.'?id='.$rows['pro_id'].'" title="Sample Product" class="product-image"> <img src="'.$dir.$rows['image'].'" alt="Sample Product"> </a> 
                         <div class="item-box-hover">
                           <div class="box-inner"> <div class="actions">
                             <div class="add_cart">
