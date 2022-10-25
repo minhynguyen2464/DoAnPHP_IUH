@@ -427,7 +427,8 @@
                                                                 Seller</span></li>
                                                         <li class="item-nav" data-type="order" data-catid=""
                                                             data-orderby="new_arrivals" data-href="pdt_new_arrivals">
-                                                            <span class="title-navi">New Arrivals</span></li>
+                                                            <span class="title-navi">New Arrivals</span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <!-- End Tab Nav -->
