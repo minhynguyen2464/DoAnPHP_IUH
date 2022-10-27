@@ -143,7 +143,7 @@
               <ul class="level1">
                 <li class="level1 first"><a href="grid.html"><span>Grid</span></a></li>
                 <li class="level1 nav-10-2"><a href="list.html"><span>List</span></a></li>
-                <li class="level1 nav-10-3"><a href="product_detail.html"><span>Product Detail</span></a></li>
+                <li class="level1 nav-10-3"><a href="product_detail.php"><span>Product Detail</span></a></li>
                 <li class="level1 nav-10-4"><a href="shopping_cart.html"><span>Shopping Cart</span></a></li>
                 <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
                   
@@ -483,16 +483,16 @@
                           <div class="product-details">
                             <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <!--access--> <strong>1</strong> x <span class="price">$179.99</span>
-                            <p class="product-name"><a href="product_detail.html">Sample Product</a></p>
+                            <p class="product-name"><a href="product_detail.php">Sample Product</a></p>
                           </div>
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="products-images/product3.jpg"></a>
+                        <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.php"><img alt="Sample Product" src="products-images/product3.jpg"></a>
                           <div class="product-details">
                             <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <!--access--> <strong>1</strong> x <span class="price">$80.00</span>
-                            <p class="product-name"><a href="product_detail.html">Sample Product</a></p>
+                            <p class="product-name"><a href="product_detail.php">Sample Product</a></p>
                           </div>
                         </div>
                       </li>
@@ -764,7 +764,7 @@
       <ul>
         <li><a href="grid.html">Grid</a></li>
         <li> <a href="list.html">List</a></li>
-        <li> <a href="product_detail.html">Product Detail</a></li>
+        <li> <a href="product_detail.php">Product Detail</a></li>
         <li> <a href="shopping_cart.html">Shopping Cart</a></li>
         <li><a href="checkout.html">Checkout</a>
           

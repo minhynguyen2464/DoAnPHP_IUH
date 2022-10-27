@@ -9,6 +9,7 @@
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <a href="product-detail/product_detail.html">Classic premium HTML5 & CSS3 template</a>
+
 <head>
     <meta charset="utf-8">
     <!--[if IE]>
@@ -161,7 +162,7 @@
                                 <ul class="level1">
                                     <li class="level1 first"><a href="grid.html"><span>Grid</span></a></li>
                                     <li class="level1 nav-10-2"><a href="list.html"><span>List</span></a></li>
-                                    <li class="level1 nav-10-3"><a href="product_detail.html"><span>Product
+                                    <li class="level1 nav-10-3"><a href="product_detail.php"><span>Product
                                                 Detail</span></a></li>
                                     <li class="level1 nav-10-4"><a href="shopping_cart.html"><span>Shopping
                                                 Cart</span></a></li>
@@ -238,7 +239,7 @@
                                                                         class="hidden">Edit item</span></a> </div>
                                                             <!--access--> <strong>1</strong> x <span
                                                                 class="price">$179.99</span>
-                                                            <p class="product-name"><a href="product_detail.html">Sample
+                                                            <p class="product-name"><a href="product_detail.php">Sample
                                                                     Product</a></p>
                                                         </div>
                                                     </div>
@@ -255,7 +256,7 @@
                                                                         class="hidden">Edit item</span></a> </div>
                                                             <!--access--> <strong>1</strong> x <span
                                                                 class="price">$80.00</span>
-                                                            <p class="product-name"><a href="product_detail.html">Sample
+                                                            <p class="product-name"><a href="product_detail.php">Sample
                                                                     Product</a></p>
                                                         </div>
                                                     </div>
@@ -703,26 +704,26 @@
                                     </div>
                                     <p class="block-subtitle">Recently added item(s) </p>
                                     <ul>
-                                        <li class="item"> <a href="product_detail.html" title="Sample Product"
+                                        <li class="item"> <a href="product_detail.php" title="Sample Product"
                                                 class="product-image"><img src="products-images/product1.jpg"
                                                     alt="Sample Product"></a>
                                             <div class="product-details">
                                                 <div class="access"> <a href="#" title="Remove This Item"
                                                         class="btn-remove1"> <span class="icon"></span> Remove </a>
                                                 </div>
-                                                <p class="product-name"> <a href="product_detail.html">Sample
+                                                <p class="product-name"> <a href="product_detail.php">Sample
                                                         Product</a> </p>
                                                 <strong>1</strong> x <span class="price">$19.99</span>
                                             </div>
                                         </li>
-                                        <li class="item last"> <a href="product_detail.html" title="Sample Product"
+                                        <li class="item last"> <a href="product_detail.php" title="Sample Product"
                                                 class="product-image"><img src="products-images/product2.jpg"
                                                     alt="Sample Product"></a>
                                             <div class="product-details">
                                                 <div class="access"> <a href="#" title="Remove This Item"
                                                         class="btn-remove1"> <span class="icon"></span> Remove </a>
                                                 </div>
-                                                <p class="product-name"> <a href="product_detail.html">Sample
+                                                <p class="product-name"> <a href="product_detail.php">Sample
                                                         Product</a> </p>
                                                 <strong>1</strong> x <span class="price">$8.00</span>
                                                 <!--access clearfix-->
@@ -746,7 +747,7 @@
                                                 <div class="item-inner">
                                                     <div class="item-img">
                                                         <div class="item-img-info"> <a class="product-image"
-                                                                title="Sample Product" href="product_detail.html"> <img
+                                                                title="Sample Product" href="product_detail.php"> <img
                                                                     alt="Sample Product"
                                                                     src="products-images/product11.jpg"></a>
                                                             <div class="item-box-hover">
@@ -777,7 +778,7 @@
                                                     <div class="item-info">
                                                         <div class="info-inner">
                                                             <div class="item-title"> <a title="Sample Product"
-                                                                    href="product_detail.html"> Sample Product </a>
+                                                                    href="product_detail.php"> Sample Product </a>
                                                             </div>
                                                             <div class="item-content">
                                                                 <div class="rating">
@@ -885,7 +886,7 @@
                                                 <div class="item-inner">
                                                     <div class="item-img">
                                                         <div class="item-img-info"> <a class="product-image"
-                                                                title="Sample Product" href="product_detail.html"> <img
+                                                                title="Sample Product" href="product_detail.php"> <img
                                                                     alt="Sample Product"
                                                                     src="products-images/product13.jpg"> </a>
                                                             <div class="new-label new-top-left">new</div>
@@ -917,7 +918,7 @@
                                                     <div class="item-info">
                                                         <div class="info-inner">
                                                             <div class="item-title"> <a title="Sample Product"
-                                                                    href="product_detail.html"> Sample Product </a>
+                                                                    href="product_detail.php"> Sample Product </a>
                                                             </div>
                                                             <div class="item-content">
                                                                 <div class="rating">
@@ -1280,7 +1281,7 @@
                 <ul>
                     <li><a href="grid.html">Grid</a></li>
                     <li> <a href="list.html">List</a></li>
-                    <li> <a href="product_detail.html">Product Detail</a></li>
+                    <li> <a href="product_detail.php">Product Detail</a></li>
                     <li> <a href="shopping_cart.html">Shopping Cart</a></li>
                     <li><a href="checkout.html">Checkout</a>
 

@@ -1023,13 +1023,13 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <?php
-				$sql = 'SELECT * FROM products';
+				$sql = 'SELECT * FROM products LIMIT 5';
                 	$p->recent_product($sql);
 				?>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer text-center">
-                                <a href="javascript:void(0)" class="uppercase">View All Products</a>
+                                <a href="pages/forms/general.php" class="uppercase">View All Products</a>
                             </div>
                             <!-- /.box-footer -->
                         </div>
