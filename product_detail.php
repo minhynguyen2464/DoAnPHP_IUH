@@ -146,48 +146,7 @@
                 <div class="row">
                     <div class="nav-inner col-lg-12">
                         <ul id="nav" class="hidden-xs">
-                            <li class="level0 parent drop-menu active"><a href="index.php"><span>Home</span></a>
-                                <ul class="level1">
-                                    <li class="level1 first parent"><a href="index.php"><span>Home Version 1</span></a>
-                                    </li>
-                                    <li class="level1 parent"><a href="../version_2/index.html"><span>Home Version
-                                                2</span></a></li>
-                                    <li class="level1 parent"><a href="../version_3/index.html"><span>Home Version
-                                                3</span></a></li>
-
-                                </ul>
-                            </li>
-                            <li class="level0 parent drop-menu"><a href="#"><span>Pages</span></a>
-                                <ul class="level1">
-                                    <li class="level1 first"><a href="grid.html"><span>Grid</span></a></li>
-                                    <li class="level1 nav-10-2"><a href="list.html"><span>List</span></a></li>
-                                    <li class="level1 nav-10-3"><a href="product_detail.php"><span>Product
-                                                Detail</span></a></li>
-                                    <li class="level1 nav-10-4"><a href="shopping_cart.html"><span>Shopping
-                                                Cart</span></a></li>
-                                    <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
-                                    </li>
-                                    <li class="level1 nav-10-4"><a href="wishlist.html"><span>Wishlist</span></a></li>
-                                    <li class="level1"><a href="dashboard.html"><span>Dashboard</span></a></li>
-                                    <li class="level1"><a href="multiple_addresses.html"><span>Multiple
-                                                Addresses</span></a></li>
-                                    <li class="level1"><a href="about_us.html"><span>About us</span></a></li>
-                                    <li class="level1"><a href="compare.html"><span>Compare</span></a></li>
-
-                                    <li class="level1"><a href="faq.html"><span>FAQ</span></a></li>
-                                    <li class="level1"><a href="quick_view.html"><span>Quick view </span></a></li>
-                                    <li class="level1"><a href="login.php"><span>Login</span></a></li>
-
-                                    <li class="level1 first parent"><a href="blog.html"><span>Blog</span></a>
-                                        <ul class="level2 right-sub">
-                                            <li class="level2 nav-2-1-1 first"><a href="blog_detail.html"><span>Blog
-                                                        Detail</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="level1"><a href="contact_us.html"><span>Contact us</span></a></li>
-                                    <li class="level1"><a href="404error.html"><span>404 Error Page</span></a></li>
-                                </ul>
-                            </li>
+                            <li class="level0 active"><a href="index.php"><span>Home</span></a></li>
                             <li class="level0 parent drop-menu"><a href="#"><span>Nam</span></a>
                                 <ul class="level1">
                                     <li class="level1 first"><a href="men_adidas.php"><span>Giày Adidas</span></a></li>
@@ -205,6 +164,9 @@
                                                 Jordan</span></a></li>
                                 </ul>
                             </li>
+                           
+                            <li class="level0"><a href="introduce.php"><span>Giới thiệu</span></a></li>
+                             <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
                         </ul>
                         <div class="menu_top">
                             <div class="top-cart-contain pull-right">
@@ -546,7 +508,7 @@
 
                     <li><a href="blog.html">Blog</a>
                         <ul>
-                            <li><a href="blog_detail.html">Blog Detail</a></li>
+                            <li><a href="blog_detail.php">Blog Detail</a></li>
                         </ul>
                     </li>
                     <li><a href="contact_us.html">Contact us</a></li>

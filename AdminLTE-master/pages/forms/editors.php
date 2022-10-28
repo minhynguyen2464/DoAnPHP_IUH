@@ -1,3 +1,7 @@
+<?php 
+include ("../../../class/admin.php");
+$p = new admin();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +32,20 @@
   <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<?php
+			if(isset($_REQUEST['btn_add'])){
+				$content = $_REQUEST['editor1'];
+				$date = date("Y-m-d");
+				$sql = "INSERT INTO blog(content,blog_date) VALUES ('$content','$date')";
+				if($p->product_modify($sql)==1){
+					header('Location: editors.php');
+					echo '<script>alert("Thêm blog thành công")</script>';
+					
+				}
+				
+			}
+        	
+		?>
 <div class="wrapper">
 
   <header class="main-header">
@@ -385,7 +403,7 @@
           <ul class="treeview-menu">
             <li><a href="general.php"><i class="fa fa-circle-o"></i> General Elements</a></li>
             <li><a href="advanced.php"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li class="active"><a href="editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li class="active"><a href="editors.php"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -495,36 +513,17 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-              <form>
+              <form method="post" id="blog_add">
                     <textarea id="editor1" name="editor1" rows="10" cols="80">
                                             This is my textarea to be replaced with CKEditor.
                     </textarea>
+                    <input name="btn_add" type="submit" id="btn_add">
               </form>
             </div>
           </div>
           <!-- /.box -->
-
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Bootstrap WYSIHTML5
-                <small>Simple and fast</small>
-              </h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
-                  <i class="fa fa-times"></i></button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body pad">
-              <form>
-                <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </form>
-            </div>
-          </div>
+		
+          
         </div>
         <!-- /.col-->
       </div>

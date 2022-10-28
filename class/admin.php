@@ -6,7 +6,7 @@
 			$_SESSION['username'] = $username;
 			$_SESSION['password'] = $password;
 			if($username=='admin' && $password=='123456'){
-				header('Location: AdminLTE-master/index2.php');
+				header('Location: AdminLTE-master/index.php');
 			}
  		}
 		
@@ -595,6 +595,21 @@
               </div>
             </div>';
 					}
+				}	
+			}
+			
+			function blog_css($sql){
+				$con = $this->connect();
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows = $result->fetch_assoc()){
+						echo '
+                    <div class="entry-content">
+                     	'.$rows['content'].'
+                      </div>
+                      <p> <a class="btn" href="blog_detail.html?id='.$rows['blog_id'].'">Read More</a> </p>
+                    </div>';
+					}	
 				}	
 			}
 			

@@ -494,7 +494,7 @@
                             </li>
                             <li><a href="pages/forms/advanced.php"><i class="fa fa-circle-o"></i> Advanced Elements</a>
                             </li>
-                            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                            <li><a href="pages/forms/editors.php"><i class="fa fa-circle-o"></i> Editors</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

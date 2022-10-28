@@ -66,8 +66,6 @@
                                     <div class="myaccount"><a title="My Account" href="login.php"><span
                                                 class="hidden-xs">My
                                                 Account</span></a></div>
-                                    <div class="wishlist"><a title="My Wishlist" href="wishlist.html"><span
-                                                class="hidden-xs">Wishlist</span></a></div>
                                     <div class="check"><a title="Checkout" href="checkout.html"><span
                                                 class="hidden-xs">Checkout</span></a></div>
                                     <div class="demo"><a title="Blog" href="blog.html"><span
@@ -111,31 +109,7 @@
                                 </form>
                             </div>
                             <!-- End Search-col -->
-                            <!-- Header Language -->
-                            <div class="lang-curr">
-                                <div class="form-language">
-                                    <ul class="lang">
-                                        <li class=""><a href="#" title="English"><img src="images/english.png"
-                                                    alt="English" />
-                                                <span>English</span></a></li>
-                                        <li class=""><a href="#" title="Francais"><img src="images/francais.png"
-                                                    alt="Francais" />
-                                                <span>francais</span></a></li>
-                                        <li class=""><a href="#" title="German"><img src="images/german.png"
-                                                    alt="German" />
-                                                <span>german</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="form-currency">
-                                    <ul class="currencies_list">
-                                        <li class=""><a class="" title="Dollar" href="#">$</a></li>
-                                        <li class=""><a class="" title="Euro" href="#">&euro;</a></li>
-                                        <li class=""><a class="" title="Pound" href="#">&pound;</a></li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                            <!-- End Header Currency -->
                         </div>
                     </div>
                 </div>
@@ -151,48 +125,7 @@
                 <div class="row">
                     <div class="nav-inner col-lg-12">
                         <ul id="nav" class="hidden-xs">
-                            <li class="level0 parent drop-menu active"><a href="index.php"><span>Home</span></a>
-                                <ul class="level1">
-                                    <li class="level1 first parent"><a href="index.php"><span>Home Version 1</span></a>
-                                    </li>
-                                    <li class="level1 parent"><a href="../version_2/index.html"><span>Home Version
-                                                2</span></a></li>
-                                    <li class="level1 parent"><a href="../version_3/index.html"><span>Home Version
-                                                3</span></a></li>
-
-                                </ul>
-                            </li>
-                            <li class="level0 parent drop-menu"><a href="#"><span>Pages</span></a>
-                                <ul class="level1">
-                                    <li class="level1 first"><a href="grid.html"><span>Grid</span></a></li>
-                                    <li class="level1 nav-10-2"><a href="list.html"><span>List</span></a></li>
-                                    <li class="level1 nav-10-3"><a href="product_detail.php"><span>Product
-                                                Detail</span></a></li>
-                                    <li class="level1 nav-10-4"><a href="shopping_cart.html"><span>Shopping
-                                                Cart</span></a></li>
-                                    <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
-                                    </li>
-                                    <li class="level1 nav-10-4"><a href="wishlist.html"><span>Wishlist</span></a></li>
-                                    <li class="level1"><a href="dashboard.html"><span>Dashboard</span></a></li>
-                                    <li class="level1"><a href="multiple_addresses.html"><span>Multiple
-                                                Addresses</span></a></li>
-                                    <li class="level1"><a href="about_us.html"><span>About us</span></a></li>
-                                    <li class="level1"><a href="compare.html"><span>Compare</span></a></li>
-
-                                    <li class="level1"><a href="faq.html"><span>FAQ</span></a></li>
-                                    <li class="level1"><a href="quick_view.html"><span>Quick view </span></a></li>
-                                    <li class="level1"><a href="login.php"><span>Login</span></a></li>
-
-                                    <li class="level1 first parent"><a href="blog.html"><span>Blog</span></a>
-                                        <ul class="level2 right-sub">
-                                            <li class="level2 nav-2-1-1 first"><a href="blog_detail.html"><span>Blog
-                                                        Detail</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="level1"><a href="contact_us.html"><span>Contact us</span></a></li>
-                                    <li class="level1"><a href="404error.html"><span>404 Error Page</span></a></li>
-                                </ul>
-                            </li>
+                            <li class="level0 active"><a href="index.php"><span>Home</span></a></li>
                             <li class="level0 parent drop-menu"><a href="#"><span>Nam</span></a>
                                 <ul class="level1">
                                     <li class="level1 first"><a href="men_adidas.php"><span>Giày Adidas</span></a></li>
@@ -210,6 +143,9 @@
                                                 Jordan</span></a></li>
                                 </ul>
                             </li>
+                           
+                            <li class="level0"><a href="introduce.php"><span>Giới thiệu</span></a></li>
+                             <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
                         </ul>
                         <div class="menu_top">
                             <div class="top-cart-contain pull-right">
@@ -295,89 +231,14 @@
                     <ul>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
                             data-thumb='images/slide-img1.jpg'>
-                            <img src='images/slide-img1.jpg' alt="slide-img" data-bgposition='left top'
+                            <img src='products-images/fa4596ad9a9d39901eeb455ed4f74e44.jpg' alt="slide-img" data-bgposition='left top'
                                 data-bgfit='cover' data-bgrepeat='no-repeat' />
-                            <div class="info">
-                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='860' data-y='60'
-                                    data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone'
-                                    data-splitin='none' data-splitout='none' data-elementdelay='0.1'
-                                    data-endelementdelay='0.1'
-                                    style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'>New Season
-                                </div>
-                                <div class='tp-caption line' data-x='860' data-y='120' data-endspeed='500'
-                                    data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none'
-                                    data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>&nbsp;</div>
-                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='860' data-y='140'
-                                    data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone'
-                                    data-splitin='none' data-splitout='none' data-elementdelay='0.1'
-                                    data-endelementdelay='0.1'
-                                    style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>Summer Sale
-                                </div>
-                                <div class='tp-caption sfb  tp-resizeme ' data-x='860' data-y='330' data-endspeed='500'
-                                    data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none'
-                                    data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#'
-                                        class="view-more">View More</a> <a href='#' class="buy-btn">Buy Now</a></div>
-                                <div class='tp-caption Title sft  tp-resizeme ' data-x='860' data-y='220'
-                                    data-endspeed='500' data-speed='500' data-start='1500'
-                                    data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none'
-                                    data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>In augue urna,
-                                    nunc, tincidunt,
-                                    augue,<br>
-                                    augue facilisis facilisis.</div>
-                                <div class='tp-caption Title sft  tp-resizeme small-size ' data-x='860' data-y='370'
-                                    data-endspeed='500' data-speed='500' data-start='1500'
-                                    data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none'
-                                    data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Lorem ipsum
-                                    dolor sit amet,
-                                    consectetur elit.</div>
-                            </div>
+                            
                         </li>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
                             data-thumb='images/slide-img2.jpg'>
-                            <img src='images/slide-img2.jpg' alt="slide" data-bgposition='left top' data-bgfit='cover'
+                            <img src='products-images/adidas_mutator_pack_5bf1cc76425a457a8032b0a3fe3cea1b.jpg' alt="slide" data-bgposition='left top' data-bgfit='cover'
                                 data-bgrepeat='no-repeat' />
-                            <div class="info">
-                                <div class='tp-caption ExtraLargeTitle sft tp-resizeme ' data-x='395' data-y='60'
-                                    data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone'
-                                    data-splitin='none' data-splitout='none' data-elementdelay='0.1'
-                                    data-endelementdelay='0.1'
-                                    style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'>NEW ARRIVALS
-                                </div>
-                                <div class='tp-caption line' data-x='395' data-y='120' data-endspeed='500'
-                                    data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none'
-                                    data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>&nbsp;</div>
-                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='395' data-y='140'
-                                    data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone'
-                                    data-splitin='none' data-splitout='none' data-elementdelay='0.1'
-                                    data-endelementdelay='0.1'
-                                    style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>Lorem a Cosmo
-                                </div>
-                                <div class='tp-caption Title1 sft tp-resizeme' data-x='395' data-y='220'
-                                    data-endspeed='500' data-speed='500' data-start='1500'
-                                    data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none'
-                                    data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>In augue urna,
-                                    nunc, tincidunt,
-                                    augue,<br>
-                                    augue facilisis facilisis.</div>
-                                <div class='tp-caption sfb  tp-resizeme ' data-x='395' data-y='330' data-endspeed='500'
-                                    data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none'
-                                    data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#'
-                                        class="view-more">View More</a> <a href='#' class="buy-btn">Buy Now</a></div>
-                                <div class='tp-caption Title sft  tp-resizeme ' data-x='395' data-y='370'
-                                    data-endspeed='500' data-speed='500' data-start='1500'
-                                    data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none'
-                                    data-elementdelay='0.1' data-endelementdelay='0.1'
-                                    style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;font-size:11px'>
-                                    Lorem ipsum dolor
-                                    sit amet, consectetur adipiscing elit.</div>
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -389,19 +250,19 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner1">
-                            <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div>
+                            <div class="top-b-text"><a href="women_nike.php"><strong>Giày Nike</strong> Danh Cho Nữ</a></div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
+                        <div class="col free-shipping"><strong>Miễn Phí Giao Hàng</strong> các hóa đơn trên 2.000.000đ</div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner2">
-                            <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
+                            <div class="top-b-text"><a href="men_adidas.php"><strong>Giày Adidas</strong>Hàng Mới 2022</a></div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col last offer"><strong>New Collection</strong> Lorem ipsum dolor.</div>
+                        <div class="col last offer"><strong>Đổi Trả</strong> Trong 30 Ngày</div>
                     </div>
                 </div>
             </div>
@@ -490,34 +351,34 @@
             <div class="container">
                 <ul class="bxslider">
                     <li>
-                        <h2>NEW ARRIVALS</h2>
-                        <h1>Sale up to 30% off</h1>
+                        <h2>HÀNG MỚI</h2>
+                        <h1>Giảm Giá Lên Đến 30%</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
                             lacus. Fusce
                             condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
                             sed arcu
                             massa. </p>
-                        <a class="shop-now" href="#">Shop now</a>
+                        <a class="shop-now" href="men_nike.php">Mua Ngay</a>
                     </li>
                     <li>
-                        <h2>Hello hotness!</h2>
-                        <h1>Summer collection</h1>
+                        <h2>XIN CHÀO MÙA HÈ</h2>
+                        <h1>Bộ Sưu Tập Mùa Hè</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
                             lacus. Fusce
                             condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
                             sed arcu
                             massa. </p>
-                        <a class="shop-now" href="#">View More</a>
+                        <a class="shop-now" href="men_adidas.php">Xem Thêm</a>
                     </li>
                     <li>
-                        <h2>New launch</h2>
-                        <h1>Designer dresses on sale</h1>
+                        <h2>BEST SELLER</h2>
+                        <h1>Những Mặt Hàng Bán Chạy</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
                             lacus. Fusce
                             condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
                             sed arcu
                             massa. </p>
-                        <a class="shop-now" href="#">Learn More</a>
+                        <a class="shop-now" href="men_nike.php">Xem Thêm</a>
                     </li>
                 </ul>
             </div>
@@ -534,9 +395,9 @@
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="blog_inner">
                             <div class="blog-img"> <img src="images/blog-img1.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.html">Read More</a> </div>
+                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
                             </div>
-                            <h3><a href="blog_detail.html">Pellentesque habitant morbi</a> </h3>
+                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
                             <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
                             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                                 egestas. Fusce sit
@@ -546,9 +407,9 @@
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="blog_inner">
                             <div class="blog-img"> <img src="images/blog-img2.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.html">Read More</a> </div>
+                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
                             </div>
-                            <h3><a href="blog_detail.html">Pellentesque habitant morbi</a> </h3>
+                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
                             <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
                             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                                 egestas. Fusce sit
@@ -558,9 +419,9 @@
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="blog_inner">
                             <div class="blog-img"> <img src="images/blog-img3.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.html">Read More</a> </div>
+                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
                             </div>
-                            <h3><a href="blog_detail.html">Pellentesque habitant morbi</a> </h3>
+                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
                             <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
                             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                                 egestas. Fusce sit
@@ -570,9 +431,9 @@
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="blog_inner">
                             <div class="blog-img"> <img src="images/blog-img4.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.html">Read More</a> </div>
+                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
                             </div>
-                            <h3><a href="blog_detail.html">Pellentesque habitant morbi</a> </h3>
+                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
                             <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
                             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                                 egestas. Fusce sit
@@ -803,7 +664,7 @@
                     <li><a href="login.php">Login</a></li>
                     <li><a href="blog.html">Blog</a>
                         <ul>
-                            <li><a href="blog_detail.html">Blog Detail</a></li>
+                            <li><a href="blog_detail.php">Blog Detail</a></li>
                         </ul>
                     </li>
                     <li><a href="contact_us.html">Contact us</a></li>
