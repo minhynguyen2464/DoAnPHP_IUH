@@ -32,7 +32,7 @@
 			//Tên db: shoeDatabase
 			//usernname: admin
 			//password: 123qwe!@#
-			private function connect(){
+			function connect(){
 			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
 				if($con->connect_error){
 				die('Connection failed: '. $con->connect_error);
@@ -484,9 +484,9 @@
                         <button onClick="var result = document.getElementById("qty"); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
                       </div>
                     </div>
-      
-                      <button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button"><span><i class="icon-basket"></i> THÊM VÀO GIỎ HÀNG</span></button>
-      
+					<form method="post" id="form-1">
+					<button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="submit" name="btn_add"><span><i class="icon-basket"></i> THÊM VÀO GIỎ HÀNG</span></button>
+   					 </form>
                   </div>
 
                 </div>
@@ -612,6 +612,90 @@
 					}	
 				}	
 			}
+			
+			//Hàm in danh sách của shopping cart
+			function sub_connect(){
+				$con = $this->connect();
+				return $con;
+			}
+
+			//
+			function count_shoppingcart(){
+				$con = $this->connect();
+				$user_id = $_SESSION['user_id'];
+				$sql = "SELECT ord_id FROM orders WHERE user_id='$user_id'";
+				$count = 0;
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					while($rows=$result->fetch_assoc()){
+						$count += count($rows['ord_id']);
+					}
+				}
+			
+				return $count;
+			}
+			
+					// Hàm list mini cart
+		function cart_list_mini(){
+			$con = $this->connect();
+			$user_id = $_SESSION['user_id'];
+			$dir = 'products-images/';
+			$sql = "SELECT pd.image, pd.name, pd.price, od.ord_id, od.qty, od.subtotal
+			FROM products AS pd JOIN orders AS od ON pd.pro_id = od.pro_id AND od.user_id='$user_id' LIMIT 2";
+			$count = $this->count_shoppingcart();
+			$result = $con->query($sql);
+		
+			echo '<div class="mini-cart">
+			<div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a
+					href="#"><span class="hidden-xs">Shopping Cart ('.$count.')</span></a></div>';
+			echo '<div>
+				<div class="top-cart-content" style="display: none;">
+					<div class="block-subtitle">
+					</div>';
+			if($result->num_rows>0){
+				while($rows=$result->fetch_assoc()){
+					echo '
+				<!--block-subtitle-->
+				<ul class="mini-products-list" id="cart-sidebar">
+					<li class="item first">
+						<div class="item-inner"><a class="product-image"
+								title="Sample Product" href="product_detail.php"><img alt="Sample Product"
+									src="'.$dir.$rows['image'].'"></a>
+							<div class="product-details">
+								<div class="access"><a class="btn-remove1"
+										title="Remove This Item" href="#">Remove</a>
+								</div>
+								<!--access--> <strong>'.$rows['qty'].'</strong> x <span
+									class="price">'.number_format($rows['price'] , 0, ',', '.').'đ'.'</span>
+								<p class="product-name"><a href="product_detail.php">'.$rows['name'].'</a></p>
+							</div>
+						</div>
+					</li>
+				</ul>';
+				}
+			}
+			if($count>2){
+				echo '<div class="more" style="font-size: 15px; text-align: center;">
+				<a href="shopping_cart.php"><p>And more</p></a>
+				</div>'; 
+			}
+				
+			echo '<div class="actions">
+				<a href="shopping_cart.php">
+				<button class="btn-checkout" title="Checkout"
+					type="button" ><span>Check out</span></button>
+					</a>
+					</div>';
+					echo '<!--actions-->
+					</div>
+				</div>
+			</div>';
+		}
+		
+		function get_username(){
+			$username = $_SESSION['username'];
+			echo $username;	
+		}
 			
 	}
 ?>

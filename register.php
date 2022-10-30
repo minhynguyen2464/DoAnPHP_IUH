@@ -1,8 +1,6 @@
-<?php
-	include('class/admin.php');
-	include('class/user.php');
-	$p = new admin();
-	$u = new user();
+<?php 
+	include ("class/user.php");
+	$p = new user();
 ?>
 
 <?php
@@ -11,7 +9,8 @@
 			$email = $_REQUEST['txtEmail'];
 			$password = $_REQUEST['txtPassword'];
 			$password2 = $_REQUEST['txtPassword2'];
-			if($u->checkPassword($password,$password2)){
+			if($p->checkPassword($password,$password2)){
+				$password = hash('sha512','$password');
 				$sql = "INSERT INTO user(username,email,password,permission)
 						VALUES('$username','$email','$password','0')";	
 				if($p->product_modify($sql)==1){
@@ -198,9 +197,9 @@
                                                 Jordan</span></a></li>
                                 </ul>
                             </li>
-                           
+
                             <li class="level0"><a href="introduce.php"><span>Giới thiệu</span></a></li>
-                             <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
+                            <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
                         </ul>
                         <div class="menu_top">
                             <div class="top-cart-contain pull-right">

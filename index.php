@@ -60,7 +60,7 @@
                         <div class="col-lg-9 col-xs-12 right_menu">
                             <div class="toplinks">
                                 <!-- Default Welcome Message -->
-                                <div class="welcome-msg hidden-xs">Default welcome msg! </div>
+                                <div class="welcome-msg hidden-xs">Xin chào <?php $p->get_username()?> !</div>
                                 <!-- End Default Welcome Message -->
                                 <div class="links">
                                     <div class="myaccount"><a title="My Account" href="login.php"><span
@@ -91,8 +91,17 @@
                                     </div>
                                     <!-- End Header Company -->
 
-                                    <div class="login"><a href="login.php"><span class="hidden-xs">Log In</span></a>
-                                    </div>
+                                    <?php
+										session_start();
+                                    	if(isset($_SESSION['username'])){
+											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
+                                    </div>';
+										}
+										else{
+											echo ' <div class="login"><a href="login.php"><span class="hidden-xs">Log In</span></a>
+                                    </div>';	
+										}
+									?>
                                 </div>
                                 <!-- links -->
                             </div>
@@ -143,73 +152,16 @@
                                                 Jordan</span></a></li>
                                 </ul>
                             </li>
-                           
+
                             <li class="level0"><a href="introduce.php"><span>Giới thiệu</span></a></li>
-                             <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
+                            <li class="level0"><a href="blog.php"><span>Blog</span></a></li>
                         </ul>
                         <div class="menu_top">
                             <div class="top-cart-contain pull-right">
                                 <!-- Top Cart -->
-                                <div class="mini-cart">
-                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a
-                                            href="#"><span class="hidden-xs">Shopping Cart (2)</span></a></div>
-                                    <div>
-                                        <div class="top-cart-content" style="display: none;">
-                                            <div class="block-subtitle">
-                                                <div class="top-subtotal">2 items, <span class="price">$259.99</span>
-                                                </div>
-                                                <!--top-subtotal-->
-                                                <div class="pull-right">
-                                                    <button title="View Cart" class="view-cart" type="button"><span>View
-                                                            Cart</span></button>
-                                                </div>
-                                                <!--pull-right-->
-                                            </div>
-                                            <!--block-subtitle-->
-                                            <ul class="mini-products-list" id="cart-sidebar">
-                                                <li class="item first">
-                                                    <div class="item-inner"><a class="product-image"
-                                                            title="Sample Product" href="#l"><img alt="Sample Product"
-                                                                src="products-images/product4.jpg"></a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="btn-remove1"
-                                                                    title="Remove This Item" href="#">Remove</a> <a
-                                                                    class="btn-edit" title="Edit item" href="#"><i
-                                                                        class="icon-pencil"></i><span
-                                                                        class="hidden">Edit item</span></a> </div>
-                                                            <!--access--> <strong>1</strong> x <span
-                                                                class="price">$179.99</span>
-                                                            <p class="product-name"><a href="product_detail.php">Sample
-                                                                    Product</a></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="item last">
-                                                    <div class="item-inner"><a class="product-image"
-                                                            title="Sample Product" href="#"><img alt="Sample Product"
-                                                                src="products-images/product3.jpg"></a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="btn-remove1"
-                                                                    title="Remove This Item" href="#">Remove</a> <a
-                                                                    class="btn-edit" title="Edit item" href="#"><i
-                                                                        class="icon-pencil"></i><span
-                                                                        class="hidden">Edit item</span></a> </div>
-                                                            <!--access--> <strong>1</strong> x <span
-                                                                class="price">$80.00</span>
-                                                            <p class="product-name"><a href="product_detail.php">Sample
-                                                                    Product</a></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="actions">
-                                                <button class="btn-checkout" title="Checkout"
-                                                    type="button"><span>Checkout</span></button>
-                                            </div>
-                                            <!--actions-->
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+								  $p->cart_list_mini();
+								?>
                                 <!-- Top Cart -->
                                 <div id="ajaxconfig_info" style="display:none"><a href="#/"></a>
                                     <input value="" type="hidden">
@@ -231,14 +183,14 @@
                     <ul>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
                             data-thumb='images/slide-img1.jpg'>
-                            <img src='products-images/fa4596ad9a9d39901eeb455ed4f74e44.jpg' alt="slide-img" data-bgposition='left top'
-                                data-bgfit='cover' data-bgrepeat='no-repeat' />
-                            
+                            <img src='products-images/fa4596ad9a9d39901eeb455ed4f74e44.jpg' alt="slide-img"
+                                data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+
                         </li>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
                             data-thumb='images/slide-img2.jpg'>
-                            <img src='products-images/adidas_mutator_pack_5bf1cc76425a457a8032b0a3fe3cea1b.jpg' alt="slide" data-bgposition='left top' data-bgfit='cover'
-                                data-bgrepeat='no-repeat' />
+                            <img src='products-images/adidas_mutator_pack_5bf1cc76425a457a8032b0a3fe3cea1b.jpg'
+                                alt="slide" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
                         </li>
                     </ul>
                 </div>
@@ -250,15 +202,18 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner1">
-                            <div class="top-b-text"><a href="women_nike.php"><strong>Giày Nike</strong> Danh Cho Nữ</a></div>
+                            <div class="top-b-text"><a href="women_nike.php"><strong>Giày Nike</strong> Danh Cho Nữ</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col free-shipping"><strong>Miễn Phí Giao Hàng</strong> các hóa đơn trên 2.000.000đ</div>
+                        <div class="col free-shipping"><strong>Miễn Phí Giao Hàng</strong> các hóa đơn trên 2.000.000đ
+                        </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner2">
-                            <div class="top-b-text"><a href="men_adidas.php"><strong>Giày Adidas</strong>Hàng Mới 2022</a></div>
+                            <div class="top-b-text"><a href="men_adidas.php"><strong>Giày Adidas</strong>Hàng Mới
+                                    2022</a></div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
