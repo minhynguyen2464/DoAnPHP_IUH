@@ -324,7 +324,7 @@
 						echo '<li class="item item-animate wide-first">
                                 <div class="item-inner">
                                   <div class="item-img">
-                                    <div class="item-img-info"><a href="product_detail.html" title="Sample Product"
+                                    <div class="item-img-info"><a href="product_detail.php?id='.$rows['pro_id'].'" title="Sample Product"
                                         class="product-image"><img src="'.$dir.$rows['image'].'"
                                           alt="Sample Product"></a>
                                       <div class="new-label new-top-left">New</div>
@@ -384,7 +384,7 @@
               <div class="item-inner">
                 <div class="item-img">
                   <div class="item-img-info"> <a class="product-image" title="Sample Product"
-                      href="product_detail.html"> <img alt="Sample Product" src="'.$dir.$rows['image'].'"> </a>
+                      href="product_detail.php?id='.$rows['pro_id'].'"> <img alt="Sample Product" src="'.$dir.$rows['image'].'"> </a>
                     <div class="sale-label sale-top-left">sale</div>
                     <div class="item-box-hover">
                       <div class="box-inner">
@@ -623,12 +623,12 @@
 			function count_shoppingcart(){
 				$con = $this->connect();
 				$user_id = $_SESSION['user_id'];
-				$sql = "SELECT ord_id FROM orders WHERE user_id='$user_id'";
+				$sql = "SELECT cart_id FROM orders WHERE user_id='$user_id'";
 				$count = 0;
 				$result = $con->query($sql);
 				if($result->num_rows>0){
 					while($rows=$result->fetch_assoc()){
-						$count += count($rows['ord_id']);
+						$count += count($rows['cart_id']);
 					}
 				}
 			
@@ -640,7 +640,7 @@
 			$con = $this->connect();
 			$user_id = $_SESSION['user_id'];
 			$dir = 'products-images/';
-			$sql = "SELECT pd.image, pd.name, pd.price, od.ord_id, od.qty, od.subtotal
+			$sql = "SELECT pd.image, pd.name, pd.price, od.cart_id, od.qty, od.subtotal, od.pro_id
 			FROM products AS pd JOIN orders AS od ON pd.pro_id = od.pro_id AND od.user_id='$user_id' LIMIT 2";
 			$count = $this->count_shoppingcart();
 			$result = $con->query($sql);
@@ -659,7 +659,7 @@
 				<ul class="mini-products-list" id="cart-sidebar">
 					<li class="item first">
 						<div class="item-inner"><a class="product-image"
-								title="Sample Product" href="product_detail.php"><img alt="Sample Product"
+								title="Sample Product" href="product_detail.php?id='.$rows['pro_id'].'"><img alt="Sample Product"
 									src="'.$dir.$rows['image'].'"></a>
 							<div class="product-details">
 								<div class="access"><a class="btn-remove1"
@@ -697,5 +697,170 @@
 			echo $username;	
 		}
 			
+		//Hàm đổ dữ liệu cho bảng Latest Order
+		function latest_order(){
+			$sql = "select od.order_detail_id, od.user_id, pd.name, od.location, od.city, od.order_date, od.status
+					from products as pd join order_detail as od 
+					on pd.pro_id=od.pro_id 
+					order by od.order_detail_id desc";
+			$con = $this->connect();
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				while($rows=$result->fetch_assoc()){
+					echo '<tr>';
+                 	echo '<td><a href="pages/examples/invoice.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">'.$rows['order_detail_id'].'</a></td>';
+                    echo  '<td>'.$rows['name'].'</td>';
+					if($rows['status']==1){
+						echo '<td><span class="label label-success">Shipped</span></td>';	
+					}
+					else{
+						echo '<td><span class="label label-warning">Pending</span></td>';
+					}
+                    echo  '<td>'.$rows['location'].', '.$rows['city'].'</td>';
+                    echo '</tr>';
+				}
+			}
+		}
+		//Hàm đổ dữ liệu cho trang invoice.php
+		function invoice_table(){
+			$con = $this->connect();
+			$userid = $_GET['userid'];
+			$date = $_GET['date'];
+			$shipping = 30000;
+			$sql = "SELECT *
+					FROM products AS pd
+					INNER JOIN order_detail AS od
+					INNER JOIN user AS u ON pd.pro_id = od.pro_id
+					AND u.user_id = od.user_id
+					AND od.user_id = '$userid'
+					AND od.order_date = '$date'";
+			$result = $con->query($sql);
+			$result2= $con->query($sql);
+			$info = $result2->fetch_assoc();
+						echo '<section class="invoice">
+					  <!-- title row -->
+					  <div class="row">
+						<div class="col-xs-12">
+						  <h2 class="page-header">
+							<i class="fa fa-globe"></i> AdminLTE, Inc.
+							<small class="pull-right">Date: 2/10/2014</small>
+						  </h2>
+						</div>
+						<!-- /.col -->
+					  </div>
+					  <!-- info row -->
+					  <div class="row invoice-info">
+						<div class="col-sm-4 invoice-col">
+						  From
+						  <address>
+							<strong>Admin, Inc.</strong><br>
+							795 Folsom Ave, Suite 600<br>
+							San Francisco, CA 94107<br>
+							Phone: (804) 123-5432<br>
+							Email: something@iuh.edu.vn
+						  </address>
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-4 invoice-col">
+						  To
+						  <address>
+							<strong>'.$info['username'].'</strong><br>
+							'.$info['location'].', '.$info['city'].'<br>
+							Phone: (555) 539-1037<br>
+							Email: '.$info['email'].'
+						  </address>
+						</div>
+						<!-- /.col -->
+						<div class="col-sm-4 invoice-col">
+						  <b>Invoice #007612</b><br>
+						  <br>
+						  <b>Order ID:</b> <br>
+						  <b>Payment Due:</b> '.$info['order_date'].'<br>
+						  <b>Account:</b> '.$info['username'].'
+						</div>
+						<!-- /.col -->
+					  </div>
+					  <!-- /.row -->
+				
+					  <!-- Table row -->
+					  <div class="row">
+						<div class="col-xs-12 table-responsive">
+						  <table class="table table-striped">
+							<thead>
+							<tr>
+							<th>Mã sản phẩm</th>
+							  <th>Tên sản phẩm</th>
+							  <th>Số lượng</th>
+							  <th>Tổng cộng</th>
+							</tr>
+							</thead>
+						<tbody>';
+			if($result->num_rows>0){
+				while($rows=$result->fetch_assoc()){
+					$total=$rows['price'];
+					echo '<tr>
+							<td>'.$rows['pro_id'].'</td>
+							<td>'.$rows['name'].'</td>
+							<td>'.$rows['qty'].'</td>
+							<td>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</td>
+						</tr>';	
+					$total += $rows['price'];
+				}
+				$vat = $total*0.08;	
+			}
+			else{
+				echo 'No Result found';
+			}
+			echo '</tbody>
+						  </table>
+						</div>
+						<!-- /.col -->
+					  </div>
+					  <!-- /.row -->
+				
+					  <div class="row">
+						<!-- accepted payments column -->
+						<div class="col-xs-6">
+						  <p class="lead">Payment Methods:</p>
+						  <img src="../../dist/img/credit/visa.png" alt="Visa">
+						  <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+						  <img src="../../dist/img/credit/american-express.png" alt="American Express">
+						  <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+				
+						  <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+							Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
+							dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+						  </p>
+						</div>
+						<!-- /.col -->
+						<div class="col-xs-6">
+						  <p class="lead">Amount Due '.$info['order_date'].'</p>
+				
+						  <div class="table-responsive">
+							<table class="table">
+							  <tr>
+								<th style="width:50%">Subtotal:</th>
+								<td>'.number_format($total , 0, ',', '.').'đ'.'</td>
+							  </tr>
+							  <tr>
+								<th>Thuế VAT (8%)</th>
+								<td>'.number_format($vat , 0, ',', '.').'đ'.'</td>
+							  </tr>
+							  <tr>
+								<th>Phí vận chuyển:</th>
+								<td>'.number_format($shipping , 0, ',', '.').'đ'.'</td>
+							  </tr>
+							  <tr>
+								<th>Total:</th>
+								<td>'.number_format($shipping+$total+$vat , 0, ',', '.').'đ'.'</td>
+							  </tr>
+							</table>
+						  </div>
+						</div>
+						<!-- /.col -->
+					  </div>
+					  <!-- /.row -->';
+					 
+		}
 	}
 ?>

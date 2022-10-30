@@ -1,8 +1,6 @@
 <?php 
-	session_start();
-	include ("../class/admin.php");
-	$p = new admin();
-	$p->checkSession();
+	include ("../class/user.php");
+	$p = new user();
 ?>
 <html>
 
@@ -526,7 +524,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                            <li><a href="pages/examples/invoice.php"><i class="fa fa-circle-o"></i> Invoice</a></li>
                             <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
                             <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
                             <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
@@ -834,86 +832,54 @@
                                                 <th>Order ID</th>
                                                 <th>Item</th>
                                                 <th>Status</th>
-                                                <th>Popularity</th>
+                                                <th>City</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                            	$p->latest_order();
+											?>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR9842</a></td>
                                                 <td>Call of Duty IV</td>
                                                 <td><span class="label label-success">Shipped</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR1848</a></td>
                                                 <td>Samsung Smart TV</td>
                                                 <td><span class="label label-warning">Pending</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#f39c12" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR7429</a></td>
                                                 <td>iPhone 6 Plus</td>
                                                 <td><span class="label label-danger">Delivered</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#f56954" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR7429</a></td>
                                                 <td>Samsung Smart TV</td>
                                                 <td><span class="label label-info">Processing</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00c0ef" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR1848</a></td>
                                                 <td>Samsung Smart TV</td>
                                                 <td><span class="label label-warning">Pending</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#f39c12" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR7429</a></td>
                                                 <td>iPhone 6 Plus</td>
                                                 <td><span class="label label-danger">Delivered</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#f56954" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                                <td><a href="pages/examples/invoice.php">OR9842</a></td>
                                                 <td>Call of Duty IV</td>
                                                 <td><span class="label label-success">Shipped</span></td>
-                                                <td>
-                                                    <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas
-                                                            width="34" height="20"
-                                                            style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                                    </div>
-                                                </td>
+                                                <td>HCM</td>
                                             </tr>
                                         </tbody>
                                     </table>

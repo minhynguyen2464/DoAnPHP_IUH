@@ -292,18 +292,18 @@
                                         </tfoot>
                                         <?php
                       $cartlist=$p->sub_connect();
-                      $sql2="select pd.image, pd.name, pd.price, od.ord_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id";
+                      $sql2="select pd.image, pd.name, pd.price, od.cart_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id AND od.user_id='$userid'";
                       $dir = 'products-images/';
                       $result = $cartlist->query($sql2);
                       $checkout_subtotal=0;
                       
                       if($result->num_rows>0){
                         while($rows=$result->fetch_assoc()){
-                          $id=$rows['ord_id'];
-                          $subtotal=$rows['qty']*floatval($rows['price']);;
+                          $id=$rows['cart_id'];
+                          $subtotal=$rows['qty']*floatval($rows['price']);
                           $checkout_subtotal+=$subtotal;
 
-                          $sql3="UPDATE orders SET subtotal = $subtotal WHERE ord_id=$id";
+                          $sql3="UPDATE orders SET subtotal = $subtotal WHERE cart_id=$id";
                           $p->product_modify($sql3);
                           echo '<tbody>
                     <tr class="first odd">
@@ -347,7 +347,7 @@
                       <a
                       class="button remove-item"
                       title="Remove item"
-                      href="remove.php?id='.$rows['ord_id'].'"
+                      href="remove.php?id='.$rows['cart_id'].'"
                       ></a>
                       </td>
                     </tr>
@@ -360,113 +360,144 @@
                             </form>
                         </div>
                         <!-- BEGIN CART COLLATERALS -->
-                        <div class="cart-collaterals row">
-                            <div class="col-sm-4">
-                                <div class="shipping">
-                                    <h3>Estimate Shipping and Tax</h3>
-                                    <div class="shipping-form">
-                                        <form id="shipping-zip-form" method="post" action="#">
-                                            <p>
-                                                Enter your destination to get a shipping estimate.
-                                            </p>
-                                            <ul class="form-list">
-                                                <li>
-                                                    <label class="required"
-                                                        for="province"><em>*</em>Province/City</label>
-                                                    <div class="input-box">
-                                                        <select title="Country" class="validate-select" id="country"
-                                                            name="country_id">
-                                                            <option selected="selected" value="HCM">
-                                                                Hồ Chí Minh
-                                                            </option>
-                                                            <option value="HN">Hà Nội</option>
-                                                            <option value="Other">Tỉnh khác</option>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <label for="region_id">Detail location</label>
-                                                    <div class="input-box">
-                                                        <input type="text" class="input-text" title="detail"
-                                                            name="detail_location" id="detail_location" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="buttons-set11">
-                                                <button class="button get-quote" title="Get a Quote" type="submit"
-                                                    name="get_quote" value="get-quote">
-                                                    <span>Get a Quote</span>
-                                                </button>
-                                            </div>
-                                            <!--buttons-set11-->
-                                        </form>
+                        <form method="post" id="checkout_form">
+                            <div class="cart-collaterals row">
+                                <div class="col-sm-4">
+                                    <div class="shipping">
+                                        <h3>Estimate Shipping and Tax</h3>
+                                        <div class="shipping-form">
+                                            <form id="shipping-zip-form" method="post" action="#">
+                                                <p>
+                                                    Enter your destination to get a shipping estimate.
+                                                </p>
+                                                <ul class="form-list">
+                                                    <li>
+                                                        <label class="required"
+                                                            for="province"><em>*</em>Province/City</label>
+                                                        <div class="input-box">
+                                                            <select title="Country" class="validate-select" id="country"
+                                                                name="country_id">
+                                                                <option selected="selected" value="HCM">
+                                                                    Hồ Chí Minh
+                                                                </option>
+                                                                <option value="HN">Hà Nội</option>
+                                                                <option value="Other">Tỉnh khác</option>
+                                                            </select>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <label for="region_id">Detail location</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="detail_location" id="detail_location" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="buttons-set11">
+                                                    <button class="button get-quote" title="Get a Quote" type="submit"
+                                                        name="get_quote" value="get-quote">
+                                                        <span>Get a Quote</span>
+                                                    </button>
+                                                </div>
+                                                <!--buttons-set11-->
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="discount">
-                                    <h3>Discount Codes</h3>
-                                    <form method="post" action="#" id="discount-coupon-form">
-                                        <label for="coupon_code">Enter your coupon code if you have one.</label>
-                                        <input type="hidden" value="0" id="remove-coupone" name="remove" />
-                                        <input type="text" name="coupon_code" id="coupon_code"
-                                            class="input-text fullwidth" />
-                                        <button value="Apply Coupon" class="button coupon" title="Apply Coupon"
-                                            type="button">
-                                            <span>Apply Coupon</span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="totals col-sm-4">
-                                <h3>Shopping Cart Total</h3>
-                                <div class="inner">
-                                    <table class="table shopping-cart-table-total" id="shopping-cart-totals-table">
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="3" class="a-left">
-                                                    <strong>Grand Total</strong>
-                                                </td>
-                                                <td class="a-right">
-                                                    <strong><span
-                                                            class="price"><?php echo number_format($checkout_subtotal , 0, ',', '.').'đ' ?></span></strong>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="3" class="a-left">Subtotal</td>
-                                                <td class="a-right">
-                                                    <span
-                                                        class="price"><?php echo number_format($checkout_subtotal , 0, ',', '.').'đ' ?></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <ul class="checkout">
-                                        <li>
-                                            <button class="button btn-proceed-checkout" title="Proceed to Checkout"
-                                                name="btn_checkout" type="submit" value="checkout" id="btn_checkout">
-                                                <span>Proceed to Checkout</span>
+                                <div class="col-sm-4">
+                                    <div class="discount">
+                                        <h3>Discount Codes</h3>
+                                        <form method="post" action="#" id="discount-coupon-form">
+                                            <label for="coupon_code">Enter your coupon code if you have one.</label>
+                                            <input type="hidden" value="0" id="remove-coupone" name="remove" />
+                                            <input type="text" name="coupon_code" id="coupon_code"
+                                                class="input-text fullwidth" />
+                                            <button value="Apply Coupon" class="button coupon" title="Apply Coupon"
+                                                type="button">
+                                                <span>Apply Coupon</span>
                                             </button>
-                                            <?php
-                          $a=$_REQUEST['btn_checkout'];
-                          echo $a;
-                        ?>
-                                        </li>
-
-                                        <li>
-                                            <a title="Checkout with Multiple Addresses" href="#">Checkout with Multiple
-                                                Addresses</a>
-                                        </li>
-                                    </ul>
+                                        </form>
+                                    </div>
                                 </div>
-                                <!--inner-->
+                                <div class="totals col-sm-4">
+                                    <h3>Shopping Cart Total</h3>
+                                    <div class="inner">
+                                        <table class="table shopping-cart-table-total" id="shopping-cart-totals-table">
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3" class="a-left">
+                                                        <strong>Grand Total</strong>
+                                                    </td>
+                                                    <td class="a-right">
+                                                        <strong><span
+                                                                class="price"><?php echo number_format($checkout_subtotal , 0, ',', '.').'đ' ?></span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="3" class="a-left">Subtotal</td>
+                                                    <td class="a-right">
+                                                        <span
+                                                            class="price"><?php echo number_format($checkout_subtotal , 0, ',', '.').'đ' ?></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ul class="checkout">
+                                            <li>
+                                                <button class="button btn-proceed-checkout" title="Proceed to Checkout"
+                                                    name="btn_checkout" type="submit" value="checkout"
+                                                    id="btn_checkout">
+                                                    <span>Proceed to Checkout</span>
+                                                </button>
+
+                                            </li>
+
+                                            <li>
+                                                <a title="Checkout with Multiple Addresses" href="#">Checkout with
+                                                    Multiple
+                                                    Addresses</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--inner-->
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
 
                         <!--cart-collaterals-->
+                        <?php
+							if(isset($_REQUEST['btn_checkout'])){
+								$city = $_REQUEST['country_id'];
+								$location = $_REQUEST['detail_location'];
+								$date = date("Y-m-d G:i:s");
+								  $cartlist=$p->sub_connect();
+								  $sql2="select od.user_id, pd.pro_id, pd.price, od.cart_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id AND od.user_id='$userid'";
+								  $result = $cartlist->query($sql2);
+								  $checkout_subtotal=0;
+                      				
+						  if($result->num_rows>0){
+							while($rows=$result->fetch_assoc()){
+								$pro_id= $rows['pro_id'];
+								$qty = $rows['qty'];
+								$sql = "INSERT INTO order_detail(pro_id,city,location,user_id,qty,order_date)
+										VALUES('$pro_id','$city','$location','$userid','$qty','$date')";
+								$p->product_modify($sql);
+								$update_cart = "UPDATE orders 
+												SET status=1 
+												WHERE user_id='$userid'";
+								$p->product_modify($update_cart);
+								echo '<script>alert("Đặt hàng thành công")</script>';
+							}
+							$delete_cart = "DELETE FROM orders WHERE status=1 AND user_id='$userid'";
+							$p->product_modify($delete_cart);
+						}
+							}
+                        	
+						?>
                     </div>
                     <div class="crosssel wow bounceInUp animated">
                         <div class="">

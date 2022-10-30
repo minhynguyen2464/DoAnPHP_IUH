@@ -21,7 +21,12 @@
 				$_SESSION['password'] = $rows['password'];
 				$_SESSION['email'] = $rows['email'];
 				$_SESSION['permission'] = $rows['permission'];
-				header('Location: index.php');	
+				if($_SESSION['permission']==1){
+					header('Location: AdminLTE-master/index.php');	
+				}
+				else{
+					header('Location: index.php');	
+				}
 			}
 			else{
 				echo '<script>Wrong username or password</script>';	

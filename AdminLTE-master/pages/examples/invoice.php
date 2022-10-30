@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | General Form Elements</title>
+    <title>AdminLTE 2 | Invoice</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -32,7 +32,7 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="widget-user-username">
+    <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
@@ -165,7 +165,6 @@
                                                 <i class="fa fa-users text-red"></i> 5 new members joined
                                             </a>
                                         </li>
-
                                         <li>
                                             <a href="#">
                                                 <i class="fa fa-shopping-cart text-green"></i> 25 sales made
@@ -400,21 +399,19 @@
                             <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
                             <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
                             <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
                             <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
                         </ul>
                     </li>
-                    <li class="treeview active">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-edit"></i> <span>Forms</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="general.php"><i class="fa fa-circle-o"></i> General Elements</a>
+                            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                            <li><a href="../forms/advanced.php"><i class="fa fa-circle-o"></i> Advanced Elements</a>
                             </li>
-                            <li class="active"><a href="advanced.php"><i class="fa fa-circle-o"></i> Advanced
-                                    Elements</a></li>
-                            <li><a href="editors.php"><i class="fa fa-circle-o"></i> Editors</a></li>
+                            <li><a href="../forms/editors.php"><i class="fa fa-circle-o"></i> Editors</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -439,21 +436,21 @@
                             <small class="label pull-right bg-yellow">12</small>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview active">
                         <a href="#">
                             <i class="fa fa-folder"></i> <span>Examples</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="../examples/invoice.php"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                            <li><a href="../examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                            <li><a href="../examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                            <li><a href="../examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                            <li><a href="../examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                            <li><a href="../examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                            <li><a href="../examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                            <li><a href="../examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                            <li><a href="../examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                            <li class="active"><a href="invoice.php"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                            <li><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+                            <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+                            <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+                            <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                            <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                            <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                            <li><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                            <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -497,165 +494,59 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    General Form Elements
-                    <small>Preview</small>
+                    Invoice
+                    <small>#007612</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="#">Forms</a></li>
-                    <li class="active">General Elements</li>
+                    <li><a href="#">Examples</a></li>
+                    <li class="active">Invoice</li>
                 </ol>
             </section>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-
-                    <!-- right column -->
-                    <div class="col-md-6">
-                        <!-- general form elements -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Quản lý tài khoản</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form role="form" method="post" enctype="multipart/form-data">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tên đăng nhập</label>
-                                        <input name="txtUsername" type="text" class="form-control" id="txtUsername"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_username_value()?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input name="txtEmail" type="mail" class="form-control" id="txtEmail"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_email_value()?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Mật khẩu</label>
-                                        <input name="txtPassword" type="password" class="form-control" id="txtPassword"
-                                            placeholder="Nhập tên sản phẩm" value="<?php $p->get_password_value()?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPermission">Quyền:</label>
-                                        <select name="txtPermission" id="txtPermission">
-                                            <?php
-                                        	if($p->get_permission_value()==1){
-												echo '<option value="1" selected>Admin</option>';
-												echo '<option value="0">User</option>';
-											}
-											else if($p->get_permission_value()==0){
-												echo '<option value="1">Admin</option>';
-												echo '<option value="0"selected>User</option>';
-											}
-											else{
-												echo '<option value="1">Admin</option>
-                                         			 <option value="0">User</option>';
-											}
-											 
-										?>
-                                        </select>
-                                    </div>
-
-                                </div>
-                                <!-- /.box-body -->
-
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary" id="submit"
-                                        name="submit">Thêm</button>
-                                    <button type="submit" class="btn btn-danger" id="delete" name="delete">Xóa</button>
-                                    <button type="submit" class="btn btn-success" id="update" name="update">Sửa</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /.box -->
-                        <?php
-				$id = $_REQUEST['id'];
-				$username = $_REQUEST['txtUsername'];
-				$email = $_REQUEST['txtEmail'];
-				$password = $_REQUEST['txtPassword'];
-				$permission = $_REQUEST['txtPermission'];
-
-				//Thêm
-        	if(isset($_REQUEST['submit'])){
-				$sql = "INSERT INTO user(username, email, password, permission) 
-						VALUES('$username', '$email', '$password', '$permission')";
-				$p->product_modify($sql);
-			}
-			//Xóa
-			if(isset($_REQUEST['delete'])){
-				$sql = "DELETE FROM user WHERE user_id='$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Deleted successfully")</script>';	
-				}	
-			}
-			
-			//Sửa
-			if(isset($_REQUEST['update'])){
-			$username = $_REQUEST['txtUsername'];
-				$email = $_REQUEST['txtEmail'];
-				$password = $_REQUEST['txtPassword'];
-				$permission = $_REQUEST['txtPermission'];
-				$sql = "UPDATE user SET 
-				username = '$username',
-				email = '$email',
-				password = '$password',
-				permission = '$permission'
-				WHERE user_id = '$id' LIMIT 1";
-				if($p->product_modify($sql)==1){
-					echo '<script>alert("Updated successfully")</script>';	
-				}
-			}
-		?>
-
-
-                    </div>
-
-                    <div class="col-md-12">
-                        <!-- Horizontal Form -->
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Danh sách các tài khoản</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form class="form-horizontal">
-                                <div class="box-body">
-                                    <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <th width="8%" align="center" valign="middle" scope="col">ID</th>
-                                                <th width="29%" scope="col">Username</th>
-                                                <th width="27%" scope="col">Email</th>
-                                                <th width="20%" scope="col">Password</th>
-                                                <th width="16%" scope="col">Quyền</th>
-                                            </tr>
-                                            <?php
-                                $sql = "SELECT * FROM user";
-                                $p->general_list_account($sql);
-                            ?>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer">
-
-                                </div>
-                                <!-- /.box-footer -->
-                            </form>
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                    <!--/.col (right) -->
+            <div class="pad margin no-print">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-info"></i> Note:</h4>
+                    This page has been enhanced for printing. Click the print button at the bottom of the invoice to
+                    test.
                 </div>
-                <!-- /.row -->
-            </section>
+            </div>
+
+            <!-- Main content -->
+            <?php
+    	$p->invoice_table();
+	?>
+            <!-- this row will not appear when printing -->
+            <div class="row no-print">
+                <div class="col-xs-12">
+                    <form method="post" id="confirm_order">
+                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>
+                            Print</a>
+                        <button type="submit" class="btn btn-success pull-right" name="btn_accept"><i
+                                class="fa fa-credit-card"></i> Chấp nhận thanh toán </button>
+                        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                            <i class="fa fa-download"></i> Generate PDF
+                        </button>
+                    </form>
+                </div>
+            </div>
+            </section>;
+            <?php
+                    	if(isset($_REQUEST['btn_accept'])){
+							$userid=$_REQUEST['userid'];
+							$date = $_REQUEST['date'];
+							$sql = "UPDATE order_detail
+									SET status=1
+									WHERE user_id='$userid' AND order_date= '$date'";
+							$p->product_modify($sql);
+							echo '<script>alert("Chấp Nhận Đơn Hàng Thành Công")</script>';	
+						}
+					?>
             <!-- /.content -->
+            <div class="clearfix"></div>
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        <footer class="main-footer no-print">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.3.3
             </div>
