@@ -71,55 +71,29 @@
                         <div class="col-lg-9 col-xs-12 right_menu">
                             <div class="toplinks">
                                 <!-- Default Welcome Message -->
-                                <div class="welcome-msg hidden-xs">Default welcome msg!</div>
+                                <div class="welcome-msg hidden-xs">Xin chào <?php $p->get_username()?> !</div>
                                 <!-- End Default Welcome Message -->
                                 <div class="links">
-                                    <div class="myaccount">
-                                        <a title="My Account" href="login.php"><span class="hidden-xs">My
-                                                Account</span></a>
-                                    </div>
-                                    <div class="wishlist">
-                                        <a title="My Wishlist" href="wishlist.html"><span
-                                                class="hidden-xs">Wishlist</span></a>
-                                    </div>
-                                    <div class="check">
-                                        <a title="Checkout" href="checkout.html"><span
-                                                class="hidden-xs">Checkout</span></a>
-                                    </div>
-                                    <div class="demo">
-                                        <a title="Blog" href="blog.html"><span class="hidden-xs">Blog</span></a>
-                                    </div>
-                                    <!-- Header Company -->
-                                    <div class="dropdown block-company-wrapper hidden-xs">
-                                        <a role="button" data-toggle="dropdown" data-target="#"
-                                            class="block-company dropdown-toggle" href="#">Company <span
-                                                class="caret"></span></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="about_us.html">About Us</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="#">Customer Service</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="#">Privacy Policy</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="sitemap.html">Site Map</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="#">Search Terms</a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="#">Advanced Search</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- End Header Company -->
+                                    <div class="myaccount"><a title="My Account" href="
+									<?php echo('account-info.php?userid='.$_SESSION['user_id'].'')?>"><span class="hidden-xs">My
+                                                Account</span></a></div>
+                                    <div class="check"><a title="Checkout"
+                                            href="<?php echo('shopping_cart.php?userid='.$_SESSION['user_id'].'')?>"><span
+                                                class="hidden-xs">Checkout</span></a></div>
+                                    <div class="demo"><a title="Blog" href="blog.php"><span
+                                                class="hidden-xs">Blog</span></a></div>
 
-                                    <div class="login">
-                                        <a href="login.php"><span class="hidden-xs">Log In</span></a>
-                                    </div>
+                                    <?php
+										session_start();
+                                    	if(isset($_SESSION['username'])){
+											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
+                                    </div>';
+										}
+										else{
+											echo ' <div class="login"><a href="login.php"><span class="hidden-xs">Log In</span></a>
+                                    </div>';	
+										}
+									?>
                                 </div>
                                 <!-- links -->
                             </div>
@@ -130,48 +104,13 @@
                                     action="http://htmldemo.magikcommerce.com/ecommerce/classic-html-template/version_1/cat"
                                     method="POST" id="search_mini_form" name="Categories">
                                     <input type="text" placeholder="Search entire store here..." value="Search"
-                                        maxlength="70" name="search" id="search" />
-                                    <button type="button" class="search-btn-bg">
-                                        <span class="glyphicon glyphicon-search"></span>&nbsp;
-                                    </button>
+                                        maxlength="70" name="search" id="search">
+                                    <button type="button" class="search-btn-bg"><span
+                                            class="glyphicon glyphicon-search"></span>&nbsp;</button>
                                 </form>
                             </div>
                             <!-- End Search-col -->
-                            <!-- Header Language -->
-                            <div class="lang-curr">
-                                <div class="form-language">
-                                    <ul class="lang">
-                                        <li class="">
-                                            <a href="#" title="English"><img src="images/english.png" alt="English" />
-                                                <span>English</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="#" title="Francais"><img src="images/francais.png"
-                                                    alt="Francais" />
-                                                <span>francais</span></a>
-                                        </li>
-                                        <li class="">
-                                            <a href="#" title="German"><img src="images/german.png" alt="German" />
-                                                <span>german</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="form-currency">
-                                    <ul class="currencies_list">
-                                        <li class="">
-                                            <a class="" title="Dollar" href="#">$</a>
-                                        </li>
-                                        <li class="">
-                                            <a class="" title="Euro" href="#">&euro;</a>
-                                        </li>
-                                        <li class="">
-                                            <a class="" title="Pound" href="#">&pound;</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                            <!-- End Header Currency -->
                         </div>
                     </div>
                 </div>
@@ -372,8 +311,8 @@
                                                 </p>
                                                 <ul class="form-list">
                                                     <li>
-                                                        <label class="required"
-                                                            for="province"><em>*</em>Province/City</label>
+                                                        <label class="required" for="province"><em>*</em>Tỉnh/Thành
+                                                            Phố</label>
                                                         <div class="input-box">
                                                             <select title="Country" class="validate-select" id="country"
                                                                 name="country_id">
@@ -386,10 +325,24 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <label for="region_id">Detail location</label>
+                                                        <label for="region_id">Địa chỉ</label>
                                                         <div class="input-box">
                                                             <input type="text" class="input-text" title="detail"
                                                                 name="detail_location" id="detail_location" />
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <label for="region_id">Số điện thoại</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="txtNumber" id="txtNumber" />
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <label for="region_id">Tên người nhận</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="txtName" id="txtName" />
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -473,6 +426,8 @@
 							if(isset($_REQUEST['btn_checkout'])){
 								$city = $_REQUEST['country_id'];
 								$location = $_REQUEST['detail_location'];
+								$recipent_name = $_REQUEST['txtName'];
+								$phone_number = $_REQUEST['txtNumber'];
 								$date = date("Y-m-d G:i:s");
 								  $cartlist=$p->sub_connect();
 								  $sql2="select od.user_id, pd.pro_id, pd.price, od.cart_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id AND od.user_id='$userid'";
@@ -483,15 +438,15 @@
 							while($rows=$result->fetch_assoc()){
 								$pro_id= $rows['pro_id'];
 								$qty = $rows['qty'];
-								$sql = "INSERT INTO order_detail(pro_id,city,location,user_id,qty,order_date)
-										VALUES('$pro_id','$city','$location','$userid','$qty','$date')";
+								$sql = "INSERT INTO order_detail(pro_id,city,location,user_id,qty,order_date,phone_number,recipient_name)
+										VALUES('$pro_id','$city','$location','$userid','$qty','$date','$phone_number','$recipent_name')";
 								$p->product_modify($sql);
 								$update_cart = "UPDATE orders 
 												SET status=1 
 												WHERE user_id='$userid'";
 								$p->product_modify($update_cart);
-								echo '<script>alert("Đặt hàng thành công")</script>';
 							}
+							echo '<script>alert("Đặt hàng thành công")</script>';
 							$delete_cart = "DELETE FROM orders WHERE status=1 AND user_id='$userid'";
 							$p->product_modify($delete_cart);
 						}

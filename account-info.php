@@ -1,11 +1,9 @@
-<?php 
-	include ("class/admin.php");
-	$p = new admin();
-
+﻿<?php 
+include ("class/admin.php");
+$p = new admin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 
 <!-- Tieu Long Lanh Kute -->
 <!-- Added by HTTrack -->
@@ -32,13 +30,14 @@
     <!-- CSS Style -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/animate.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/revslider.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="css/owl.theme.css">
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-menu.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/blogmate.css">
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -158,246 +157,93 @@
             </div>
         </nav>
         <!-- end nav -->
-        <!-- Slider -->
-        <div id="magik-slideshow" class="magik-slideshow">
-            <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
-                <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
-                    <ul>
-                        <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
-                            data-thumb='images/slide-img1.jpg'>
-                            <img src='products-images/fa4596ad9a9d39901eeb455ed4f74e44.jpg' alt="slide-img"
-                                data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
 
-                        </li>
-                        <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
-                            data-thumb='images/slide-img2.jpg'>
-                            <img src='products-images/adidas_mutator_pack_5bf1cc76425a457a8032b0a3fe3cea1b.jpg'
-                                alt="slide" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
-                        </li>
-                    </ul>
+        <!-- Main Container -->
+
+        <section class="main-container col2-right-layout bounceInUp animated">
+            <div class="main container">
+                <div class="row" style="text-align:center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li role="presentation" class="active"><a
+                                        href="<?php echo('account-info.php?userid='.$_SESSION['user_id'].'')?>">Hồ
+                                        sơ</a></li>
+                                <li role="presentation"><a
+                                        href="<?php echo('account-order.php?userid='.$_SESSION['user_id'].'')?>">Quản lý
+                                        đơn hàng</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h1>ĐỒ ÁN NHÓM 6</h1>
+                    <h3>Chủ Đề: Website Thương Mai Điện Tử Bán Giày</h3>
+                    <h3>Giảng Viên Hướng Dẫn: Võ Ngọc Tấn Phước</h3>
+                    <h3>Mã Lớp Học Phần: DHCNTT16C - 420300328103</h3>
+                    <br>
+                    <h4>Thành Viên Thực Hiện</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã Số Sinh Viên</th>
+                                    <th>Tên</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>20071341</td>
+                                    <td>Nguyễn Minh Ý</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>20064531</td>
+                                    <td>Nguyễn Tuấn Nghĩa</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>18083971</td>
+                                    <td>Lê Tường Quy</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>20065131</td>
+                                    <td>Nguyễn Đình Phong</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>20067821</td>
+                                    <td>Mạch Vĩnh Thuận</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- end banner -->
+        </section>
+        <!-- Main Container End -->
         <div class="top-banner-section wow bounceInUp animated">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner1">
-                            <div class="top-b-text"><a href="women_nike.php"><strong>Giày Nike</strong> Danh Cho Nữ</a>
-                            </div>
+                            <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col free-shipping"><strong>Miễn Phí Giao Hàng</strong> các hóa đơn trên 2.000.000đ
-                        </div>
+                        <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
                         <div class="col add-banner2">
-                            <div class="top-b-text"><a href="men_adidas.php"><strong>Giày Adidas</strong>Hàng Mới
-                                    2022</a></div>
+                            <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
                         </div>
+
+
+
                     </div>
                     <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col last offer"><strong>Đổi Trả</strong> Trong 30 Ngày</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- main container -->
-        <div class="main-col">
-            <div class="container">
-                <div class="row">
-                    <div class="product-grid-view">
-                        <div class="col-md-12">
-                            <div class="std">
-                                <div class="home-tabs wow bounceInUp animated">
-                                    <div class="producttabs">
-                                        <div id="magik_producttabs1" class="magik-producttabs">
-                                            <!--<h3></h3>-->
-                                            <div class="magik-pdt-container">
-                                                <!--Begin Tab Nav -->
-                                                <div class="magik-pdt-nav">
-                                                    <ul class="pdt-nav">
-                                                        <li class="item-nav tab-loaded tab-nav-actived"
-                                                            data-type="order" data-catid="" data-orderby="best_sales"
-                                                            data-href="pdt_best_sales"><span class="title-navi">Best
-                                                                Seller</span></li>
-                                                        <li class="item-nav" data-type="order" data-catid=""
-                                                            data-orderby="new_arrivals" data-href="pdt_new_arrivals">
-                                                            <span class="title-navi">New Arrivals</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- End Tab Nav -->
-                                                <!--Begin Tab Content -->
-                                                <div class="magik-pdt-content wide-5">
-                                                    <div
-                                                        class="pdt-content is-loaded pdt_best_sales tab-content-actived">
-                                                        <ul class="pdt-list products-grid-home zoomOut play">
-                                                            <?php
-                              	$sql = "SELECT * FROM products LIMIT 8";
-								$p->index_page_list($sql);
-							  ?>
-
-                                                        </ul>
-                                                    </div>
-                                                    <div class="pdt-content pdt_new_arrivals is-loaded">
-                                                        <ul class="pdt-list products-grid-home zoomOut play">
-                                                            <?php
-                              	$sql = "SELECT * FROM products ORDER BY add_date desc LIMIT 8";
-								$p->index_page_list($sql);
-							  ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end main container -->
-        <!-- Featured Slider -->
-        <section class="featured-pro container wow bounceInUp animated">
-            <div class="slider-items-products">
-                <div class="new_title center">
-                    <h2>Featured Products</h2>
-                </div>
-                <div id="featured-slider" class="product-flexslider hidden-buttons">
-                    <div class="slider-items slider-width-col4 products-grid">
-                        <?php
-            	$sql = "SELECT * FROM products where comp_id=1 ORDER BY price desc LIMIT 6";
-				$p->index_page_list_featured($sql);
-			?>
-
-
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Featured Slider -->
-        <!--Offer Start-->
-        <div class="offer-slider wow animated parallax parallax-2">
-            <div class="container">
-                <ul class="bxslider">
-                    <li>
-                        <h2>HÀNG MỚI</h2>
-                        <h1>Giảm Giá Lên Đến 30%</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
-                            lacus. Fusce
-                            condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
-                            sed arcu
-                            massa. </p>
-                        <a class="shop-now" href="men_nike.php">Mua Ngay</a>
-                    </li>
-                    <li>
-                        <h2>XIN CHÀO MÙA HÈ</h2>
-                        <h1>Bộ Sưu Tập Mùa Hè</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
-                            lacus. Fusce
-                            condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
-                            sed arcu
-                            massa. </p>
-                        <a class="shop-now" href="men_adidas.php">Xem Thêm</a>
-                    </li>
-                    <li>
-                        <h2>BEST SELLER</h2>
-                        <h1>Những Mặt Hàng Bán Chạy</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
-                            lacus. Fusce
-                            condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Integer
-                            sed arcu
-                            massa. </p>
-                        <a class="shop-now" href="men_nike.php">Xem Thêm</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--Offer silder End-->
-
-        <!-- Latest Blog -->
-        <section class="latest-blog wow bounceInUp animated">
-            <div class="container">
-                <div class="row">
-                    <div class="new_title center">
-                        <h2>Latest Blog</h2>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-lg-3">
-                        <div class="blog_inner">
-                            <div class="blog-img"> <img src="images/blog-img1.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
-                            </div>
-                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
-                            <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                egestas. Fusce sit
-                                ... </p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-lg-3">
-                        <div class="blog_inner">
-                            <div class="blog-img"> <img src="images/blog-img2.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
-                            </div>
-                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
-                            <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                egestas. Fusce sit
-                                ... </p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-lg-3">
-                        <div class="blog_inner">
-                            <div class="blog-img"> <img src="images/blog-img3.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
-                            </div>
-                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
-                            <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                egestas. Fusce sit
-                                ... </p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-lg-3">
-                        <div class="blog_inner">
-                            <div class="blog-img"> <img src="images/blog-img4.jpg" alt="Blog image">
-                                <div class="mask"> <a class="info" href="blog_detail.php">Read More</a> </div>
-                            </div>
-                            <h3><a href="blog_detail.php">Pellentesque habitant morbi</a> </h3>
-                            <div class="post-date"><i class="icon-calendar"></i> Apr 10, 2014</div>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                egestas. Fusce sit
-                                ... </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Latest Blog -->
-
-        <!-- offer banner section -->
-
-        <div class="offer-banner-section wow bounceInUp animated">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col"><img src="images/promo-banner-img1.png" alt="offer banner1"></div>
-                    </div>
-                    <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col"><img src="images/promo-banner-img2.png" alt="offer banner2"></div>
-                    </div>
-                    <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col"><img src="images/promo-banner-img3.png" alt="offer banner3"></div>
-                    </div>
-                    <div class="col-lg-3 col-sm-3 col-xs-6">
-                        <div class="col last"><img src="images/promo-banner-img4.png" alt="offer banner4"></div>
+                        <div class="col last offer"><strong>New Collection</strong> Lorem ipsum.</div>
                     </div>
                 </div>
             </div>
@@ -590,15 +436,19 @@
                     <li> <a href="list.html">List</a></li>
                     <li> <a href="product_detail.php">Product Detail</a></li>
                     <li> <a href="shopping_cart.html">Shopping Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="checkout.html">Checkout</a>
+
+                    </li>
                     <li> <a href="wishlist.html">Wishlist</a></li>
                     <li> <a href="dashboard.html">Dashboard</a></li>
                     <li> <a href="multiple_addresses.html">Multiple Addresses</a></li>
                     <li> <a href="about_us.html">About us</a></li>
                     <li><a href="compare.html">Compare</a></li>
+
                     <li><a href="faq.html">FAQ</a></li>
                     <li><a href="quick_view.html">Quick view</a></li>
                     <li><a href="login.php">Login</a></li>
+
                     <li><a href="blog.html">Blog</a>
                         <ul>
                             <li><a href="blog_detail.php">Blog Detail</a></li>
@@ -810,83 +660,10 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/parallax.js"></script>
-    <script type="text/javascript" src="js/revslider.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
-    <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-    <script type='text/javascript'>
-    jQuery(document).ready(function() {
-        jQuery('#rev_slider_4').show().revolution({
-            dottedOverlay: 'none',
-            delay: 5000,
-            startwidth: 1920,
-            startheight: 650,
-
-            hideThumbs: 200,
-            thumbWidth: 200,
-            thumbHeight: 50,
-            thumbAmount: 2,
-
-            navigationType: 'thumb',
-            navigationArrows: 'solo',
-            navigationStyle: 'round',
-
-            touchenabled: 'on',
-            onHoverStop: 'on',
-
-            swipe_velocity: 0.7,
-            swipe_min_touches: 1,
-            swipe_max_touches: 1,
-            drag_block_vertical: false,
-
-            spinner: 'spinner0',
-            keyboardNavigation: 'off',
-
-            navigationHAlign: 'center',
-            navigationVAlign: 'bottom',
-            navigationHOffset: 0,
-            navigationVOffset: 20,
-
-            soloArrowLeftHalign: 'left',
-            soloArrowLeftValign: 'center',
-            soloArrowLeftHOffset: 20,
-            soloArrowLeftVOffset: 0,
-
-            soloArrowRightHalign: 'right',
-            soloArrowRightValign: 'center',
-            soloArrowRightHOffset: 20,
-            soloArrowRightVOffset: 0,
-
-            shadow: 0,
-            fullWidth: 'on',
-            fullScreen: 'off',
-
-            stopLoop: 'off',
-            stopAfterLoops: -1,
-            stopAtSlide: -1,
-
-            shuffle: 'off',
-
-            autoHeight: 'off',
-            forceFullWidth: 'on',
-            fullScreenAlignForce: 'off',
-            minFullScreenHeight: 0,
-            hideNavDelayOnMobile: 1500,
-
-            hideThumbsOnMobile: 'off',
-            hideBulletsOnMobile: 'off',
-            hideArrowsOnMobile: 'off',
-            hideThumbsUnderResolution: 0,
-
-            hideSliderAtLimit: 0,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            startWithSlide: 0,
-            fullScreenOffsetContainer: ''
-        });
-    });
-    </script>
 </body>
 
 <!-- Tieu Long Lanh Kute -->

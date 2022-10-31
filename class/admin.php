@@ -711,10 +711,13 @@
                  	echo '<td><a href="pages/examples/invoice.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">'.$rows['order_detail_id'].'</a></td>';
                     echo  '<td>'.$rows['name'].'</td>';
 					if($rows['status']==1){
-						echo '<td><span class="label label-success">Shipped</span></td>';	
+						echo '<td><span class="label label-danger">Đang vận chuyển</span></td>';	
+					}
+					else if($rows['status']==3){
+						echo '<td><span class="label label-success">Thành Công</span></td>';	
 					}
 					else{
-						echo '<td><span class="label label-warning">Pending</span></td>';
+						echo '<td><span class="label label-info">Đang xử lý</span></td>';
 					}
                     echo  '<td>'.$rows['location'].', '.$rows['city'].'</td>';
                     echo '</tr>';
@@ -764,9 +767,9 @@
 						<div class="col-sm-4 invoice-col">
 						  To
 						  <address>
-							<strong>'.$info['username'].'</strong><br>
+							<strong>'.$info['recipient_name'].'</strong><br>
 							'.$info['location'].', '.$info['city'].'<br>
-							Phone: (555) 539-1037<br>
+							Phone: '.$info['phone_number'].'<br>
 							Email: '.$info['email'].'
 						  </address>
 						</div>
@@ -797,7 +800,7 @@
 						<tbody>';
 			if($result->num_rows>0){
 				while($rows=$result->fetch_assoc()){
-					$total=$rows['price'];
+					//$total=0;
 					echo '<tr>
 							<td>'.$rows['pro_id'].'</td>
 							<td>'.$rows['name'].'</td>
@@ -861,6 +864,46 @@
 					  </div>
 					  <!-- /.row -->';
 					 
+		}
+		//Hàm đổ dữ liệu cho trang account-info.php
+		function account_order_list(){
+			if(isset($_SESSION['user_id'])){
+				$userid=$_SESSION['user_id'];
+				$con = 	$this->connect();
+				$sql = "SELECT *
+					FROM products AS pd
+					INNER JOIN order_detail AS od
+				 	ON pd.pro_id = od.pro_id
+					AND od.user_id = '$userid' 
+					ORDER BY od.order_date desc";
+				$result = $con->query($sql);
+				while($rows=$result->fetch_assoc()){
+					$i=1;
+					echo '<tr>
+                                        <th scope="row">'.$i.'</th>
+                                        <td>'.$rows['name'].'</td>
+                                        <td>'.$rows['qty'].'</td>
+                                        <td>'.number_format($rows['price']*$rows['qty'] , 0, ',', '.').'đ'.'</td>';
+					if($rows['status']==1){
+						echo '<td><span class="label label-danger" style="color:#fff;">Đang vận chuyển</span></td>';	
+					}
+					else if($rows['status']==3){
+						echo '<td><span class="label label-success" style="color:#fff;">Thành Công</span></td>';	
+					}
+					else{
+						echo '<td><span class="label label-info" style="color:#fff;">Đang xử lý</span></td>';
+					}
+					if($rows['status']==1 ){
+                  		  echo '<td><button type="button" class="btn btn-success"><a href="accept-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">ĐÃ NHẬN ĐƯỢC HÀNG</a></button></td >';
+					}
+					else{
+						echo '<td></td>';	
+					}
+                  echo  '</tr>';
+				
+				$i=$i+1;
+				}
+			}
 		}
 	}
 ?>

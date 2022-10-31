@@ -520,10 +520,10 @@
             <div class="row no-print">
                 <div class="col-xs-12">
                     <form method="post" id="confirm_order">
-                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>
+                        <a href="invoice-print.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>
                             Print</a>
                         <button type="submit" class="btn btn-success pull-right" name="btn_accept"><i
-                                class="fa fa-credit-card"></i> Chấp nhận thanh toán </button>
+                                class="fa fa-credit-card"></i> Chấp nhận đơn hàng </button>
                         <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
                             <i class="fa fa-download"></i> Generate PDF
                         </button>
