@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	include ("class/admin.php");
 	$p = new admin();
 

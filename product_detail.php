@@ -1,6 +1,21 @@
 ﻿<?php 
+	session_start();
 	include ("class/admin.php");
 	$p = new admin();
+	 		//Khi nhấn vào nút thêm vào giỏ hàng thì thực hiện add vào
+        	if(isset($_REQUEST['btn_add'])){
+				if(isset($_SESSION['username'])){
+					$id = $_REQUEST['id'];
+					$pro_id = $id;
+					$user_id = $_SESSION['user_id'];
+					 $sql2="INSERT INTO orders (pro_id,user_id) VALUES ('$pro_id','$user_id')";
+              	   $p->product_modify($sql2);
+					 header('Location: product_detail.php?id='.$id.'');
+				}
+				else{
+					header('Location: login.php');	
+				}
+			}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,22 +59,6 @@
 </head>
 
 <body class="cms-index-index cms-home-page">
-    <?php
-	 		//Khi nhấn vào nút thêm vào giỏ hàng thì thực hiện add vào
-        	if(isset($_REQUEST['btn_add'])){
-				if(isset($_SESSION['username'])){
-					$id = $_REQUEST['id'];
-					$pro_id = $id;
-					$user_id = $_SESSION['user_id'];
-					 $sql2="INSERT INTO orders (pro_id,user_id) VALUES ('$pro_id','$user_id')";
-              	   $p->product_modify($sql2);
-					 header('Location: product_detail.php?id='.$id.'');
-				}
-				else{
-					header('Location: login.php');	
-				}
-			}
-		?>
     <div id="page">
         <!-- Header -->
         <header>
@@ -88,7 +87,6 @@
                                                 class="hidden-xs">Blog</span></a></div>
 
                                     <?php
-										session_start();
                                     	if(isset($_SESSION['username'])){
 											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
                                     </div>';

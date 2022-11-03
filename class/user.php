@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include ('admin.php');
 	class user extends admin{
 		function checkPassword($pw1,$pw2){
@@ -19,7 +20,6 @@
 				$salted_password = $password.$salt;
 				$password = hash('sha512',$salted_password);
 				if($password==$rows['password']){
-					session_start();
 					$_SESSION['user_id'] = $rows['user_id'];
 					$_SESSION['username'] = $rows['username'];
 					$_SESSION['password'] = $rows['password'];
