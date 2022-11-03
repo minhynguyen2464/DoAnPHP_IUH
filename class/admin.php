@@ -1,21 +1,7 @@
 <?php
 	session_start();
 	class admin{	
-		//Hàm kiểm tra đăng nhập admin
-		function checkInput($username,$password){
-			$_SESSION['username'] = $username;
-			$_SESSION['password'] = $password;
-			if($username=='admin' && $password=='123456'){
-				header('Location: AdminLTE-master/index.php');
-			}
- 		}
-		
-		function checkSession(){
-			if($_SESSION['username']!='admin' || $_SESSION['password']!='123456'){
-				header('Location: login.php');	
-			}	
-		}
-		
+
 		//Hàm chuyển file
 		function moveFile($tmp_name, $dir, $name){
 			$path = $dir.$name;
