@@ -4,15 +4,17 @@
 ?>
 
 <?php
-    	if(isset($_REQUEST['register'])){
+    	if(isset($_REQUEST['send'])){
 			$username = $_REQUEST['txtUsername'];
 			$email = $_REQUEST['txtEmail'];
 			$password = $_REQUEST['txtPassword'];
 			$password2 = $_REQUEST['txtPassword2'];
+			$salt = $p->salt_generator();
 			if($p->checkPassword($password,$password2)){
-				$password = hash('sha512','$password');
-				$sql = "INSERT INTO user(username,email,password,permission)
-						VALUES('$username','$email','$password','0')";	
+				$salted_pasword = $password.$salt;
+				$password = hash('sha512',$salted_pasword);
+				$sql = "INSERT INTO user(username,email,password,permission,salt)
+						VALUES('$username','$email','$password','0','$salt')";	
 				if($p->product_modify($sql)==1){
 					header('Location: login.php');
 					exit();
@@ -20,6 +22,9 @@
 				else{
 					echo '<script>alert("Failed")</script>';	
 				}
+			}
+			else{
+				echo '<script>alert("Mật khẩu với giống nhau")</script>';	
 			}
 			
 		}
@@ -277,6 +282,7 @@
                                             <br>
                                             <input type="text" title="Username" class="input-text" id="txtUsername"
                                                 value="" name="txtUsername">
+                                            <span class="required" id="spUsername"></span>
                                         </li>
 
                                         <li>
@@ -284,6 +290,7 @@
                                             <br>
                                             <input type="email" title="Email" class="input-text" id="txtEmail" value=""
                                                 name="txtEmail">
+                                            <span class="required" id="spEmail"></span>
                                         </li>
 
                                         <li>
@@ -291,21 +298,23 @@
                                             <br>
                                             <input type="password" title="Password" class="input-text" id="txtPassword"
                                                 value="" name="txtPassword">
+                                            <span class="required" id="spPassword"></span>
                                         </li>
 
                                         <li>
                                             <label for="txtPassword2">Nhập lại mật khẩu<span
-                                                    class="required">*</span></label>
+                                                    class="required"></span></label>
                                             <br>
                                             <input type="password" title="Password" class="input-text" id="txtPassword2"
                                                 value="" name="txtPassword2">
+                                            <span class="required" id="spPassword"></span>
                                         </li>
 
                                     </ul>
                                     <p class="required">* Bắt buộc điền</p>
                                     <div class="buttons-set">
-                                        <button id="register" name="register" type="submit"
-                                            class="button login"><span>Đăng ký</span></button>
+                                        <button id="send" name="send" type="submit" class="button login"><span>Đăng
+                                                ký</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -754,13 +763,15 @@
 
     <!-- End Footer -->
     <!-- JavaScript -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/parallax.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
+    <script type="text/javascript" src="js/regex.js"></script>
 </body>
 
 <!-- Tieu Long Lanh Kute -->

@@ -1,5 +1,5 @@
 <?php 
-	include ("class/admin.php");
+	include ("admin.php");
 	$p = new admin();
 	$con = $p->connect();
 	$user_id = $_GET['userid'];

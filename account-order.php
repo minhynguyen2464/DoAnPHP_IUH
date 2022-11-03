@@ -41,10 +41,7 @@ $p = new admin();
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,900' rel='stylesheet' type='text/css'>
-</head>
-
-<body class="cms-index-index cms-home-page">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,<body class="cms-index-index cms-home-page">
     <div id="page">
         <!-- Header -->
         <header>
@@ -179,9 +176,9 @@ $p = new admin();
                                     <thead>
                                         <tr align="center">
                                             <th valign="middle">STT</th>
-                                            <th align="center">Tên sản phẩm</th>
+                                            <th align="center">Tên đơn hàng</th>
                                             <th>Số lượng</th>
-                                            <th>Giá tiền</th>
+                                            <th>Tổng cộng</th>
                                             <th>Tình trạng</th>
                                             <th></th>
                                         </tr>
@@ -641,7 +638,10 @@ $p = new admin();
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
-</body>
+</body>700,900' rel='stylesheet' type='text/css'>
+</head>
+
+
 
 <!-- Tieu Long Lanh Kute -->
 

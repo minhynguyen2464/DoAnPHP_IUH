@@ -33,15 +33,15 @@
 			//usernname: admin
 			//password: 123qwe!@#
 
-			/*function connect(){
+			function connect(){
 			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
 				if($con->connect_error){
 				die('Connection failed: '. $con->connect_error);
 				}
 			 return $con;
-			 }*/
+			 }
 
-			function connect(){
+			/*function connect(){
 				//Get Heroku ClearDB connection information
 				$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$cleardb_server = $cleardb_url["host"];
@@ -53,7 +53,7 @@
 				// Connect to DB
 				$con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 				return $con;
-			}
+			}*/
 		
 			//Hàm thêm xóa sửa database
 			function product_modify($sql){
@@ -700,10 +700,11 @@
 			
 		//Hàm đổ dữ liệu cho bảng Latest Order
 		function latest_order(){
-			$sql = "select od.order_detail_id, od.user_id, pd.name, od.location, od.city, od.order_date, od.status
-					from products as pd join order_detail as od 
-					on pd.pro_id=od.pro_id 
-					order by od.order_detail_id desc";
+			$sql = "SELECT od.order_detail_id, od.user_id, pd.name, od.location, od.city, od.order_date, od.status
+					FROM products AS pd
+					JOIN order_detail AS od ON pd.pro_id = od.pro_id
+					GROUP BY od.order_date, od.user_id
+					ORDER BY od.order_detail_id DESC";
 			$con = $this->connect();
 			$result = $con->query($sql);
 			if($result->num_rows>0){
@@ -866,17 +867,17 @@
 					  <!-- /.row -->';
 					 
 		}
-		//Hàm đổ dữ liệu cho trang account-info.php
+		//Hàm đổ dữ liệu cho trang account-order.php
 		function account_order_list(){
 			if(isset($_SESSION['user_id'])){
 				$userid=$_SESSION['user_id'];
 				$con = 	$this->connect();
-				$sql = "SELECT *
-					FROM products AS pd
-					INNER JOIN order_detail AS od
-				 	ON pd.pro_id = od.pro_id
-					AND od.user_id = '$userid' 
-					ORDER BY od.order_date desc";
+				$sql = "SELECT pd.name, SUM( od.qty ) AS qty, SUM( pd.price ) AS price, od.status, od.user_id, od.order_date
+						FROM products AS pd
+						INNER JOIN order_detail AS od ON pd.pro_id = od.pro_id
+						AND od.user_id ='$userid'
+						GROUP BY od.order_date
+						ORDER BY od.order_date DESC";
 				$result = $con->query($sql);
 				while($rows=$result->fetch_assoc()){
 					$i=1;
@@ -884,7 +885,7 @@
                                         <th scope="row">'.$i.'</th>
                                         <td>'.$rows['name'].'</td>
                                         <td>'.$rows['qty'].'</td>
-                                        <td>'.number_format($rows['price']*$rows['qty'] , 0, ',', '.').'đ'.'</td>';
+                                        <td>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</td>';
 					if($rows['status']==1){
 						echo '<td><span class="label label-danger" style="color:#fff;">Đang vận chuyển</span></td>';	
 					}

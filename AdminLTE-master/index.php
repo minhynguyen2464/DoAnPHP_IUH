@@ -1,6 +1,7 @@
 <?php 
 	include ("../class/user.php");
 	$p = new user();
+	$p->check_admin();
 ?>
 <html>
 

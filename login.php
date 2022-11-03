@@ -51,10 +51,9 @@
 
 <body class="cms-index-index cms-home-page">
     <?php
-          	if(isset($_REQUEST['send'])){
+          	if(isset($_REQUEST['login'])){
 				$username = $_REQUEST['txtUsername'];
 				$password = $_REQUEST['txtPassword'];
-				$password = hash('sha512','$password');
 				$p->get_login($username,$password);
 			}
 	?>
@@ -199,19 +198,21 @@
                                         <li>
                                             <label for="email">Username <span class="required">*</span></label>
                                             <br>
-                                            <input type="text" title="Email Address" class="input-text" id="email"
+                                            <input type="text" title="Email Address" class="input-text" id="txtUsername"
                                                 value="" name="txtUsername">
+                                            <span class="required" id="spUsername"></span>
                                         </li>
-                                        <input type="password" title="Password" id="pass" class="input-text"
-                                            name="txtPassword">
                                         <li>
                                             <label for="pass">Password <span class="required">*</span></label>
+                                            <input type="password" title="Password" id="txtPassword" class="input-text"
+                                                name="txtPassword">
+                                            <span class="required" id="spPassword"></span>
                                             <br>
                                         </li>
                                     </ul>
                                     <p class="required">* Required Fields</p>
                                     <div class="buttons-set">
-                                        <button id="send2" name="send" type="submit"
+                                        <button id="login" name="login" type="submit"
                                             class="button login"><span>Login</span></button>
                                         <a class="forgot-word" href="#">Forgot Your Password?</a>
                                     </div>
@@ -661,13 +662,15 @@
 
     <!-- End Footer -->
     <!-- JavaScript -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/parallax.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
+    <script type="text/javascript" src="js/regex.js"></script>
 </body>
 
 <!-- Tieu Long Lanh Kute -->

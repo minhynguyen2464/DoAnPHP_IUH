@@ -1,6 +1,8 @@
 ﻿<?php 
-include ("class/admin.php");
-$p = new admin();
+	include ("class/user.php");
+	$p = new user();
+	session_start();
+	$p->check_login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
