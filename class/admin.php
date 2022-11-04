@@ -19,15 +19,15 @@
 			//usernname: admin
 			//password: 123qwe!@#
 
-			/*function connect(){
+			function connect(){
 			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
 				if($con->connect_error){
 				die('Connection failed: '. $con->connect_error);
 				}
 			 return $con;
-			 }*/
+			 }
 
-			function connect(){
+			/*function connect(){
 				//Get Heroku ClearDB connection information
 				$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$cleardb_server = $cleardb_url["host"];
@@ -39,7 +39,7 @@
 				// Connect to DB
 				$con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 				return $con;
-			}
+			}*/
 		
 			//Hàm thêm xóa sửa database
 			function product_modify($sql){
@@ -183,6 +183,9 @@
 					if($result->num_rows>0){
 						$rows = $result->fetch_assoc();
 						echo $rows['username'];
+					}
+					else{
+						echo '';	
 					}
 				}
 			}
@@ -609,13 +612,19 @@
 			//
 			function count_shoppingcart(){
 				$con = $this->connect();
-				$user_id = $_SESSION['user_id'];
+				if(isset($_SESSION['user_id'])){
+					$user_id = $_SESSION['user_id'];
+				}
+				else{
+					$user_id=0;	
+				}
+				
 				$sql = "SELECT cart_id FROM orders WHERE user_id='$user_id'";
 				$count = 0;
 				$result = $con->query($sql);
 				if($result->num_rows>0){
 					while($rows=$result->fetch_assoc()){
-						$count += count($rows['cart_id']);
+						$count++;
 					}
 				}
 			
@@ -624,8 +633,14 @@
 			
 					// Hàm list mini cart
 		function cart_list_mini(){
+			if(isset($_SESSION['user_id'])){
+				$user_id = $_SESSION['user_id'];	
+			}
+			else{
+				$user_id = 0;	
+			}
 			$con = $this->connect();
-			$user_id = $_SESSION['user_id'];
+			
 			$dir = 'products-images/';
 			$sql = "SELECT pd.image, pd.name, pd.price, od.cart_id, od.qty, od.subtotal, od.pro_id
 			FROM products AS pd JOIN orders AS od ON pd.pro_id = od.pro_id AND od.user_id='$user_id' LIMIT 2";
@@ -680,8 +695,10 @@
 		}
 		
 		function get_username(){
-			$username = $_SESSION['username'];
-			echo $username;	
+			if(isset($_SESSION['username'])){
+				$username = $_SESSION['username'];
+				echo $username;	
+			}
 		}
 			
 		//Hàm đổ dữ liệu cho bảng Latest Order

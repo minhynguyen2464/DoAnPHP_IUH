@@ -1,7 +1,6 @@
 ﻿<?php 
 	include ("class/user.php");
 	$p = new user();
-	session_start();
 	$p->check_login();
 ?>
 <!DOCTYPE html>
@@ -75,7 +74,6 @@
                                                 class="hidden-xs">Blog</span></a></div>
 
                                     <?php
-										session_start();
                                     	if(isset($_SESSION['username'])){
 											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
                                     </div>';

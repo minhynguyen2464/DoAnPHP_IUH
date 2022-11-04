@@ -1,5 +1,4 @@
 ﻿<?php 
-	session_start();
 	include ("class/user.php");
 	$p = new user();
 	//Login được mới vào được trang shopping cart
@@ -84,7 +83,6 @@
                                                 class="hidden-xs">Blog</span></a></div>
 
                                     <?php
-										session_start();
                                     	if(isset($_SESSION['username'])){
 											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
                                     </div>';
@@ -217,15 +215,17 @@
                                                         value="empty_cart" name="update_cart_action" type="submit">
                                                         <span>Clear Cart</span>
                                                     </button>
-                                                    <?php
-                              switch ($_REQUEST['update_cart_action']) {
-                                case 'empty_cart':{
-                                    $sql1="delete from orders";
-                                    $p->product_modify($sql1);
-                                  }
-                                  break;
-                              }
-                            ?>
+                             <?php
+							 	if(isset($_REQUEST['update_cart_action'])){
+									 switch ($_REQUEST['update_cart_action']) {
+									case 'empty_cart':{
+										$sql1="delete from orders where user_id='$userid'";
+										$p->product_modify($sql1);
+									  }
+									  break;
+								  }
+								}
+							?>
                                                 </td>
                                             </tr>
                                         </tfoot>

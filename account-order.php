@@ -41,7 +41,7 @@ $p = new admin();
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,<body class="cms-index-index cms-home-page">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,<body class="cms-index-index cms-home-page"'>
     <div id="page">
         <!-- Header -->
         <header>
@@ -70,7 +70,6 @@ $p = new admin();
                                                 class="hidden-xs">Blog</span></a></div>
 
                                     <?php
-										session_start();
                                     	if(isset($_SESSION['username'])){
 											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
                                     </div>';

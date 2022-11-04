@@ -1,5 +1,4 @@
 <?php 
-	session_start();
 	include ("class/user.php");
 	$p = new user();
 ?>
@@ -102,16 +101,15 @@
                                 <!-- End Default Welcome Message -->
                                 <div class="links">
                                     <div class="myaccount"><a title="My Account" href="
-									<?php echo('account-info.php?userid='.$_SESSION['user_id'].'')?>"><span class="hidden-xs">My
+									<?php echo('account-info.php?userid=0')?>"><span class="hidden-xs">My
                                                 Account</span></a></div>
                                     <div class="check"><a title="Checkout"
-                                            href="<?php echo('shopping_cart.php?userid='.$_SESSION['user_id'].'')?>"><span
+                                            href="<?php echo('shopping_cart.php?userid=0')?>"><span
                                                 class="hidden-xs">Checkout</span></a></div>
                                     <div class="demo"><a title="Blog" href="blog.php"><span
                                                 class="hidden-xs">Blog</span></a></div>
 
                                     <?php
-										session_start();
                                     	if(isset($_SESSION['username'])){
 											echo ' <div class="login"><a href="logout.php"><span class="hidden-xs">Log Out</span></a>
                                     </div>';

@@ -1,7 +1,12 @@
 ﻿<?php 
-	session_start();
 	include ("class/admin.php");
 	$p = new admin();
+	if(isset($_SESSION['user_id'])){
+		$user_id = $_SESSION['user_id'];	
+	}
+	else{
+		$user_id=0;	
+	}
 	 		//Khi nhấn vào nút thêm vào giỏ hàng thì thực hiện add vào
         	if(isset($_REQUEST['btn_add'])){
 				if(isset($_SESSION['username'])){
@@ -78,10 +83,10 @@
                                 <!-- End Default Welcome Message -->
                                 <div class="links">
                                     <div class="myaccount"><a title="My Account" href="
-									<?php echo('account-info.php?userid='.$_SESSION['user_id'].'')?>"><span class="hidden-xs">My
+									<?php echo('account-info.php?userid='.$user_id.'')?>"><span class="hidden-xs">My
                                                 Account</span></a></div>
                                     <div class="check"><a title="Checkout"
-                                            href="<?php echo('shopping_cart.php?userid='.$_SESSION['user_id'].'')?>"><span
+                                            href="<?php echo('shopping_cart.php?userid='.$user_id.'')?>"><span
                                                 class="hidden-xs">Checkout</span></a></div>
                                     <div class="demo"><a title="Blog" href="blog.php"><span
                                                 class="hidden-xs">Blog</span></a></div>
