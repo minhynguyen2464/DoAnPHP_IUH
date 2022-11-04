@@ -19,15 +19,15 @@
 			//usernname: admin
 			//password: 123qwe!@#
 
-			function connect(){
+			/*function connect(){
 			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
 				if($con->connect_error){
 				die('Connection failed: '. $con->connect_error);
 				}
 			 return $con;
-			 }
+			 }*/
 
-			/*function connect(){
+			function connect(){
 				//Get Heroku ClearDB connection information
 				$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$cleardb_server = $cleardb_url["host"];
@@ -39,7 +39,7 @@
 				// Connect to DB
 				$con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 				return $con;
-			}*/
+			}
 		
 			//Hàm thêm xóa sửa database
 			function product_modify($sql){
