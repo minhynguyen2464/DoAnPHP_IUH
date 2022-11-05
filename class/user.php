@@ -67,6 +67,7 @@
 			}
 		}
 		
+		//Tạo muối
 		function salt_generator() {
 			$sym = array(0,1,2,3,4,5,6,7,8,9,'q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m');
 			$sole = '';
@@ -75,5 +76,33 @@
 		   }
 			return $sole;
 		}
+		
+		//Tạo tài khoản
+		function user_reigster($username,$email,$password,$password2){
+			if($this->checkPassword($password,$password2)){
+				$salt = $this->salt_generator();//Tạo muối
+				$con = $this->connect();
+				$salted_pasword = $password.$salt; //Trộn muối
+				$password = hash('sha512',$salted_pasword);//Băm 
+				$sql = "INSERT INTO user(username,email,password,permission,salt)
+						VALUES('$username','$email','$password','0','$salt')";	
+				if ($con->query($sql) === TRUE) {
+				  /*$last_id = $con->insert_id; //Lấy id vừa insert vào
+					$hash_id = hash('crc32',$last_id); //Mã hóa id
+					echo'<script>alert("'..'")</script>';
+					$update_id = "UPDATE user SET user_id='$hash_id' WHERE user_id='$last_id'"; //Update id với id đã mã hóa
+					$this->product_modify($update_id);*/
+					header('Location: login.php');
+					exit;
+				}
+				else {
+				  echo "Error: <br>" . $con->error;
+				}
+			}
+			else{
+				echo '<script>alert("Mật khẩu không giống nhau")</script>';	
+			}	
+		}
+
 	}
 ?>

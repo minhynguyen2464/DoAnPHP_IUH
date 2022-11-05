@@ -637,7 +637,7 @@ $p = new admin();
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-menu.min.js"></script>
-</body>700,900' rel='stylesheet' type='text/css'>
+    </body>700,900' rel='stylesheet' type='text/css'>
 </head>
 
 

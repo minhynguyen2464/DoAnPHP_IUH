@@ -9,24 +9,7 @@
 			$email = $_REQUEST['txtEmail'];
 			$password = $_REQUEST['txtPassword'];
 			$password2 = $_REQUEST['txtPassword2'];
-			$salt = $p->salt_generator();
-			if($p->checkPassword($password,$password2)){
-				$salted_pasword = $password.$salt;
-				$password = hash('sha512',$salted_pasword);
-				$sql = "INSERT INTO user(username,email,password,permission,salt)
-						VALUES('$username','$email','$password','0','$salt')";	
-				if($p->product_modify($sql)==1){
-					header('Location: login.php');
-					exit();
-				}
-				else{
-					echo '<script>alert("Failed")</script>';	
-				}
-			}
-			else{
-				echo '<script>alert("Mật khẩu với giống nhau")</script>';	
-			}
-			
+			$p->user_reigster($username,$email,$password,$password2);
 		}
 ?>
 <!DOCTYPE html>
@@ -176,66 +159,9 @@
                         <div class="menu_top">
                             <div class="top-cart-contain pull-right">
                                 <!-- Top Cart -->
-                                <div class="mini-cart">
-                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a
-                                            href="#"><span class="hidden-xs">Shopping Cart (2)</span></a></div>
-                                    <div>
-                                        <div class="top-cart-content" style="display: none;">
-                                            <div class="block-subtitle">
-                                                <div class="top-subtotal">2 items, <span class="price">$259.99</span>
-                                                </div>
-                                                <!--top-subtotal-->
-                                                <div class="pull-right">
-                                                    <button title="View Cart" class="view-cart" type="button"><span>View
-                                                            Cart</span></button>
-                                                </div>
-                                                <!--pull-right-->
-                                            </div>
-                                            <!--block-subtitle-->
-                                            <ul class="mini-products-list" id="cart-sidebar">
-                                                <li class="item first">
-                                                    <div class="item-inner"><a class="product-image"
-                                                            title="Sample Product" href="#l"><img alt="Sample Product"
-                                                                src="products-images/product4.jpg"></a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="btn-remove1"
-                                                                    title="Remove This Item" href="#">Remove</a> <a
-                                                                    class="btn-edit" title="Edit item" href="#"><i
-                                                                        class="icon-pencil"></i><span
-                                                                        class="hidden">Edit item</span></a> </div>
-                                                            <!--access--> <strong>1</strong> x <span
-                                                                class="price">$179.99</span>
-                                                            <p class="product-name"><a href="product_detail.php">Sample
-                                                                    Product</a></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="item last">
-                                                    <div class="item-inner"><a class="product-image"
-                                                            title="Sample Product" href="#"><img alt="Sample Product"
-                                                                src="products-images/product3.jpg"></a>
-                                                        <div class="product-details">
-                                                            <div class="access"><a class="btn-remove1"
-                                                                    title="Remove This Item" href="#">Remove</a> <a
-                                                                    class="btn-edit" title="Edit item" href="#"><i
-                                                                        class="icon-pencil"></i><span
-                                                                        class="hidden">Edit item</span></a> </div>
-                                                            <!--access--> <strong>1</strong> x <span
-                                                                class="price">$80.00</span>
-                                                            <p class="product-name"><a href="product_detail.php">Sample
-                                                                    Product</a></p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="actions">
-                                                <button class="btn-checkout" title="Checkout"
-                                                    type="button"><span>Checkout</span></button>
-                                            </div>
-                                            <!--actions-->
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+								  $p->cart_list_mini();
+								?>
                                 <!-- Top Cart -->
                                 <div id="ajaxconfig_info" style="display:none"><a href="#/"></a>
                                     <input value="" type="hidden">

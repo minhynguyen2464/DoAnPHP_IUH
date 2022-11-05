@@ -19,15 +19,15 @@
 			//usernname: admin
 			//password: 123qwe!@#
 
-			/*function connect(){
-			$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
-				if($con->connect_error){
-				die('Connection failed: '. $con->connect_error);
-				}
-			 return $con;
-			 }*/
-
 			function connect(){
+				$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
+				if($con->connect_error){
+					die('Connection failed: '. $con->connect_error);
+				}
+					 return $con;
+			 }
+
+			/*function connect(){
 				//Get Heroku ClearDB connection information
 				$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$cleardb_server = $cleardb_url["host"];
@@ -39,12 +39,12 @@
 				// Connect to DB
 				$con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 				return $con;
-			}
+			}*/
 		
 			//Hàm thêm xóa sửa database
 			function product_modify($sql){
 				$con = $this->connect();
-				if(mysqli_query($con,$sql)){
+				if($con->query($sql)===TRUE){
 					return 1;
 				}	
 				else{
@@ -731,6 +731,7 @@
 		}
 		//Hàm đổ dữ liệu cho trang invoice.php
 		function invoice_table(){
+			$total=0;
 			$con = $this->connect();
 			$userid = $_GET['userid'];
 			$date = $_GET['date'];
@@ -805,7 +806,6 @@
 						<tbody>';
 			if($result->num_rows>0){
 				while($rows=$result->fetch_assoc()){
-					//$total=0;
 					echo '<tr>
 							<td>'.$rows['pro_id'].'</td>
 							<td>'.$rows['name'].'</td>
@@ -898,16 +898,88 @@
 					else{
 						echo '<td><span class="label label-info" style="color:#fff;">Đang xử lý</span></td>';
 					}
+					
+					echo '<td>
+					 <!-- Button trigger modal -->
+                                    <button style="background-color: #2ecc71; color:white;s"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                      Xem
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Danh sách đơn hàng</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                           		<table class="table">
+    <caption>Danh sách các sản phẩm của đơn hàng</caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá sản phẩm</th>
+			<th>Số lượng</th>
+        </tr>
+    </thead>
+    <tbody>';
+	
+	//Lấy user_id và order_date của từng row
+	$i=1;
+	$mini_userid=$rows['user_id'];
+	$mini_date = $rows['order_date'];
+	$mini_sql = "SELECT * FROM
+					order_detail as od inner join products as pd
+					on pd.pro_id=od.pro_id AND od.user_id='$mini_userid' AND od.order_date='$mini_date'";
+	$mini_result = $con->query($mini_sql);
+	if($mini_result->num_rows>0){
+		while($mini_rows=$mini_result->fetch_assoc()){
+			echo '<tr>
+					<th scope="row">'.$i.'</th>
+					<td>'.$mini_rows['name'].'</td>
+					<td>'.number_format($mini_rows['price'] , 0, ',', '.').'đ'.'</td>
+					<td>'.$mini_rows['qty'].'</td>
+				</tr>';	
+			$i++;
+		}	
+	}
+    echo '</tbody>
+</table>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+					</td>';
+					
 					if($rows['status']==1 ){
-                  		  echo '<td><button type="button" class="btn btn-success"><a href="accept-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">ĐÃ NHẬN ĐƯỢC HÀNG</a></button></td >';
+                  		  echo '<td><button type="button" class="btn btn-success" style="background-color:#2ecc71"><a style="color:white" href="class/accept-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">ĐÃ NHẬN ĐƯỢC HÀNG</a></button></td >';
 					}
-					else{
-						echo '<td></td>';	
+					
+					if($rows['status']==0 ){
+                  		  echo '<td><button type="button" class="btn btn-danger" style="background-color:red"><a style="color:white" href="class/remove-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">HỦY ĐƠN</a></button></td >';
 					}
+					
                   echo  '</tr>';
 				
 				$i=$i+1;
 				}
+			}
+		}
+		//Đếm visitor của trang
+		function visitor_count($ip,$date){
+			$con = $this->connect();
+			$sql = "SELECT * FROM visitor_count WHERE visitor_ip='$ip'";
+			$result = $con->query($sql);
+			if($result->num_rows<1){	
+				$insert = "INSERT INTO visitor_count(visitor_ip,visit_date) VALUES('$ip','$date')";
+				$result = $con->query($insert);	
 			}
 		}
 	}

@@ -7,6 +7,10 @@
 	else{
 		$user_id=0;	
 	}
+	$ip = $_SERVER["REMOTE_ADDR"];
+	$date = date('Y-m-d');
+	$p->visitor_count($ip,$date);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
