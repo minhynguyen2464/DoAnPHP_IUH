@@ -3,6 +3,35 @@
 	$p = new user();
 	$p->check_login();
 ?>
+
+<?php
+        	if(isset($_REQUEST['btn_submit'])){
+				$user_id=$_SESSION['user_id'];
+				$phone_number = $_REQUEST['txtNumber'];
+				$adress = $_REQUEST['txtAdress'];
+				$user_name = $_REQUEST['txtName'];
+				$user_gender = $_REQUEST['txtGender'];
+				$user_birthday = $_REQUEST['txtDate'];
+				$sql = "INSERT INTO user_info(user_id,phone_number, adress, user_name, user_gender, user_birthday) VALUES('$user_id','$phone_number','$adress','$user_name','$user_gender','$user_birthday')";
+				if($p->product_modify($sql)==1){
+					header('Location: account-info.php?userid='.$user_id.'');	
+				}
+			}
+			
+			if(isset($_REQUEST['btn_update'])){
+				$user_id=$_SESSION['user_id'];
+				$phone_number = $_REQUEST['txtNumber'];
+				$adress = $_REQUEST['txtAdress'];
+				$user_name = $_REQUEST['txtName'];
+				$user_gender = $_REQUEST['txtGender'];
+				$user_birthday = $_REQUEST['txtDate'];
+				$sql = "UPDATE user_info
+						SET phone_number='$phone_number', adress='$adress', user_name='$user_name', user_gender='$user_gender',user_birthday='$user_birthday'";
+				if($p->product_modify($sql)==1){
+					header('Location: account-info.php?userid='.$user_id.'');	
+				}
+			}
+		?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -160,7 +189,7 @@
 
         <!-- Main Container -->
 
-        <section class="main-container col2-right-layout bounceInUp animated">
+        <section class="main-container col2-right-layout bounceInUp animated" style="font-size:14px">
             <div class="main container">
                 <div class="row" style="text-align:center">
                     <div class="row">
@@ -175,50 +204,87 @@
                             </ul>
                         </div>
                     </div>
-                    <h1>ĐỒ ÁN NHÓM 6</h1>
-                    <h3>Chủ Đề: Website Thương Mai Điện Tử Bán Giày</h3>
-                    <h3>Giảng Viên Hướng Dẫn: Võ Ngọc Tấn Phước</h3>
-                    <h3>Mã Lớp Học Phần: DHCNTT16C - 420300328103</h3>
-                    <br>
-                    <h4>Thành Viên Thực Hiện</h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã Số Sinh Viên</th>
-                                    <th>Tên</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>20071341</td>
-                                    <td>Nguyễn Minh Ý</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>20064531</td>
-                                    <td>Nguyễn Tuấn Nghĩa</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>18083971</td>
-                                    <td>Lê Tường Quy</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>20065131</td>
-                                    <td>Nguyễn Đình Phong</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>20067821</td>
-                                    <td>Mạch Vĩnh Thuận</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form method="post" id="account-info">
+                        <p>
+                            <label for="textfield">Tên tài khoản:</label>
+                            <input name="txtUsername" type="text" disabled id="txtUsername"
+                                value="<?php echo $_SESSION['username']?>" size="50%">
+                        </p>
+                        <p>
+                            <label for="textfield2">Tên:</label>
+                            <input name="txtName" type="text" id="txtName" size="50%"
+                                value="<?php $p->get_user_value('user_name')?>">
+                        </p>
+                        <p>
+                            <label for="textfield3">Email:</label>
+                            <input name="txtEmail" type="text" disabled id="txtEmail"
+                                value="<?php echo $_SESSION['email']?>" size="50%">
+                        </p>
+                        <p>
+                            <label for="password">Số điện thoại:</label>
+                            <input name="txtNumber" type="text" id="txtNumber" size="50%"
+                                value="<?php $p->get_user_value('phone_number')?>">
+                        </p>
+                        <p>
+                            <label for="password">Địa chỉ nhà:</label>
+                            <input name="txtAdress" type="text" id="txtAdress" size="50%"
+                                value="<?php $p->get_user_value('adress')?>">
+                        </p>
+                        <p>Giới tính
+                            <?php
+                        	$gender = $p->return_user_value('user_gender');
+							if($gender=='Male'){
+								echo ' <input type="radio" name="txtGender" id="txtGender" value="Male" style="margin-right:10px" checked>
+                        <label for="txtGender">Nam </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="Female" style="margin-right:10px">
+                        <label for="txtGender">Nữ </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="No" style="margin-right:10px">
+                        <label for="txtGender">Khác </label>';
+							}
+							else if($gender=='Female'){
+								echo ' <input type="radio" name="txtGender" id="txtGender" value="Male" style="margin-right:10px">
+                        <label for="txtGender">Nam </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="Female" style="margin-right:10px" checked>
+                        <label for="txtGender">Nữ </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="No" style="margin-right:10px">
+                        <label for="txtGender">Khác </label>';
+							}
+							else if($gender=='No'){
+								echo ' <input type="radio" name="txtGender" id="txtGender" value="Male" style="margin-right:10px">
+                        <label for="txtGender">Nam </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="Female" style="margin-right:10px">
+                        <label for="txtGender">Nữ </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="No" style="margin-right:10px" checked>
+                        <label for="txtGender">Khác </label>';
+							}
+							else{
+								echo ' <input type="radio" name="txtGender" id="txtGender" value="Male" style="margin-right:10px">
+                        <label for="txtGender">Nam </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="Female" style="margin-right:10px">
+                        <label for="txtGender">Nữ </label>
+					    <input type="radio" name="txtGender" id="txtGender" value="No" style="margin-right:10px">
+                        <label for="txtGender">Khác </label>';	
+							}
+						?>
+
+                        </p>
+                        <label for="start">Ngày sinh:</label>
+
+                        <input type="date" id="start" name="txtDate"
+                            value="<?php $p->get_user_value('user_birthday')?>"> <br>
+                        <hr>
+                        <?php
+						$check = $p->check_user_info();
+						if($check==1){
+							echo'<button type="submit" class="btn btn-primary" name="btn_update" id="btn_update" style="background-color:black	">Cập nhật</button>';
+						}
+						else{
+							echo '<button type="submit" class="btn btn-primary" name="btn_submit" id="btn_submit" style="background-color:black	">Thêm thông tin</button>'	;
+						}
+					?>
+
+                    </form>
+                    <hr>
                 </div>
             </div>
         </section>

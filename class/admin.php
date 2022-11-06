@@ -850,9 +850,10 @@
 		//Hàm đổ dữ liệu cho trang account-order.php
 		function account_order_list(){
 			if(isset($_SESSION['user_id'])){
+				$i=1;
 				$userid=$_SESSION['user_id'];
 				$con = 	$this->connect();
-				$sql = "SELECT pd.name, SUM( od.qty ) AS qty, SUM( pd.price ) AS price, od.status, od.user_id, od.order_date
+				$sql = "SELECT pd.name, SUM( od.qty ) AS qty, SUM( pd.price ) AS price, SUM(pd.price*od.qty)as subtotal,od.status, od.user_id, od.order_date
 						FROM products AS pd
 						INNER JOIN order_detail AS od ON pd.pro_id = od.pro_id
 						AND od.user_id ='$userid'
@@ -860,12 +861,12 @@
 						ORDER BY od.order_date DESC";
 				$result = $con->query($sql);
 				while($rows=$result->fetch_assoc()){
-					$i=1;
+
 					echo '<tr>
                                         <th scope="row">'.$i.'</th>
                                         <td>'.$rows['name'].'</td>
                                         <td>'.$rows['qty'].'</td>
-                                        <td>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</td>';
+                                        <td>'.number_format($rows['subtotal'] , 0, ',', '.').'đ'.'</td>';
 					if($rows['status']==1){
 						echo '<td><span class="label label-danger" style="color:#fff;">Đang vận chuyển</span></td>';	
 					}
@@ -875,15 +876,14 @@
 					else{
 						echo '<td><span class="label label-info" style="color:#fff;">Đang xử lý</span></td>';
 					}
-					
 					echo '<td>
 					 <!-- Button trigger modal -->
-                                    <button style="background-color: #2ecc71; color:white;s"type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    <button style="background-color: #2ecc71; color:white;s"type="button" class="btn btn-primary" data-toggle="modal" data-target="#'.$i.'">
                                       Xem
                                     </button>
                                     
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="'.$i.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">
@@ -901,12 +901,13 @@
             <th>Tên sản phẩm</th>
             <th>Giá sản phẩm</th>
 			<th>Số lượng</th>
+			<th>Tổng cộng</th>
         </tr>
     </thead>
     <tbody>';
 	
 	//Lấy user_id và order_date của từng row
-	$i=1;
+	$mini_id=1;
 	$mini_userid=$rows['user_id'];
 	$mini_date = $rows['order_date'];
 	$mini_sql = "SELECT * FROM
@@ -916,12 +917,13 @@
 	if($mini_result->num_rows>0){
 		while($mini_rows=$mini_result->fetch_assoc()){
 			echo '<tr>
-					<th scope="row">'.$i.'</th>
+					<th scope="row">'.$mini_id.'</th>
 					<td>'.$mini_rows['name'].'</td>
 					<td>'.number_format($mini_rows['price'] , 0, ',', '.').'đ'.'</td>
 					<td>'.$mini_rows['qty'].'</td>
+					<td>'.number_format($mini_rows['price']*$mini_rows['qty'] , 0, ',', '.').'đ'.'</td>
 				</tr>';	
-			$i++;
+			$mini_id++;
 		}	
 	}
     echo '</tbody>
@@ -936,11 +938,11 @@
 					</td>';
 					
 					if($rows['status']==1 ){
-                  		  echo '<td><button type="button" class="btn btn-success" style="background-color:#2ecc71"><a style="color:white" href="class/accept-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">ĐÃ NHẬN ĐƯỢC HÀNG</a></button></td >';
+                  		  echo '<td><button type="button" class="btn btn-success" style="background-color:#2ecc71"><a style="color:white" href="class/accept-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">Đã nhận được hàng</a></button></td >';
 					}
 					
 					if($rows['status']==0 ){
-                  		  echo '<td><button type="button" class="btn btn-danger" style="background-color:red"><a style="color:white" href="class/remove-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">HỦY ĐƠN</a></button></td >';
+                  		  echo '<td><button type="button" class="btn btn-danger" style="background-color:red"><a style="color:white" href="class/remove-order.php?userid='.$rows['user_id'].'&date='.$rows['order_date'].'">Hủy đơn</a></button></td >';
 					}
 					
                   echo  '</tr>';

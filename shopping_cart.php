@@ -307,45 +307,65 @@
                                         <div class="shipping-form">
                                             <form id="shipping-zip-form" method="post" action="#">
                                                 <p>
-                                                    Enter your destination to get a shipping estimate.
+                                                    Điền thông tin của bạn vào đây.
                                                 </p>
-                                                <ul class="form-list">
+                                                <?php
+													$check = $p->check_user_info();
+													if($check==1){
+														$adress = $p->return_user_value('adress');
+														$phone_number = $p->return_user_value('phone_number');
+														$name = $p->return_user_value('user_name');
+														echo '<ul class="form-list">
                                                     <li>
-                                                        <label class="required" for="province"><em>*</em>Tỉnh/Thành
-                                                            Phố</label>
+                                                        <label for="region_id">Địa chỉ<span class="required" id="spAdress">*</span></label>
                                                         <div class="input-box">
-                                                            <select title="Country" class="validate-select" id="country"
-                                                                name="country_id">
-                                                                <option selected="selected" value="HCM">
-                                                                    Hồ Chí Minh
-                                                                </option>
-                                                                <option value="HN">Hà Nội</option>
-                                                                <option value="Other">Tỉnh khác</option>
-                                                            </select>
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="detail_location" id="detail_location" value="'.$adress.'"/>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <label for="region_id">Địa chỉ</label>
+                                                        <label for="region_id">Số điện thoại<span class="required" id="spPhone">*</span></label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="txtNumber" id="txtNumber" value="'.$phone_number.'"/>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <label for="region_id">Tên người nhận<span class="required" id="spName">*</span></label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text" title="detail"
+                                                                name="txtName" id="txtName" value="'.$name.'"/>
+                                                        </div>
+                                                    </li>
+                                                </ul>';	
+													}
+													else{
+														echo '<ul class="form-list">
+                                                    <li>
+                                                        <label for="region_id">Địa chỉ<span class="required" id="spAdress">*</span></label>
                                                         <div class="input-box">
                                                             <input type="text" class="input-text" title="detail"
                                                                 name="detail_location" id="detail_location" />
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <label for="region_id">Số điện thoại</label>
+                                                        <label for="region_id">Số điện thoại<span class="required" id="spPhone">*</span></label>
                                                         <div class="input-box">
                                                             <input type="text" class="input-text" title="detail"
                                                                 name="txtNumber" id="txtNumber" />
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <label for="region_id">Tên người nhận</label>
+                                                        <label for="region_id">Tên người nhận<span class="required" id="spName">*</span></label>
                                                         <div class="input-box">
                                                             <input type="text" class="input-text" title="detail"
                                                                 name="txtName" id="txtName" />
                                                         </div>
                                                     </li>
-                                                </ul>
+                                                </ul>';	
+													}
+												?>
+
                                                 <div class="buttons-set11">
                                                     <button class="button get-quote" title="Get a Quote" type="submit"
                                                         name="get_quote" value="get-quote">

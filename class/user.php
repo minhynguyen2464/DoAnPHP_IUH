@@ -103,6 +103,47 @@
 				echo '<script>alert("Mật khẩu không giống nhau")</script>';	
 			}	
 		}
+		
+		function get_user_value($column){
+			if(isset($_SESSION['user_id'])){
+				$id = $_SESSION['user_id'];
+				$con = $this->connect();
+				$sql = "SELECT * FROM user_info WHERE user_id=$id";
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					$rows = $result->fetch_assoc();
+					echo $rows[$column];	
+				}
+			}
+		}
+		
+		function return_user_value($column){
+			if(isset($_SESSION['user_id'])){
+				$id = $_SESSION['user_id'];
+				$con = $this->connect();
+				$sql = "SELECT * FROM user_info WHERE user_id=$id";
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					$rows = $result->fetch_assoc();
+					return $rows[$column];	
+				}
+			}
+		}
+		
+		//Xem user đã cập nhật thông tin chưa
+		function check_user_info(){
+				$con = $this->connect();
+				$id= $_SESSION['user_id'];
+                 $sql = "SELECT user_id FROM user_info WHERE user_id='$id'";
+				$result = $con->query($sql);
+				if($result->num_rows>0){
+					return 1;	
+				}
+				else{
+					return 0;	
+				}
+		}
+
 
 	}
 ?>

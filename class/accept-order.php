@@ -8,5 +8,5 @@
 			SET status=3 
 			WHERE user_id='$user_id' AND order_date='$date'";
 	$result = $con->query($sql);
-	header('Location: account-order.php');
+	header('Location: ../account-order.php');
 ?>
