@@ -20,7 +20,7 @@
 			//password: 123qwe!@#
 
 			function connect(){
-				$con = new MySQLi('localhost','admin','123qwe!@#','shoeDatabase');	
+				$con = new MySQLi('localhost','admin','123qwe!@#','shoedatabase');	
 				if($con->connect_error){
 					die('Connection failed: '. $con->connect_error);
 				}
@@ -430,14 +430,11 @@
 					$result = $con->query($sql);
 					if($result->num_rows>0){
 						while($rows=$result->fetch_assoc()){
-							echo '<div class="product-essential">
-            <form action="#" method="post" id="product_addtocart_form">
-              <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
-              <div class="product-img-box col-sm-5 col-xs-12 bounceInRight animated">
+							echo '<div class="product-img-box col-sm-5 col-xs-12 bounceInRight animated">
                 <div class="new-label new-top-left"> New </div>
                 <div class="product-image">
-                  <div class="large-image"> <a href="'.$dir.$rows['image'].'" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img alt="Thumbnail" src="'.$dir.$rows['image'].'"> </a> </div>
-                  
+                  <div class="large-image"> <a href="'.$dir.$rows['image'].'" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20" style="position: relative; display: block;"> <img alt="Thumbnail" src="'.$dir.$rows['image'].'" style="display: block;"> </a> <div class="mousetrap" style="background-image: url(&quot;.&quot;); z-index: 999; position: absolute; width: 458px; height: 556px; left: 0px; top: 0px; cursor: pointer;"></div></div>
+
                 </div>
                 <!-- end: more-images --> 
               </div>
@@ -454,36 +451,16 @@
                   <div class="rating-box">
                     <div style="width:60%" class="rating"></div>
                   </div>
-                  <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Thêm đánh giá</a> </p>
+                  <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
                 </div>
-                <p class="availability in-stock pull-right"><span>Còn hàng</span></p>
+                <p class="availability in-stock pull-right"><span>In Stock</span></p>
                 <div class="price-block">
                   <div class="price-box">
-                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> '.number_format(($rows['price']*0.1)+$rows['price'] , 0, ',', '.').'đ'.' </span> </p>
+                     <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> '.number_format(($rows['price']*0.1)+$rows['price'] , 0, ',', '.').'đ'.' </span> </p>
                     <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"</span>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</p>
                   </div>
-                </div>
-                <div class="add-to-box">
-                  <div class="add-to-cart">
-                    <label for="qty">Qty:</label>
-                    <div class="pull-left">
-                      <div class="custom pull-left">
-                        <button onClick="var result = document.getElementById("qty"); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="icon-plus">&nbsp;</i></button>
-                        <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                        
-                        <button onClick="var result = document.getElementById("qty"); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
-                      </div>
-                    </div>
-					<form method="post" id="form-1">
-					<button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="submit" name="btn_add"><span><i class="icon-basket"></i> THÊM VÀO GIỎ HÀNG</span></button>
-   					 </form>
-                  </div>
-
-                </div>
-              </div>
-              
-            </form>
-          </div>';
+                </div>';
+							
 						}
 					}	
 				}
@@ -619,12 +596,12 @@
 					$user_id=0;	
 				}
 				
-				$sql = "SELECT cart_id FROM orders WHERE user_id='$user_id'";
+				$sql = "SELECT cart_id, qty FROM orders WHERE user_id='$user_id'";
 				$count = 0;
 				$result = $con->query($sql);
 				if($result->num_rows>0){
 					while($rows=$result->fetch_assoc()){
-						$count++;
+						$count+=$rows['qty'];
 					}
 				}
 			
@@ -975,7 +952,7 @@
 		//Đếm visitor của trang
 		function visitor_count($ip,$date){
 			$con = $this->connect();
-			$sql = "SELECT * FROM visitor_count WHERE visitor_ip='$ip'";
+			$sql = "SELECT visitor_ip FROM visitor_count WHERE visitor_ip='$ip'";
 			$result = $con->query($sql);
 			if($result->num_rows<1){	
 				$insert = "INSERT INTO visitor_count(visitor_ip,visit_date) VALUES('$ip','$date')";

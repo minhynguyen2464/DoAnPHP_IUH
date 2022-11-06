@@ -245,7 +245,7 @@
                                                         class="pdt-content is-loaded pdt_best_sales tab-content-actived">
                                                         <ul class="pdt-list products-grid-home zoomOut play">
                                                             <?php
-                              	$sql = "SELECT * FROM products LIMIT 8";
+                              	$sql = "SELECT * FROM products order by comp_id asc LIMIT 8";
 								$p->index_page_list($sql);
 							  ?>
 

@@ -10,11 +10,21 @@
 	 		//Khi nhấn vào nút thêm vào giỏ hàng thì thực hiện add vào
         	if(isset($_REQUEST['btn_add'])){
 				if(isset($_SESSION['username'])){
+					$qty = $_REQUEST['qty'];
 					$id = $_REQUEST['id'];
 					$pro_id = $id;
 					$user_id = $_SESSION['user_id'];
-					 $sql2="INSERT INTO orders (pro_id,user_id) VALUES ('$pro_id','$user_id')";
-              	   $p->product_modify($sql2);
+					
+					//Xử lý subtotal
+					$con = $p->connect();
+					$sub_sql = "SELECT * from products WHERE pro_id='$pro_id'";
+					$result = $con->query($sub_sql);
+					$rows=$result->fetch_assoc();
+					echo '<script>alert("'.$rows['price'].'")</script>';
+					$subtotal=$qty*$rows['price'];
+					//End of function
+					 $sql2="INSERT INTO orders (pro_id,user_id,qty,subtotal) VALUES ('$pro_id','$user_id','$qty','$subtotal')";
+              	 	  $p->product_modify($sql2);
 					 header('Location: product_detail.php?id='.$id.'');
 				}
 				else{
@@ -196,210 +206,246 @@
                 <div class="col-main">
                     <div class="row">
                         <div class="product-view">
-                            <?php
-				if(isset($_REQUEST['id'])){
-					$id = $_REQUEST['id'];
-					$sql = "SELECT * FROM products WHERE pro_id='$id'";
-					$p->product_detail_css_1($sql);
-					$p->product_detail_css_2($sql);
-				}           	
-			?>
-                            <div class="related-slider col-lg-12 col-xs-12 bounceInDown animated">
-                                <div class="slider-items-products">
-                                    <div class="slider-items-products">
-                                        <div class="new_title center">
-                                            <h2>Sản Phẩm Liên Quan</h2>
-                                        </div>
+                            <div class="product-essential">
+                                <form action="#" method="post" id="product_addtocart_form">
+                                    <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+                                    <?php
+			  	$pro_id = $_GET['id'];
+              	$sql = "SELECT * FROM products WHERE pro_id=$pro_id";
+				$p->product_detail_css_1($sql);
+			  ?>
 
-                                        <div id="related-products-slider" class="product-flexslider hidden-buttons">
-                                            <div class="slider-items slider-width-col4 products-grid">
 
-                                                <!-- Item -->
-                                                <?php
+                                    <div class="add-to-box">
+                                        <div class="add-to-cart">
+                                            <label for="qty">Qty:</label>
+                                            <div class="pull-left">
+                                                <div class="custom pull-left">
+                                                    <form method="post">
+                                                        <button
+                                                            onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;"
+                                                            class="increase items-count" type="button"><i
+                                                                class="icon-plus">&nbsp;</i></button>
+                                                        <input type="text" class="input-text qty" title="Qty" value="1"
+                                                            maxlength="12" id="qty" name="qty">
+
+                                                        <button
+                                                            onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;"
+                                                            class="reduced items-count" type="button"><i
+                                                                class="icon-minus">&nbsp;</i></button>
+                                                </div>
+                                            </div>
+
+                                            <button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
+                                                title="Add to Cart" type="submit" name="btn_add"><span><i
+                                                        class="icon-basket"></i> Thêm vào giỏ hàng</span></button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+                <?php
+        	 	$pro_id = $_GET['id'];
+              	$sql = "SELECT * FROM products WHERE pro_id=$pro_id";
+				$p->product_detail_css_2($sql);
+		  ?>
+                <div class="related-slider col-lg-12 col-xs-12 bounceInDown animated">
+                    <div class="slider-items-products">
+                        <div class="slider-items-products">
+                            <div class="new_title center">
+                                <h2>Sản Phẩm Liên Quan</h2>
+                            </div>
+
+                            <div id="related-products-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col4 products-grid">
+
+                                    <!-- Item -->
+                                    <?php
 													$p->product_detail_css_3();
 												?>
-                                                <!-- End Item -->
+                                    <!-- End Item -->
 
 
-                                            </div>
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Container End -->
-
-
-        <!-- end banner section -->
-        <div class="brand-logo">
-            <div class="container">
-                <div class="slider-items-products">
-                    <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-                        <div class="slider-items slider-width-col6">
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo1.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo2.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo3.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo4.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo5.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo6.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo1.png" alt="Image"></a> </div>
-                            <!-- End Item -->
-
-                            <!-- Item -->
-                            <div class="item"><a href="#"><img src="images/b-logo4.png" alt="Image"></a> </div>
-                            <!-- End Item -->
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Footer -->
-        <footer>
-            <section class="footer-navbar">
-                <div class="footer-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 col-xs-12 col-lg-8">
-                                <div class="footer-column pull-left collapsed-block">
-                                    <h4>Shopping Guide<a class="expander visible-xs" href="#TabBlock-1">+</a></h4>
-                                    <div class="tabBlock" id="TabBlock-1">
-                                        <ul class="links">
-                                            <li class="first"><a href="#" title="How to buy">How to buy</a></li>
-                                            <li><a href="faq.html" title="FAQs">FAQs</a></li>
-                                            <li><a href="#" title="Payment">Payment</a></li>
-                                            <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
-                                            <li><a href="#" title="Where is my order?">Where is my order?</a></li>
-                                            <li class="last"><a href="#" title="Return policy">Return policy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="footer-column pull-left collapsed-block">
-                                    <h4>Style Advisor<a class="expander visible-xs" href="#TabBlock-2">+</a></h4>
-                                    <div class="tabBlock" id="TabBlock-2">
-                                        <ul class="links">
-                                            <li class="first"><a title="Your Account" href="login.php">Your Account</a>
-                                            </li>
-                                            <li><a title="Information" href="#">Information</a></li>
-                                            <li><a title="Addresses" href="#">Addresses</a></li>
-                                            <li><a title="Addresses" href="#">Discount</a></li>
-                                            <li><a title="Orders History" href="#">Orders History</a></li>
-                                            <li class="last"><a title=" Additional Information" href="#">Additional
-                                                    Information</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="footer-column pull-left collapsed-block">
-                                    <h4>Information<a class="expander visible-xs" href="#TabBlock-3">+</a></h4>
-                                    <div class="tabBlock" id="TabBlock-3">
-                                        <ul class="links">
-                                            <li class="first"><a href="#" title="privacy policy">Privacy policy</a></li>
-                                            <li><a href="#" title="Search Terms">Search Terms</a></li>
-                                            <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-                                            <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-                                            <li><a href="#" title="Suppliers">Suppliers</a></li>
-                                            <li class=" last"><a href="#" title="Our stores" class="link-rss">Our
-                                                    stores</a></li>
-                                        </ul>
-                                    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Main Container End -->
+
+
+    <!-- end banner section -->
+    <div class="brand-logo">
+        <div class="container">
+            <div class="slider-items-products">
+                <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+                    <div class="slider-items slider-width-col6">
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo1.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo2.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo3.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo4.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo5.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo6.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo1.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                        <!-- Item -->
+                        <div class="item"><a href="#"><img src="images/b-logo4.png" alt="Image"></a> </div>
+                        <!-- End Item -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <section class="footer-navbar">
+            <div class="footer-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 col-lg-8">
+                            <div class="footer-column pull-left collapsed-block">
+                                <h4>Shopping Guide<a class="expander visible-xs" href="#TabBlock-1">+</a></h4>
+                                <div class="tabBlock" id="TabBlock-1">
+                                    <ul class="links">
+                                        <li class="first"><a href="#" title="How to buy">How to buy</a></li>
+                                        <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                        <li><a href="#" title="Payment">Payment</a></li>
+                                        <li><a href="#" title="Shipment&lt;/a&gt;">Shipment</a></li>
+                                        <li><a href="#" title="Where is my order?">Where is my order?</a></li>
+                                        <li class="last"><a href="#" title="Return policy">Return policy</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <div class="footer-column-last">
-                                    <div class="newsletter-wrap collapsed-block">
-                                        <h4>Sign up for emails<a class="expander visible-xs" href="#TabBlock-4">+</a>
-                                        </h4>
-                                        <div class="tabBlock" id="TabBlock-4">
-                                            <form id="newsletter-validate-detail" method="post" action="#">
-                                                <div id="container_form_news">
-                                                    <div id="container_form_news2">
-                                                        <input type="text"
-                                                            class="input-text required-entry validate-email"
-                                                            value="Enter your email address" onfocus=" this.value='' "
-                                                            title="Sign up for our newsletter" id="newsletter"
-                                                            name="email">
-                                                        <button class="button subscribe" title="Subscribe"
-                                                            type="submit"><span>Subscribe</span></button>
-                                                    </div>
+                            <div class="footer-column pull-left collapsed-block">
+                                <h4>Style Advisor<a class="expander visible-xs" href="#TabBlock-2">+</a></h4>
+                                <div class="tabBlock" id="TabBlock-2">
+                                    <ul class="links">
+                                        <li class="first"><a title="Your Account" href="login.php">Your Account</a>
+                                        </li>
+                                        <li><a title="Information" href="#">Information</a></li>
+                                        <li><a title="Addresses" href="#">Addresses</a></li>
+                                        <li><a title="Addresses" href="#">Discount</a></li>
+                                        <li><a title="Orders History" href="#">Orders History</a></li>
+                                        <li class="last"><a title=" Additional Information" href="#">Additional
+                                                Information</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-column pull-left collapsed-block">
+                                <h4>Information<a class="expander visible-xs" href="#TabBlock-3">+</a></h4>
+                                <div class="tabBlock" id="TabBlock-3">
+                                    <ul class="links">
+                                        <li class="first"><a href="#" title="privacy policy">Privacy policy</a></li>
+                                        <li><a href="#" title="Search Terms">Search Terms</a></li>
+                                        <li><a href="#" title="Advanced Search">Advanced Search</a></li>
+                                        <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
+                                        <li><a href="#" title="Suppliers">Suppliers</a></li>
+                                        <li class=" last"><a href="#" title="Our stores" class="link-rss">Our
+                                                stores</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="footer-column-last">
+                                <div class="newsletter-wrap collapsed-block">
+                                    <h4>Sign up for emails<a class="expander visible-xs" href="#TabBlock-4">+</a>
+                                    </h4>
+                                    <div class="tabBlock" id="TabBlock-4">
+                                        <form id="newsletter-validate-detail" method="post" action="#">
+                                            <div id="container_form_news">
+                                                <div id="container_form_news2">
+                                                    <input type="text" class="input-text required-entry validate-email"
+                                                        value="Enter your email address" onfocus=" this.value='' "
+                                                        title="Sign up for our newsletter" id="newsletter" name="email">
+                                                    <button class="button subscribe" title="Subscribe"
+                                                        type="submit"><span>Subscribe</span></button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="social">
-                                        <h4>Follow Us</h4>
-                                        <ul class="link">
-                                            <li class="fb pull-left"><a href="#"></a></li>
-                                            <li class="tw pull-left"><a href="#"></a></li>
-                                            <li class="googleplus pull-left"><a href="#"></a></li>
-                                            <li class="rss pull-left"><a href="#"></a></li>
-                                            <li class="pintrest pull-left"><a href="#"></a></li>
-                                            <li class="linkedin pull-left"><a href="#"></a></li>
-                                            <li class="youtube pull-left"><a href="#"></a></li>
-                                        </ul>
-                                    </div>
+                                </div>
+                                <div class="social">
+                                    <h4>Follow Us</h4>
+                                    <ul class="link">
+                                        <li class="fb pull-left"><a href="#"></a></li>
+                                        <li class="tw pull-left"><a href="#"></a></li>
+                                        <li class="googleplus pull-left"><a href="#"></a></li>
+                                        <li class="rss pull-left"><a href="#"></a></li>
+                                        <li class="pintrest pull-left"><a href="#"></a></li>
+                                        <li class="linkedin pull-left"><a href="#"></a></li>
+                                        <li class="youtube pull-left"><a href="#"></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="footer-middle">
-                    <div class="container">
-                        <div class="row">
-                            <div style="text-align:center"><a href="index.php"><img src="images/footer-logo.png"
-                                        alt="footer-logo"></a></div>
-                            <address>
-                                <i class="icon-location-arrow"></i> 123 Main Street, Anytown, CA 12345 USA <i
-                                    class="icon-mobile-phone"></i><span> +(408) 394-7557</span> <i
-                                    class="icon-envelope"></i><a
-                                    href="mailto:support@magikcommerce.com">support@magikcommerce.com</a>
-                            </address>
+            </div>
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div style="text-align:center"><a href="index.php"><img src="images/footer-logo.png"
+                                    alt="footer-logo"></a></div>
+                        <address>
+                            <i class="icon-location-arrow"></i> 123 Main Street, Anytown, CA 12345 USA <i
+                                class="icon-mobile-phone"></i><span> +(408) 394-7557</span> <i
+                                class="icon-envelope"></i><a
+                                href="mailto:support@magikcommerce.com">support@magikcommerce.com</a>
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5 col-xs-12 coppyright">&copy; 2015 Magikcommerce. All Rights Reserved.
+                        </div>
+                        <div class="col-sm-7 col-xs-12 company-links">
+                            <ul class="links">
+                                <li><a title="Magento Themes" href="#">Magento Themes</a></li>
+                                <li><a title="Premium Themes" href="#">Premium Themes</a></li>
+                                <li><a title="Responsive Themes" href="#">Responsive Themes</a></li>
+                                <li class="last"><a title="Magento Extensions" href="#">Magento Extensions</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-5 col-xs-12 coppyright">&copy; 2015 Magikcommerce. All Rights Reserved.
-                            </div>
-                            <div class="col-sm-7 col-xs-12 company-links">
-                                <ul class="links">
-                                    <li><a title="Magento Themes" href="#">Magento Themes</a></li>
-                                    <li><a title="Premium Themes" href="#">Premium Themes</a></li>
-                                    <li><a title="Responsive Themes" href="#">Responsive Themes</a></li>
-                                    <li class="last"><a title="Magento Extensions" href="#">Magento Extensions</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </footer>
+            </div>
+        </section>
+    </footer>
     </div>
     <div id="mobile-menu">
         <div class="mm-search">

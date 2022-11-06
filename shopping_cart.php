@@ -215,7 +215,7 @@
                                                         value="empty_cart" name="update_cart_action" type="submit">
                                                         <span>Clear Cart</span>
                                                     </button>
-                             <?php
+                                                    <?php
 							 	if(isset($_REQUEST['update_cart_action'])){
 									 switch ($_REQUEST['update_cart_action']) {
 									case 'empty_cart':{
@@ -238,12 +238,12 @@
                       
                       if($result->num_rows>0){
                         while($rows=$result->fetch_assoc()){
-                          $id=$rows['cart_id'];
-                          $subtotal=$rows['qty']*floatval($rows['price']);
-                          $checkout_subtotal+=$subtotal;
+                          //$id=$rows['cart_id'];
+                          //$subtotal=$rows['qty']*floatval($rows['price']);
+                          $checkout_subtotal+=$rows['subtotal'];
 
-                          $sql3="UPDATE orders SET subtotal = $subtotal WHERE cart_id=$id";
-                          $p->product_modify($sql3);
+                          /*$sql3="UPDATE orders SET subtotal = $subtotal WHERE cart_id=$id";
+                          $p->product_modify($sql3);*/
                           echo '<tbody>
                     <tr class="first odd">
                       <td class="image">
@@ -269,7 +269,7 @@
                       </td>
                       <td class="a-center hidden-table">
                       <span class="cart-price">
-                        <span class="price">'.$rows['price'].'</span>
+                        <span class="price">'.number_format($rows['price'] , 0, ',', '.').'đ'.'</span>
                       </span>
                       </td>
                       <td class="a-center movewishlist">
@@ -279,7 +279,7 @@
                       </td>
                       <td class="a-center movewishlist">
                       <span class="cart-price">
-                        <span class="price">'.$rows['subtotal'].'</span>
+                        <span class="price">'.number_format($rows['subtotal'] , 0, ',', '.').'đ'.'</span>
                       </span>
                       </td>
                       <td class="a-center last">
