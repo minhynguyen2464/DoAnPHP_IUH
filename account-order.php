@@ -22,7 +22,7 @@ $p = new admin();
     <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico"
         type="image/x-icon" />
-    <title>Classic premium HTML5 &amp; CSS3 template</title>
+    <title>Quản lý đơn hàng</title>
 
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

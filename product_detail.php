@@ -25,6 +25,9 @@
 					//End of function
 					 $sql2="INSERT INTO orders (pro_id,user_id,qty,subtotal) VALUES ('$pro_id','$user_id','$qty','$subtotal')";
               	 	  $p->product_modify($sql2);
+					  //Trừ instock bên product
+					  $stock = "UPDATE products SET in_stock=in_stock-'$qty' WHERE pro_id=$id";
+					  $p->product_modify($stock);
 					 header('Location: product_detail.php?id='.$id.'');
 				}
 				else{
@@ -52,7 +55,7 @@
     <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico"
         type="image/x-icon" />
-    <title>Classic premium HTML5 &amp; CSS3 template</title>
+    <title>Chi tiết sản phẩm</title>
 
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -210,10 +213,10 @@
                                 <form action="#" method="post" id="product_addtocart_form">
                                     <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
                                     <?php
-			  	$pro_id = $_GET['id'];
-              	$sql = "SELECT * FROM products WHERE pro_id=$pro_id";
-				$p->product_detail_css_1($sql);
-			  ?>
+										$pro_id = $_GET['id'];
+										$sql = "SELECT * FROM products WHERE pro_id=$pro_id";
+										$p->product_detail_css_1($sql);
+									  ?>
 
 
                                     <div class="add-to-box">
@@ -235,10 +238,20 @@
                                                                 class="icon-minus">&nbsp;</i></button>
                                                 </div>
                                             </div>
-
-                                            <button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
+										<?php
+											$id = $_REQUEST['id'];
+                                        	if($p->check_instock($id)){
+												echo ' <button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
                                                 title="Add to Cart" type="submit" name="btn_add"><span><i
-                                                        class="icon-basket"></i> Thêm vào giỏ hàng</span></button>
+                                                        class="icon-basket"></i> Thêm vào giỏ hàng</span></button>';	
+											}
+											else{
+												echo '<button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
+                                                title="Add to Cart" type="submit" disabled name="btn_add" style="background:gray"><span><i
+                                                        class="icon-basket"></i> Thêm vào giỏ hàng</span></button>';	
+											}
+										?>
+
                                 </form>
                             </div>
 

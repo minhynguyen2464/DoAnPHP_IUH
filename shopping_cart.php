@@ -9,6 +9,39 @@
 	$permission = $_SESSION['permission'];
 	$p->check_login($username,$password,$userid,$email,$permission);
 ?>
+
+                        <?php
+						//Khi user nhấn nút thanh toán
+							if(isset($_REQUEST['btn_checkout'])){
+								$location = $_REQUEST['detail_location'];
+								$recipent_name = $_REQUEST['txtName'];
+								$phone_number = $_REQUEST['txtNumber'];
+								$date = date("Y-m-d G:i:s");
+								  $cartlist=$p->sub_connect();
+								  $sql2="select od.user_id, pd.pro_id, pd.price, od.cart_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id AND od.user_id='$userid'";
+								  $result = $cartlist->query($sql2);
+								  $checkout_subtotal=0;
+                      				
+						  if($result->num_rows>0){
+							while($rows=$result->fetch_assoc()){
+								$pro_id= $rows['pro_id'];
+								$qty = $rows['qty'];
+								$sql = "INSERT INTO order_detail(pro_id,location,user_id,qty,order_date,phone_number,recipient_name)
+										VALUES('$pro_id','$location','$userid','$qty','$date','$phone_number','$recipent_name')";
+								$p->product_modify($sql);
+								$update_cart = "UPDATE orders 
+												SET status=1 
+												WHERE user_id='$userid'";
+								$p->product_modify($update_cart);
+							}
+							echo '<script>alert("Đặt hàng thành công")</script>';
+							$delete_cart = "DELETE FROM orders WHERE status=1 AND user_id='$userid'";
+							$p->product_modify($delete_cart);
+							}
+							//Redirect qua VNPAY
+							header('Location: vnpay_php/index.php?userid='.$userid.'&date='.$date.'');
+						}
+						?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Tieu Long Lanh Kute -->
@@ -28,7 +61,7 @@
     <link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico"
         type="image/x-icon" />
-    <title>Classic premium HTML5 &amp; CSS3 template</title>
+    <title>Giỏ hàng</title>
 
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -442,37 +475,7 @@
 
 
                         <!--cart-collaterals-->
-                        <?php
-							if(isset($_REQUEST['btn_checkout'])){
-								$city = $_REQUEST['country_id'];
-								$location = $_REQUEST['detail_location'];
-								$recipent_name = $_REQUEST['txtName'];
-								$phone_number = $_REQUEST['txtNumber'];
-								$date = date("Y-m-d G:i:s");
-								  $cartlist=$p->sub_connect();
-								  $sql2="select od.user_id, pd.pro_id, pd.price, od.cart_id, od.qty, od.subtotal from products as pd join orders as od on pd.pro_id=od.pro_id AND od.user_id='$userid'";
-								  $result = $cartlist->query($sql2);
-								  $checkout_subtotal=0;
-                      				
-						  if($result->num_rows>0){
-							while($rows=$result->fetch_assoc()){
-								$pro_id= $rows['pro_id'];
-								$qty = $rows['qty'];
-								$sql = "INSERT INTO order_detail(pro_id,city,location,user_id,qty,order_date,phone_number,recipient_name)
-										VALUES('$pro_id','$city','$location','$userid','$qty','$date','$phone_number','$recipent_name')";
-								$p->product_modify($sql);
-								$update_cart = "UPDATE orders 
-												SET status=1 
-												WHERE user_id='$userid'";
-								$p->product_modify($update_cart);
-							}
-							echo '<script>alert("Đặt hàng thành công")</script>';
-							$delete_cart = "DELETE FROM orders WHERE status=1 AND user_id='$userid'";
-							$p->product_modify($delete_cart);
-						}
-							}
-                        	
-						?>
+	
                     </div>
                     <div class="crosssel wow bounceInUp animated">
                         <div class="">

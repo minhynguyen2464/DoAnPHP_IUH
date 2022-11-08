@@ -568,6 +568,11 @@
                                         <label for="txtPicture">Chọn hình ảnh</label>
                                         <input type="file" id="txtPicture" name="txtPicture">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Số lượng hàng:</label>
+                                        <input name="txtInstock" type="text" class="form-control" id="txtInstock"
+                                            placeholder="Nhập số lượng hàng" value="<?php $p->get_instock_value();?>">
+                                    </div>
                                 </div>
                                 <!-- /.box-body -->
 
@@ -581,23 +586,24 @@
                         </div>
                         <!-- /.box -->
                         <?php
+				
+				//Thêm
+        	if(isset($_REQUEST['submit'])){
 				$id = $_REQUEST['id'];
 				$name = $_REQUEST['txtName'];
 				$price = $_REQUEST['txtPrice'];
 				$gender = $_REQUEST['txtGender'];
 				$description = $_REQUEST['textarea'];
-				$comp_id = $_REQUEST['txtCompany'];		
+				$comp_id = $_REQUEST['txtCompany'];	
+				$in_stock = $_REQUEST['txtInstock'];	
 				$date = date("Y-m-d");
 				//File processing
 				$dir = '../../../products-images/';
 				$fileName = $_FILES['txtPicture']['name'];
 				$fileTempName = $_FILES['txtPicture']['tmp_name'];
-				//Thêm
-        	if(isset($_REQUEST['submit'])){
-
 				$p->moveFile($fileTempName,$dir,$fileName);
-				$sql = "INSERT INTO products(name, price, image, description, gender, comp_id, add_date) 
-						VALUES('$name', '$price', '$fileName', '$description', '$gender','$comp_id','$date')";
+				$sql = "INSERT INTO products(name, price, image, description, gender, comp_id, add_date, in_stock) 
+						VALUES('$name', '$price', '$fileName', '$description', '$gender','$comp_id','$date','$in_stock')";
 				$p->product_modify($sql);
 			}
             
@@ -611,22 +617,27 @@
 			
 			//Sửa
 			if(isset($_REQUEST['update'])){
+				$id = $_REQUEST['id'];
 				$name = $_REQUEST['txtName'];
 				$price = $_REQUEST['txtPrice'];
 				$gender = $_REQUEST['txtGender'];
 				$description = $_REQUEST['textarea'];
 				$comp_id = $_REQUEST['txtCompany'];	
+				$in_stock = $_REQUEST['txtInstock'];
 				$sql = "UPDATE products SET 
 				name = '$name',
 				price = '$price',
 				gender = '$gender',
 				description = '$description',
-				comp_id = '$comp_id'
+				comp_id = '$comp_id',
+				in_stock =  '$in_stock'
 				WHERE pro_id = '$id' LIMIT 1";
 				if($p->product_modify($sql)==1){
 					echo '<script>alert("Updated successfully")</script>';	
 				}
-				$test = "SELECT * FROM products";
+				else{
+					echo '<script>alert("Updated failed")</script>';
+				}
 			}
 		?>
 
@@ -651,6 +662,7 @@
                                         <th width="13%" scope="col">Giới tính</th>
                                         <th width="14%" scope="col">Giá</th>
                                         <th width="16%" scope="col">Công ty</th>
+                                        <th width="16%" scope="col">Số lượng hàng</th>
                                     </tr>
                                     <?php
 												$sql = "SELECT * FROM products ORDER BY comp_id";

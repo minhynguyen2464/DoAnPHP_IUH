@@ -143,6 +143,21 @@
 					return 0;	
 				}
 		}
+		
+	//Return dữ liệu từ oder_detail
+		function return_order_detail($user_id,$date,$column){
+			$con = $this->connect();
+			$sql = "SELECT SUM( od.qty ) AS qty, SUM( pd.price ) AS price, SUM(pd.price*od.qty)as subtotal, od.user_id, od.order_date
+						FROM products AS pd
+						INNER JOIN order_detail AS od ON pd.pro_id = od.pro_id
+						AND od.user_id ='$user_id' AND od.order_date='$date'
+						GROUP BY od.order_date";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				$rows = $result->fetch_assoc();
+				echo $rows[$column];	
+			}
+		}
 
 
 	}

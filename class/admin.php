@@ -93,6 +93,7 @@
 							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['gender'].'</a></td>
 							  <td><a href="?id='.$rows['pro_id'].'">'.$rows['price'].'</a></td>
 							<td><a href="?id='.$rows['pro_id'].'">'.$rows['comp_id'].'</a></td>
+							<td><a href="?id='.$rows['pro_id'].'">'.$rows['in_stock'].'</a></td>
                     		</tr>';
 					}	
 				}
@@ -139,6 +140,19 @@
 					if($result->num_rows>0){
 						$rows = $result->fetch_assoc();
 						echo $rows['price'];
+					}
+				}
+			}
+			
+			function get_instock_value(){
+				if(isset($_REQUEST['id'])){
+					$id = $_REQUEST['id'];
+					$con = $this->connect();
+					$sql = "SELECT in_stock FROM products WHERE pro_id='$id'";
+					$result = $con->query($sql);
+					if($result->num_rows>0){
+						$rows = $result->fetch_assoc();
+						echo $rows['in_stock'];
 					}
 				}
 			}
@@ -452,9 +466,15 @@
                     <div style="width:60%" class="rating"></div>
                   </div>
                   <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
-                </div>
-                <p class="availability in-stock pull-right"><span>In Stock</span></p>
-                <div class="price-block">
+                </div>';
+				if($rows['in_stock']!=0){
+					echo '<p class="availability in-stock pull-right"><span>Còn '.$rows['in_stock'].' sản phẩm</span></p>';
+				}
+				else{
+					echo '<p class="availability in-stock pull-right" style="background:none repeat scroll 0 0 orangered"><span>Hết hàng</span></p>';
+				}
+                
+                echo '<div class="price-block">
                   <div class="price-box">
                      <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> '.number_format(($rows['price']*0.1)+$rows['price'] , 0, ',', '.').'đ'.' </span> </p>
                     <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"</span>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</p>
@@ -853,10 +873,10 @@
 				$i=1;
 				$userid=$_SESSION['user_id'];
 				$con = 	$this->connect();
-				$sql = "SELECT pd.name, SUM( od.qty ) AS qty, SUM( pd.price ) AS price, SUM(pd.price*od.qty)as subtotal,od.status, od.user_id, od.order_date
+				$sql = "SELECT pd.name, SUM( od.qty ) AS qty, SUM( pd.price ) AS price, SUM(pd.price*od.qty)as subtotal,od.status, od.user_id, od.order_date, od.type
 						FROM products AS pd
 						INNER JOIN order_detail AS od ON pd.pro_id = od.pro_id
-						AND od.user_id ='$userid'
+						AND od.user_id ='$userid' AND od.type=1
 						GROUP BY od.order_date
 						ORDER BY od.order_date DESC";
 				$result = $con->query($sql);
@@ -906,8 +926,9 @@
     </thead>
     <tbody>';
 	
-	//Lấy user_id và order_date của từng row
+	//Lấy user_id và order_date của từng row cho modal Xem
 	$mini_id=1;
+	$mini_dir='products-images/';
 	$mini_userid=$rows['user_id'];
 	$mini_date = $rows['order_date'];
 	$mini_sql = "SELECT * FROM
@@ -961,5 +982,22 @@
 				$result = $con->query($insert);	
 			}
 		}
+		
+		//Check còn hàng hay không
+		function check_instock($pro_id){
+			$con = $this->connect();
+			$sql = "SELECT in_stock FROM products WHERE pro_id = $pro_id";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				$rows = $result->fetch_assoc();
+				if($rows['in_stock']!=0){
+					return true;	
+				}
+				else{
+					return false;	
+				}
+			}	
+		}
+		
 	}
 ?>
