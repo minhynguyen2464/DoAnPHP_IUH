@@ -514,8 +514,8 @@
 
             <!-- Main content -->
             <?php
-    	$p->invoice_table();
-	?>
+				$p->invoice_table();
+			?>
             <!-- this row will not appear when printing -->
             <div class="row no-print">
                 <div class="col-xs-12">

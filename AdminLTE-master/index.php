@@ -609,8 +609,11 @@
                             <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Likes</span>
-                                <span class="info-box-number">41,410</span>
+                                <span class="info-box-text">Số lượt truy cập website</span>
+                                <span class="info-box-number"><?php 
+									$sql = "SELECT COUNT(visitor_id) as visitor_id FROM visitor_count";
+									$p->count_coulmn($sql,'visitor_id');
+								?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -626,8 +629,8 @@
                             <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Sales</span>
-                                <span class="info-box-number">760</span>
+                                <span class="info-box-text">Số đơn hàng đã bán được</span>
+                                <span class="info-box-number"><?php $p->count_order()?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -639,8 +642,11 @@
                             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">New Members</span>
-                                <span class="info-box-number">2,000</span>
+                                <span class="info-box-text">Số thành viên đăng ký</span>
+                                <span class="info-box-number"><?php 
+									$sql = "SELECT COUNT(user_id) as user_id, permission FROM user WHERE permission=0";
+									$p->count_coulmn($sql,'user_id');
+								?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -745,8 +751,11 @@
                                         <div class="description-block border-right">
                                             <span class="description-percentage text-green"><i
                                                     class="fa fa-caret-up"></i> 17%</span>
-                                            <h5 class="description-header">$35,210.43</h5>
-                                            <span class="description-text">TOTAL REVENUE</span>
+                                            <h5 class="description-header"><?php 
+											$price= $p->count_price();
+											echo number_format($price , 0, ',', '.').'đ';
+											?></h5>
+                                            <span class="description-text">DOANH THU</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -755,8 +764,11 @@
                                         <div class="description-block border-right">
                                             <span class="description-percentage text-yellow"><i
                                                     class="fa fa-caret-left"></i> 0%</span>
-                                            <h5 class="description-header">$10,390.90</h5>
-                                            <span class="description-text">TOTAL COST</span>
+                                            <h5 class="description-header"><?php 
+											$price= $p->count_price()*0.3;
+											echo number_format($price , 0, ',', '.').'đ';
+											?></h5>
+                                            <span class="description-text">TỔNG CHI PHÍ</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -765,8 +777,12 @@
                                         <div class="description-block border-right">
                                             <span class="description-percentage text-green"><i
                                                     class="fa fa-caret-up"></i> 20%</span>
-                                            <h5 class="description-header">$24,813.53</h5>
-                                            <span class="description-text">TOTAL PROFIT</span>
+                                            <h5 class="description-header"><?php 
+											$revenue = $p->count_price();
+											$profit = $revenue-$revenue*0.3;
+											echo number_format($profit , 0, ',', '.').'đ';
+											?></h5>
+                                            <span class="description-text">LỢI NHUẬN</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -948,9 +964,9 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <?php
-				$sql = 'SELECT * FROM products LIMIT 5';
-                	$p->recent_product($sql);
-				?>
+								$sql = "SELECT * FROM products ORDER BY add_date desc LIMIT 5";
+									$p->recent_product($sql);
+								?>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer text-center">

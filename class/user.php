@@ -54,7 +54,6 @@
 		}
 		
 		function check_admin(){
-			session_start();
 			$username =  $_SESSION['username'];
 			$password = $_SESSION['password'];
 			$userid = $_SESSION['user_id'];
@@ -158,7 +157,8 @@
 				echo $rows[$column];	
 			}
 		}
-
+		
+		
 
 	}
 ?>

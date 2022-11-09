@@ -67,7 +67,7 @@
 							  </div>
 							  <div class="product-info">
 								<a href="javascript:void(0)" class="product-title">'.$row['name'].'
-								  <span class="label label-warning pull-right">$'.$row['price'].'</span></a>
+								  <span class="label label-warning pull-right">'.number_format($row['price'] , 0, ',', '.').'đ'.'</span></a>
 									<span class="product-description">
 									  '.$row['description'].'.
 									</span>
@@ -721,7 +721,7 @@
 					else{
 						echo '<td><span class="label label-info">Đang xử lý</span></td>';
 					}
-                    echo  '<td>'.$rows['location'].', '.$rows['city'].'</td>';
+                    echo  '<td>'.$rows['location'].'</td>';
                     echo '</tr>';
 				}
 			}
@@ -807,9 +807,9 @@
 							<td>'.$rows['pro_id'].'</td>
 							<td>'.$rows['name'].'</td>
 							<td>'.$rows['qty'].'</td>
-							<td>'.number_format($rows['price'] , 0, ',', '.').'đ'.'</td>
+							<td>'.number_format($rows['price']*$rows['qty'] , 0, ',', '.').'đ'.'</td>
 						</tr>';	
-					$total += $rows['price'];
+					$total += $rows['price']*$rows['qty'];
 				}
 				$vat = $total*0.08;	
 			}
@@ -997,6 +997,45 @@
 					return false;	
 				}
 			}	
+		}
+		
+		//Count cho trang dashboard admin
+		function count_coulmn($sql, $column){
+			$con=$this->connect();
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				$rows = $result->fetch_assoc();
+				echo $rows[$column];
+			}
+		}
+		
+		//Count lastest_order cho trang dashboard admin
+		function count_order(){
+			$count = 0;
+			$con = $this->connect();
+			$sql = "SELECT order_detail_id, user_id, order_date, status
+					FROM order_detail 
+					WHERE status=3
+					GROUP BY order_date, user_id";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				 $count++;
+			}	
+			echo $count;
+		}
+		
+		//Count lastest_order cho trang dashboard admin
+		function count_price(){
+			$subtotal = 0;
+			$con = $this->connect();
+			$sql = "SELECT od.order_detail_id, od.user_id, od.qty, od.status, pd.price FROM order_detail as od INNER JOIN products as pd ON od.pro_id = pd.pro_id AND od.status=3";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				 while($rows=$result->fetch_assoc()){
+					 $subtotal += $rows['qty']*$rows['price'];
+				}
+			}	
+			return $subtotal;
 		}
 		
 	}
