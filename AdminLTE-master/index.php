@@ -405,7 +405,7 @@
                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Alexander Pierce</p>
+                        <p>IUH</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -431,22 +431,7 @@
                         </a>
                         <ul class="treeview-menu menu-open" style="display: block;">
 
-                            <li class=""><a href="index2.php"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Layout Options</span>
-                            <span class="label label-primary pull-right">4</span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a>
-                            </li>
-                            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed
-                                    Sidebar</a></li>
+                            <li class=""><a href="index.php"><i class="fa fa-circle-o"></i> Dashboard</a></li>
                         </ul>
                     </li>
                     <li>
@@ -470,53 +455,16 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>UI Elements</span>
+                            <i class="fa fa-edit"></i> <span>Nhập hàng</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                            <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> <span>Forms</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/forms/general.php"><i class="fa fa-circle-o"></i> General Elements</a>
+                            <li><a href="pages/forms/general.php"><i class="fa fa-circle-o"></i> Post hàng</a>
                             </li>
-                            <li><a href="pages/forms/advanced.php"><i class="fa fa-circle-o"></i> Advanced Elements</a>
+                            <li><a href="pages/forms/advanced.php"><i class="fa fa-circle-o"></i> Quản lý tài khoản</a>
                             </li>
-                            <li><a href="pages/forms/editors.php"><i class="fa fa-circle-o"></i> Editors</a></li>
+                            <li><a href="pages/forms/editors.php"><i class="fa fa-circle-o"></i> Post Blog</a></li>
                         </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i> <span>Tables</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-calendar"></i> <span>Calendar</span>
-                            <small class="label pull-right bg-red">3</small>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="pages/mailbox/mailbox.html">
-                            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                            <small class="label pull-right bg-yellow">12</small>
-                        </a>
                     </li>
 
                     <li class="treeview">
@@ -529,40 +477,7 @@
                             <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
                             <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
                             <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a>
-                            </li>
-                            <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                            <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                            <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                            <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                         </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-share"></i> <span>Multilevel</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle-o"></i> Level One <i
-                                        class="fa fa-angle-left pull-right"></i></a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-circle-o"></i> Level Two <i
-                                                class="fa fa-angle-left pull-right"></i></a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a>
                     </li>
                     <li class="header">LABELS</li>
                     <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
@@ -703,32 +618,18 @@
                                             <strong>Goal Completion</strong>
                                         </p>
 
-                                        <div class="progress-group">
-                                            <span class="progress-text">Add Products to Cart</span>
-                                            <span class="progress-number"><b>160</b>/200</span>
+                                        <?php
+                                        	$p->pb_donhang();
+										?>
 
-                                            <div class="progress sm">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                                            </div>
-                                        </div>
                                         <!-- /.progress-group -->
-                                        <div class="progress-group">
-                                            <span class="progress-text">Complete Purchase</span>
-                                            <span class="progress-number"><b>310</b>/400</span>
-
-                                            <div class="progress sm">
-                                                <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                                            </div>
-                                        </div>
+                                        <?php
+                                        	$p->pb_dangiao();
+										?>
                                         <!-- /.progress-group -->
-                                        <div class="progress-group">
-                                            <span class="progress-text">Visit Premium Page</span>
-                                            <span class="progress-number"><b>480</b>/800</span>
-
-                                            <div class="progress sm">
-                                                <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                            </div>
-                                        </div>
+                                        <?php
+                                        	$p->pb_nhaphang();
+										?>
                                         <!-- /.progress-group -->
                                         <div class="progress-group">
                                             <span class="progress-text">Send Inquiries</span>
@@ -951,7 +852,7 @@
                         <!-- PRODUCT LIST -->
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Recently Added Products</h3>
+                                <h3 class="box-title">Sản phẩm được thêm gần đây</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -966,6 +867,34 @@
                                 <?php
 								$sql = "SELECT * FROM products ORDER BY add_date desc LIMIT 5";
 									$p->recent_product($sql);
+								?>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                <a href="pages/forms/general.php" class="uppercase">View All Products</a>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+
+                        <!-- PRODUCT LIST -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Sản phẩm hết hàng</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                            class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <?php
+								$sql = "SELECT * FROM products WHERE in_stock=0";
+								$p->out_of_stock_product($sql);
 								?>
                             </div>
                             <!-- /.box-body -->

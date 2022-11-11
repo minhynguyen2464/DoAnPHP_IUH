@@ -6,7 +6,7 @@
 		function moveFile($tmp_name, $dir, $name){
 			$path = $dir.$name;
 			if(move_uploaded_file($tmp_name,$path)){
-				echo '<script>alert("Move file sucessfully")</script>';	
+				return true;
 			}	
 			else{
 				echo '<script>alert("Failed")</script>';	
@@ -19,15 +19,15 @@
 			//usernname: admin
 			//password: 123qwe!@#
 
-			/*function connect(){
+			function connect(){
 				$con = new MySQLi('localhost','admin','123qwe!@#','shoedatabase');	
 				if($con->connect_error){
 					die('Connection failed: '. $con->connect_error);
 				}
 					 return $con;
-			 }*/
+			 }
 
-			function connect(){
+			/*function connect(){
 				//Get Heroku ClearDB connection information
 				$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 				$cleardb_server = $cleardb_url["host"];
@@ -39,7 +39,7 @@
 				// Connect to DB
 				$con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 				return $con;
-			}
+			}*/
 		
 			//Hàm thêm xóa sửa database
 			function product_modify($sql){
@@ -68,6 +68,31 @@
 							  <div class="product-info">
 								<a href="javascript:void(0)" class="product-title">'.$row['name'].'
 								  <span class="label label-warning pull-right">'.number_format($row['price'] , 0, ',', '.').'đ'.'</span></a>
+									<span class="product-description">
+									  '.$row['description'].'.
+									</span>
+							  </div>
+							</li>
+						  </ul>';
+					}	
+				}	
+			}
+			
+			//Hàm list các sản phẩm thêm gần đây ở trang AdminLTE-master/index2.php
+			function out_of_stock_product($sql){
+				$con = $this->connect();
+				$result = $con->query($sql);
+				$dir = '../products-images/';
+				if($result->num_rows>0){
+					while($row=$result->fetch_assoc()){
+						echo '<ul class="products-list product-list-in-box">
+							<li class="item">
+							  <div class="product-img">
+								<img src="'.$dir.$row['image'].'" alt="Product Image">
+							  </div>
+							  <div class="product-info">
+								<a href="javascript:void(0)" class="product-title">'.$row['name'].'
+								  <span class="label label-danger pull-right">Còn '.$row['in_stock'].' sản phẩm</span></a>
 									<span class="product-description">
 									  '.$row['description'].'.
 									</span>
@@ -586,16 +611,28 @@
 			}
 			
 			function blog_css($sql){
+				$dir = 'products-images/';
 				$con = $this->connect();
 				$result = $con->query($sql);
 				if($result->num_rows>0){
 					while($rows = $result->fetch_assoc()){
-						echo '
+						echo '<article class="blog_entry clearfix">
+                  <header class="blog_entry-header clearfix">
+                    <div class="blog_entry-header-inner">
+                      <h2 class="blog_entry-title"> <a rel="bookmark" href="blog_detail.php?blog_id='.$rows['blog_id'].'">'.$rows['header'].'</a> </h2>
+                    </div>
+                    <!--blog_entry-header-inner--> 
+                  </header>
+                  <div class="entry-content">
+                    <div class="featured-thumb"><a href="#"><img src="'.$dir.$rows['thumbnail'].'" alt="blog image"></a></div>
                     <div class="entry-content">
-                     	'.$rows['content'].'
-                      </div>
-                      <p> <a class="btn" href="blog_detail.html?id='.$rows['blog_id'].'">Read More</a> </p>
-                    </div>';
+                    </div>
+                    <p> <a class="btn" href="blog_detail.php?blog_id='.$rows['blog_id'].'">Read More</a> </p>
+                  </div>
+                  <footer class="entry-meta"> Bài đăng được đăng vào 
+                    <time datetime="2014-07-10T06:53:43+00:00" class="entry-date">'.$rows['blog_date'].'</time>
+                    . </footer>
+                </article>';
 					}	
 				}	
 			}
@@ -1038,5 +1075,270 @@
 			return $subtotal;
 		}
 		
+		//Tạo progress bar cho xử lý đơn hàng trang inedex.php admin
+		function pb_donhang(){
+			$con = $this->connect();
+			$count=0;
+			$total=0;
+			$sql = "SELECT status FROM order_detail GROUP BY order_date,user_id";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+					while($rows = $result->fetch_assoc()){
+						$total++;	
+						if($rows['status']!=0){
+							$count++;	
+						}
+					}
+			}
+			echo '<div class="progress-group">
+                                            <span class="progress-text">Đơn hàng cần phải xử lý</span>
+                                            <span class="progress-number"><b>'.$count.'</b>/'.$total.'</span>
+
+                                            <div class="progress sm">
+                                                <div class="progress-bar progress-bar-aqua" style="width: '.($count*100)/$total.'%"></div>
+                                            </div>
+                                        </div>';
+		}
+		
+		//Tạo progress bar cho nhập hàng trang index.php admin
+		function pb_nhaphang(){
+			$con = $this->connect();
+			$count=0;
+			$total=0;
+			$sql = "SELECT in_stock FROM products";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+					while($rows = $result->fetch_assoc()){
+						$total++;	
+						if($rows['in_stock']==0){
+							$count++;	
+						}
+					}
+			}
+			echo '<div class="progress-group">
+                                            <span class="progress-text">Sản phẩm hết hàng</span>
+                                            <span class="progress-number"><b>'.$count.'</b>/'.$total.'</span>
+
+                                            <div class="progress sm">
+                                                <div class="progress-bar progress-bar-red" style="width: '.($count*100)/$total.'%"></div>
+                                            </div>
+                                        </div>';
+		}
+		
+		//Tạo progress bar cho đơn hàng đang giao index.php admin
+		function pb_dangiao(){
+			$con = $this->connect();
+			$count=0;
+			$total=0;
+			$sql = "SELECT status FROM order_detail GROUP BY order_date,user_id";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+					while($rows = $result->fetch_assoc()){
+						$total++;	
+						if($rows['status']!=1){
+							$count++;	
+						}
+					}
+			}
+			echo '<div class="progress-group">
+                                            <span class="progress-text">Đơn hàng đang giao</span>
+                                            <span class="progress-number"><b>'.$count.'</b>/'.$total.'</span>
+
+                                            <div class="progress sm">
+                                                <div class="progress-bar progress-bar-green" style="width: '.($count*100)/$total.'%"></div>
+                                            </div>
+                                        </div>';
+		}
+		
+		//Đổ data cho trang blog_detail.php
+		function blog_detail_data($blog_id){
+			$dir = 'products-images/';
+			$con = $this->connect();
+			$sql = "SELECT * FROM blog WHERE blog_id='$blog_id'";
+			$result = $con->query($sql);	
+			if($result->num_rows>0){
+				$rows=$result->fetch_assoc();
+				echo '<div class="main container">
+                <div class="row">
+                    <div class="col-main col-sm-9">
+                        <div class="page-title">
+                            <h2>Blog</h2>
+                        </div>
+                        <div class="blog-wrapper" id="main">
+                            <div class="site-content" id="primary">
+                                <div role="main" id="content">
+                                    <article class="blog_entry clearfix">
+                                        <header class="blog_entry-header clearfix">
+                                            <div class="blog_entry-header-inner">
+                                                <h2 class="blog_entry-title">'.$rows['header'].'</h2>
+                                            </div>
+                                            <!--blog_entry-header-inner-->
+                                        </header>
+                                        <!--blog_entry-header clearfix-->
+                                        <div class="entry-content">
+                                            <div class="featured-thumb"><a href="#"><img alt="blog-img4"
+                                                        src="'.$dir.$rows['thumbnail'].'"></a></div>
+                                            <div class="entry-content">
+                                                '.$rows['content'].'
+                                            </div>
+                                        </div>
+                                        <footer class="entry-meta"> This entry was posted in <a rel="category tag"
+                                                title="View all posts in First Category" href="#/first-category">First
+                                                Category</a> On
+                                            <time datetime="2014-07-10T06:53:43+00:00" class="entry-date">Jul 10,
+                                                2014</time>
+                                            .
+                                        </footer>
+                                    </article>
+                                    <div class="comment-content wow bounceInUp animated">
+                                        <div class="comments-wrapper">
+                                            <h3> Bình luận </h3>
+                                            <ul class="commentlist">
+                                                <li class="comment">
+                                                    <div class="comment-wrapper">
+                                                        <div class="comment-author vcard">
+
+                                                            <span class="author">John Doe</span>
+                                                        </div>
+                                                        <!--comment-author vcard-->
+                                                        <div class="comment-meta">
+                                                            <time datetime="2014-07-10T07:26:28+00:00"
+                                                                class="entry-date">Thu, Jul 10, 2014 07:26:28
+                                                                am</time>
+                                                            .
+                                                        </div>
+                                                        <!--comment-meta-->
+                                                        <div class="comment-body"> Curabitur at vestibulum sem. Aliquam
+                                                            vehicula neque ac nibh
+                                                            suscipit ultrices. Morbi interdum accumsan arcu nec
+                                                            scelerisque ellentesque id erat sem,
+                                                            ut commodo nulla. Sed a nulla et eros fringilla. Phasellus
+                                                            eget purus nulla. </div>
+                                                    </div>
+                                                </li>
+                                                <!--comment-->
+                                                <li class="comment">
+                                                    <div class="comment-wrapper">
+                                                        <div class="comment-author vcard">
+
+                                                            <span class="author">John Doe</span>
+                                                        </div>
+                                                        <!--comment-author vcard-->
+                                                        <div class="comment-meta">
+                                                            <time datetime="2014-07-10T07:27:08+00:00"
+                                                                class="entry-date">Thu, Jul 10, 2014 07:27:08
+                                                                am</time>
+                                                            .
+                                                        </div>
+                                                        <!--comment-meta-->
+                                                        <div class="comment-body"> Curabitur at vestibulum sem. Aliquam
+                                                            vehicula neque ac nibh
+                                                            suscipit ultrices. Morbi interdum accumsan arcu nec
+                                                            scelerisque ellentesque id erat sem,
+                                                            ut commodo nulla. Sed a nulla et eros fringilla. Phasellus
+                                                            eget purus nulla. </div>
+                                                    </div>
+                                                </li>
+                                                <!--comment-->
+                                            </ul>
+                                            <!--commentlist-->
+                                        </div>
+                                        <!--comments-wrapper-->
+
+                                        <div class="comments-form-wrapper clearfix">
+                                            <h3>Leave A reply</h3>
+                                            <form class="comment-form" method="post" id="postComment">
+                                                <div class="field">
+                                                    <label>Name<em class="required">*</em></label>
+                                                    <input type="text" class="input-text" title="Name" id="user"
+                                                        name="user_name">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Email<em class="required">*</em></label>
+                                                    <input type="text" class="input-text" title="Email" id="email"
+                                                        name="user_email">
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="field aw-blog-comment-area">
+                                                    <label for="comment">Comment<em class="required">*</em></label>
+                                                    <textarea rows="5" cols="50" class="input-text" title="Comment"
+                                                        id="comment" name="comment"></textarea>
+                                                </div>
+                                                <div style="width:96%" class="button-set">
+                                                    <input type="hidden" value="1" name="blog_id">
+                                                    <button type="submit" class="bnt-comment"><span><span>Add
+                                                                Comment</span></span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!--comments-form-wrapper clearfix-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="col-right sidebar col-sm-3">
+                        <div role="complementary" class="widget_wrapper13" id="secondary">
+                            <div class="popular-posts widget widget__sidebar" id="recent-posts-4">
+                                <h3 class="widget-title">Các bài đăng liên quan</h3>
+                                <div class="widget-content">
+                                    <ul class="posts-list unstyled clearfix">';
+                              $this->blog_detail_mini_data($blog_id);
+                               echo  '</ul>
+                                </div>
+                                <!--widget-content-->
+                            </div>
+                            <div class="popular-posts widget widget_categories" id="categories-2">
+                                <h3 class="widget-title">Categories</h3>
+                                <ul>
+                                    <li class="cat-item cat-item-19599"><a href="#">First Category</a></li>
+                                    <li class="cat-item cat-item-19599"><a href="#">Second Category</a></li>
+                                </ul>
+                            </div>
+                            <!-- Banner Ad Block -->
+                            <div class="ad-spots widget widget__sidebar">
+                                <h3 class="widget-title">Ad Spots</h3>
+                                <div class="widget-content"><a target="_self" href="#" title=""><img alt="offer banner"
+                                            src="images/offer-banner1.jpg"></a></div>
+                            </div>
+                            <!-- Banner Text Block -->
+                            <div class="text-widget widget widget__sidebar">
+                                <h3 class="widget-title">Text Widget</h3>
+                                <div class="widget-content">Mauris at blandit erat. Nam vel tortor non quam scelerisque
+                                    cursus. Praesent
+                                    nunc vitae magna pellentesque auctor. Quisque id lectus.<br>
+                                    <br>
+                                    Massa, eget eleifend tellus. Proin nec ante leo ssim nunc sit amet velit malesuada
+                                    pharetra. Nulla
+                                    neque sapien, sollicitudin non ornare quis, malesuada.
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>';	
+			}
+		}
+		
+		function blog_detail_mini_data($blog_id){
+			$con = $this->connect();
+			$dir = 'products-images/';
+			$sql = "SELECT * FROM blog ORDER BY blog_date desc LIMIT 4";
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				while($rows = $result->fetch_assoc()){
+					echo '<li>
+                                            <figure class="featured-thumb"> <a href="blog_detail.php?blog_id='.$rows['blog_id'].'"> <img width="80"
+                                                        height="53" alt="blog image" src="'.$dir.$rows['thumbnail'].'"> </a>
+                                            </figure>
+                                            <!--featured-thumb-->
+                                            <h4><a title="Pellentesque posuere" href="blog_detail.php">'.$rows['header'].'</a></h4>
+                                            <p class="post-meta"><i class="icon-calendar"></i>
+                                                <time datetime="2014-07-10T07:09:31+00:00" class="entry-date">'.$rows['blog_date'].'</time>
+                                            </p>
+                                        </li>';	
+				}	
+			}	
+		}
 	}
 ?>

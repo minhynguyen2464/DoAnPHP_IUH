@@ -177,9 +177,9 @@ $p = new admin();
                                 <div role="main" id="content">
                                     <article class="blog_entry clearfix">
                                         <?php
-                            	$sql = "SELECT * FROM blog";
-								$p->blog_css($sql);
-							?>
+											$sql = "SELECT * FROM blog";
+											$p->blog_css($sql);
+										?>
                                     </article>
 
                                 </div>
