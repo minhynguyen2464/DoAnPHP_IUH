@@ -374,7 +374,7 @@ $p = new admin();
                         </a>
                         <ul class="treeview-menu menu-open" style="display: block;">
 
-                            <li class=""><a href="index.php"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+                            <li class=""><a href="../../index.php"><i class="fa fa-circle-o"></i> Dashboard</a></li>
                         </ul>
                     </li>
                     <li>
