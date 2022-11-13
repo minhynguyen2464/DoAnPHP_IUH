@@ -26,15 +26,20 @@
 							while($rows=$result->fetch_assoc()){
 								$pro_id= $rows['pro_id'];
 								$qty = $rows['qty'];
+								//Thêm đơn hàng mới vào bảng orde
 								$sql = "INSERT INTO order_detail(pro_id,location,user_id,qty,order_date,phone_number,recipient_name)
 										VALUES('$pro_id','$location','$userid','$qty','$date','$phone_number','$recipent_name')";
 								$p->product_modify($sql);
+								//Set status shopping cart của user thành 1
 								$update_cart = "UPDATE orders 
 												SET status=1 
 												WHERE user_id='$userid'";
 								$p->product_modify($update_cart);
+								//Trừ instock bên 
+								  $stock = "UPDATE products SET in_stock=in_stock-'$qty' WHERE pro_id=$pro_id";
+								  $p->product_modify($stock);
 							}
-							echo '<script>alert("Đặt hàng thành công")</script>';
+							//Loại bỏ shopping cart của user
 							$delete_cart = "DELETE FROM orders WHERE status=1 AND user_id='$userid'";
 							$p->product_modify($delete_cart);
 							}

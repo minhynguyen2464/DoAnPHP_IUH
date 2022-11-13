@@ -493,7 +493,7 @@
                   <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
                 </div>';
 				if($rows['in_stock']!=0){
-					echo '<p class="availability in-stock pull-right"><span>Còn '.$rows['in_stock'].' sản phẩm</span></p>';
+					echo '<p class="availability in-stock pull-right"><span>Còn hàng</span></p>';
 				}
 				else{
 					echo '<p class="availability in-stock pull-right" style="background:none repeat scroll 0 0 orangered"><span>Hết hàng</span></p>';
