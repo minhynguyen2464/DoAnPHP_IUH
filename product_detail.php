@@ -10,24 +10,31 @@
 	 		//Khi nhấn vào nút thêm vào giỏ hàng thì thực hiện add vào
         	if(isset($_REQUEST['btn_add'])){
 				if(isset($_SESSION['username'])){
+					$con = $p->connect();
 					$qty = $_REQUEST['qty'];
 					$id = $_REQUEST['id'];
 					$pro_id = $id;
 					$user_id = $_SESSION['user_id'];
-					
 					//Xử lý subtotal
-					$con = $p->connect();
-					$sub_sql = "SELECT * from products WHERE pro_id='$pro_id'";
+					$sub_sql = "SELECT price from products WHERE pro_id='$pro_id'";
 					$result = $con->query($sub_sql);
 					$rows=$result->fetch_assoc();
-					echo '<script>alert("'.$rows['price'].'")</script>';
 					$subtotal=$qty*$rows['price'];
+					$price=$rows['price'];
+					//Nếu như thêm sản phẩm trùng
+					$select_user_cart = "SELECT pro_id FROM orders WHERE user_id = '$user_id' AND pro_id='$pro_id'";
+					$sub_result = $con->query($select_user_cart);
+					if($sub_result->num_rows>0){
+						$sub_rows=$sub_result->fetch_assoc();
+						$sub_pro_id = $sub_rows['pro_id'];
+						$sql2="UPDATE orders SET qty=qty+'$qty', subtotal=$price*qty WHERE pro_id='$sub_pro_id' AND user_id='$user_id'";
+						$p->product_modify($sql2);
+					}
+					else{
+						$sql2="INSERT INTO orders (pro_id,user_id,qty,subtotal) VALUES ('$pro_id','$user_id','$qty','$subtotal')";
+              	 	  	$p->product_modify($sql2);
+					}
 					//End of function
-					 $sql2="INSERT INTO orders (pro_id,user_id,qty,subtotal) VALUES ('$pro_id','$user_id','$qty','$subtotal')";
-              	 	  $p->product_modify($sql2);
-					  //Trừ instock bên product
-					  $stock = "UPDATE products SET in_stock=in_stock-'$qty' WHERE pro_id=$id";
-					  $p->product_modify($stock);
 					 header('Location: product_detail.php?id='.$id.'');
 				}
 				else{
@@ -238,7 +245,7 @@
                                                                 class="icon-minus">&nbsp;</i></button>
                                                 </div>
                                             </div>
-										<?php
+                                            <?php
 											$id = $_REQUEST['id'];
                                         	if($p->check_instock($id)){
 												echo ' <button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
