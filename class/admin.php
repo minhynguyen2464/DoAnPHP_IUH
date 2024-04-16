@@ -1340,5 +1340,35 @@
 				}	
 			}	
 		}
+
+		function searchProducts($query) {
+			$con = $this->connect();
+			$dir = 'products-images/';
+			$sql = "SELECT * FROM products WHERE name LIKE '%$query%'";
+			// Execute SQL query and return results
+			$result = $con->query($sql);
+			if($result->num_rows>0){
+				echo '
+				<div class="search-results" style="position: absolute; width:100%; background-color:white; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px; top: 100%; left: 0; z-index: 1000;">';
+				while($rows = $result->fetch_assoc()){
+					echo '
+					<a href="/product_detail.php?id='.$rows['pro_id'].'">
+					<div style="padding:10px; display: flex; align-items: center;">
+                                        <div style="flex: 1;">
+                                            <h5>'.$rows['name'].'</h5>
+                                            <p>Giá: '.number_format($rows['price'] , 0, ',', '.').'đ'.'</p>
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <img src="./products-images/'.$rows['image'].'" alt="Adidas Stan Smith" style="max-width: 80%; height: auto;">
+                                        </div>
+                                    </div>
+                                    <hr>
+					</a>
+				';	
+				}	
+			
+				echo '</div>';
+			}	
+		}
 	}
 ?>

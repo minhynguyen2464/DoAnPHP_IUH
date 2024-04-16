@@ -157,8 +157,8 @@
 				echo $rows[$column];	
 			}
 		}
-		
-		
+
+
 
 	}
 ?>

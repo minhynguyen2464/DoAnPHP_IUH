@@ -10,7 +10,6 @@
 	$ip = $_SERVER["REMOTE_ADDR"];
 	$date = date('Y-m-d');
 	$p->visitor_count($ip,$date);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,17 +95,28 @@
                                 <!-- links -->
                             </div>
 
-                            <!-- Search-col -->
-                            <div class="search-box pull-right">
-                                <form
-                                    action="http://htmldemo.magikcommerce.com/ecommerce/classic-html-template/version_1/cat"
-                                    method="POST" id="search_mini_form" name="Categories">
-                                    <input type="text" placeholder="Search entire store here..." value="Search"
-                                        maxlength="70" name="search" id="search">
-                                    <button type="button" class="search-btn-bg"><span
-                                            class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                            <div class="search-box pull-right" style="position: relative;">
+                                <form action="" method="POST" id="search_mini_form" name="Categories">
+                                    <input type="text" placeholder="Search entire store here..." maxlength="70" name="search" id="search">
+                                    <button type="submit" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
                                 </form>
+                                <?php
+                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                        // Retrieve the search query
+                                        $search_query = $_POST['search'];
+                                        
+                                        // Now you can process the search query as needed
+                                        // For example, you can perform a search in your database using the $search_query
+                                        $result = $p->searchProducts($search_query);
+                                        // Display the search query
+                                    }
+                                ?>
                             </div>
+
+                                
+                            
+
+                            
                             <!-- End Search-col -->
 
                         </div>
@@ -577,7 +587,7 @@
     </div>
     <div id="mobile-menu">
         <div class="mm-search">
-            <form name="search">
+            <form name="search" method="post" action="login.php">
                 <div class="input-group">
                     <div class="input-group-btn">
                         <button class="btn-default" type="submit"><i class="icon-search"></i></button>
@@ -586,6 +596,17 @@
                         id="srch-term">
                 </div>
             </form>
+            <?php
+                // Check if the form is submitted
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    // Retrieve the search query
+                    $search_query = $_POST['search'];
+                    // Perform search (Replace this with your actual search logic)
+                    // Example: Searching products from a database
+                    $results = $p->searchProducts($search_query); // This function should be implemented
+                    
+                }
+            ?>
         </div>
         <ul>
             <li> </li>
@@ -895,6 +916,9 @@
         });
     });
     </script>
+
+
+
 </body>
 
 <!-- Tieu Long Lanh Kute -->

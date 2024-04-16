@@ -93,15 +93,22 @@
                             </div>
 
                             <!-- Search-col -->
-                            <div class="search-box pull-right">
-                                <form
-                                    action="http://htmldemo.magikcommerce.com/ecommerce/classic-html-template/version_1/cat"
-                                    method="POST" id="search_mini_form" name="Categories">
-                                    <input type="text" placeholder="Search entire store here..." value="Search"
-                                        maxlength="70" name="search" id="search">
-                                    <button type="button" class="search-btn-bg"><span
-                                            class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                            <div class="search-box pull-right" style="position: relative;">
+                                <form action="" method="POST" id="search_mini_form" name="Categories">
+                                    <input type="text" placeholder="Search entire store here..." maxlength="70" name="search" id="search">
+                                    <button type="submit" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
                                 </form>
+                                <?php
+                                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                        // Retrieve the search query
+                                        $search_query = $_POST['search'];
+                                        
+                                        // Now you can process the search query as needed
+                                        // For example, you can perform a search in your database using the $search_query
+                                        $result = $p->searchProducts($search_query);
+                                        // Display the search query
+                                    }
+                                ?>
                             </div>
                             <!-- End Search-col -->
 
